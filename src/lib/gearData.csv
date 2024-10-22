@@ -1,0 +1,54 @@
+name,slotId,schoolId,glyphSlots,runeSlots,bludgeonResistance,elementalResistance,monsterResistance,pierceResistance,slashResistance,poisonResistance,maxToxicity,armorPiercing,adrenaline,attackPower,critDamage,critChance,bleedChance,poisonChance,burnChance,dismemberChance,signs,aard,axii,igni,quen,yrden,experience
+None,armor,,,,,,,,,,,,,,,,,,,,,,,,,,
+None,trousers,,,,,,,,,,,,,,,,,,,,,,,,,,
+None,boots,,,,,,,,,,,,,,,,,,,,,,,,,,
+None,gauntlets,,,,,,,,,,,,,,,,,,,,,,,,,,
+None,steel,,,,,,,,,,,,,,,,,,,,,,,,,,
+None,silver,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ursine Armor - Grandmaster,armor,bear,3,0,25%,,32%,26%,32%,,,,22%,,,,,,,,,,,,,,
+Feline Armor - Grandmaster,armor,cat,3,0,,36%,15%,12%,17%,,,,,22%,,,,,,,,,,,,,
+Forgotten Wolven Armor - Grandmaster,armor,forgottenWolf,3,0,,30%,30%,18%,22%,,,,20%,20%,,,,,,,,,,,,,
+Griffin Armor - Grandmaster,armor,griffin,3,0,17%,,26%,19%,24%,,,,,,,,,,,,22%,,,,,,
+Manticore Armor,armor,manticore,3,0,,,28%,19%,24%,,5,,,,25%,,,,,,,,,,,,
+Viper Armor,armor,viper,3,0,,40%,28%,30%,30%,50%,,,,,,,,,,,,,,,,,
+Wolven Armor - Grandmaster,armor,wolf,3,0,17%,,26%,19%,24%,,,,22%,,,,,,,,,,,,,,
+Warrior's Leather Jacket,armor,,0,0,9%,15%,12%,9%,18%,,,,,,,,,,,,,,,,,,
+Ursine Boots - Grandmaster,boots,bear,1,0,5%,,4%,6%,6%,,,,11%,,,,,,,,,,,,,,
+Feline Boots - Grandmaster,boots,cat,1,0,,5%,3%,5%,6%,,,,,11%,,,,,,,,,,,,,
+Forgotten Wolven Boots - Grandmaster,boots,forgottenWolf,1,0,4%,,4%,4%,6%,,,,,,,,,,,,,,,,,12%,
+Griffin Boots - Grandmaster,boots,griffin,1,0,5%,,4%,5%,6%,,,,,,,,,,,,11%,,,,,,
+Manticore Boots,boots,manticore,1,0,,,4%,5%,6%,,5,,,,25%,,,,,,,,,,,,
+Viper Boots,boots,viper,1,0,,5%,4%,5%,5%,10%,,,,,,,,,,,,,,,,,
+Wolven Boots - Grandmaster,boots,wolf,1,0,5%,,4%,5%,6%,,,,,11%,,,,,,,,,,,,,
+Ursine Gauntlets - Grandmaster,gauntlets,bear,1,0,,6%,4%,6%,6%,,,,11%,,,,,,,,,,,,,,
+Feline Gauntlets - Grandmaster,gauntlets,cat,1,0,,5%,3%,5%,5%,,,,,11%,,,,,,,,,,,,,
+Forgotten Wolven Gauntlets - Grandmaster,gauntlets,forgottenWolf,1,0,,5%,4%,4%,6%,,,,,,,,,,,,,12%,,,,,
+Griffin Gauntlets - Grandmaster,gauntlets,griffin,1,0,,12%,4%,5%,6%,,,,,,,,,,,,11%,,,,,,
+Manticore Gauntlets,gauntlets,manticore,1,0,,12%,,5%,6%,,5,,,,,5%,,,,,,,,,,,
+Viper Gauntlets,gauntlets,viper,1,0,,5%,5%,5%,5%,10%,,,,,,,,,,,,,,,,,
+Wolven Gauntlets - Grandmaster,gauntlets,wolf,1,0,,12%,4%,5%,6%,,,,,,,,,,,,11%,,,,,,
+Ursine Silver Sword - Grandmaster,silver,bear,0,3,,,,,,,,,21%,,75%,5%,,,,14%,,,,,,,20%
+Feline Silver Sword - Grandmaster,silver,cat,0,3,,,,,,,,,,,,10%,15%,,,10%,,15%,,,,,20%
+Forgotten Wolven Silver Sword - Grandmaster,silver,forgottenWolf,0,3,,,,,,,,,7%,,35%,15%,10%,,,,10%,,,,,,10%
+Griffin Silver Sword - Grandmaster,silver,griffin,0,3,,,,,,,,,,,25%,5%,,,,10%,21%,,,,,,20%
+Manticore Silver Sword,silver,manticore,0,3,,,,,,,,250,,,50%,5%,10%,,,,,,,,,,5%
+Viper Venomous Silver Sword,silver,viper,0,3,,,,,,,,,,,75%,10%,,15%,,,,25%,,,,,20%
+Wolven Silver Sword - Grandmaster,silver,wolf,0,3,,,,,,,,,11%,,,11%,11%,,,,11%,,,,,,20%
+Aerondight,silver,,0,0,,,,,,,,,,,,,,,,,,,,,,,
+Ursine Steel Sword - Grandmaster,steel,bear,0,3,,,,,,,,,21%,,75%,5%,,,,14%,,,,,,,5%
+Feline Steel Sword - Grandmaster,steel,cat,0,3,,,,,,,,,,,,10%,15%,,,10%,,15%,,,,,5%
+Forgotten Wolven Steel Sword - Grandmaster,steel,forgottenWolf,0,3,,,,,,,,,10%,,20%,7%,5%,,,,7%,,,,,,10%
+Griffin Steel Sword - Grandmaster,steel,griffin,0,3,,,,,,,,,,,25%,5%,,,,10%,21%,,,,,,5%
+Manticore Steel Sword,steel,manticore,0,3,,,,,,,,250,,,50%,5%,10%,,,,,,,,,,5%
+Viper Venomous Steel Sword,steel,viper,0,3,,,,,,,,,,,75%,10%,,15%,,,,25%,,,,,5%
+Wolven Steel Sword - Grandmaster,steel,wolf,0,3,,,,,,,,,11%,,,11%,11%,,,,11%,,,,,,5%
+Iris,steel,,0,3,,,,,,,,,,,,,,,,,,,,,,,
+Teigr,steel,,0,3,,,,,,,,,,,,10%,10%,,,,,15%,,,,,5%
+Toussaint Knight's Steel Sword,steel,,0,3,,,,,,,,300,,,100%,20%,,,15%,,,,,,30%,,
+Ursine Trousers - Grandmaster,trousers,bear,2,0,,25%,10%,6%,11%,,,,11%,,,,,,,,,,,,,,
+Feline Trousers - Grandmaster,trousers,cat,2,0,,11%,7%,5%,7%,,,,,22%,,,,,,,,,,,,,
+Forgotten Wolven Trousers - Grandmaster,trousers,forgottenWolf,2,0,,25%,10%,,8%,,,,,,,,,,,,12%,,,,,,
+Griffin Trousers - Grandmaster,trousers,griffin,2,0,,33%,8%,6%,9%,,,,,,,,,,,,11%,,,,,,
+Manticore Trousers,trousers,manticore,2,0,,33%,8%,9%,,,5,,,,,5%,,,,,,,,,,,
+Viper Trousers,trousers,viper,2,0,,10%,8%,10%,10%,30%,,,,,,,,,,,,,,,,,
+Wolven Trousers - Grandmaster,trousers,wolf,2,0,,33%,8%,,9%,,,,,11%,,,,,,,11%,,,,,,
