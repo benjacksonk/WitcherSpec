@@ -1,34 +1,28 @@
 ﻿<script lang="ts">
 	import Grid from './Grid.svelte';
 	import GearDisplay from './GearDisplay.svelte';
-	import { Gear, GearSlot } from '$lib/types';
-	
+	import { type Gear, GearSlot } from "$lib/types.svelte";
+
 	interface Props {
-		gearSlots: GearSlot[]
+		gearSlots: GearSlot[];
 	}
 
-	let { gearSlots = $bindable([]) }: Props = $props();
+	let {
+		gearSlots = $bindable([]),
+	}: Props = $props();
 
-	let currentSlot: GearSlot = $state<GearSlot>(gearSlots[0]);
-	let removePopup: boolean = $state<boolean>(true);
+	let nullGearSlot: GearSlot = new GearSlot("null");
+	let currentSlot: GearSlot = $state(nullGearSlot);
+	
+	
+	function handleOnclickSlot(event: MouseEvent, gearSlot: GearSlot) {
+		event.preventDefault();
+		currentSlot = (currentSlot === gearSlot ? nullGearSlot : gearSlot);
+	}
 	
 	function handleOnclickGear(event: MouseEvent, gearSlot: GearSlot, gear: Gear) {
 		event.preventDefault();
 		gearSlot.currentGear = gear;
-	}
-	function handleOnclickSlot(event: MouseEvent, gearSlot: GearSlot) {
-		event.preventDefault();
-		togglePopup(gearSlot);
-	}
-
-	function togglePopup(gearSlot: GearSlot) {
-		if (currentSlot?.id == gearSlot.id) {
-			removePopup = true;
-		}
-		else {
-			removePopup = false;
-			currentSlot = gearSlot;
-		}
 	}
 </script>
 
@@ -38,27 +32,23 @@
 	<div class="frameGrid">
 		<Grid gap="1px">
 			{#each gearSlots as gearSlot, i}
-				<div class="gearSlot">
-					<button class="slotBtn plain" onclick={(event) => handleOnclickSlot(event, gearSlot)}>
-						<GearDisplay bind:gear={gearSlots[i].currentGear} labelSlot={true}/>
-					</button>
-				</div>
+				<button class="slotBtn plain" onmousedown={(event) => handleOnclickSlot(event, gearSlot)}>
+					<GearDisplay gear={gearSlot.currentGear} labelSlot={true}/>
+				</button>
 			{/each}
 		</Grid>
 	</div>
-	{#if currentSlot != null}
-		<div class="popup" class:removed={removePopup}>
-			<div class="frameGrid">
-				<Grid tracks={6} vertical={true} gap={"1px 0"}>
-					{#each currentSlot.inventory as gear, i}
-						<button class="gearBtn plain" onclick={(event) => handleOnclickGear(event, currentSlot, currentSlot.inventory[i])}>
-<!--							<GearDisplay bind:gear={currentSlot.inventory[i]}/>-->
-						</button>
-					{/each}
-				</Grid>
-			</div>
+	<div class="popup" class:removed={currentSlot === nullGearSlot}>
+		<div class="frameGrid">
+			<Grid tracks={6} vertical={true} gap={"1px 0"}>
+				{#each currentSlot.inventory as gear, i}
+					<button class="gearBtn plain" onmousedown={(event) => handleOnclickGear(event, currentSlot, gear)}>
+						<GearDisplay gear={gear}/>
+					</button>
+				{/each}
+			</Grid>
 		</div>
-	{/if}
+	</div>
 </div>
 
 
@@ -76,6 +66,10 @@
     }
 
     button.slotBtn {
+		width: fit-content;
+		height: fit-content;
+		display: flex;
+		
         border-style: solid;
 		border-color: var(--color-grey-1);
 		border-width: 2px;
@@ -99,6 +93,10 @@
     }
 
     button.gearBtn {
+		width: fit-content;
+		height: fit-content;
+		display: flex;
+		
         border: 1px solid var(--color-grey-1);
         border-bottom: none;
     }

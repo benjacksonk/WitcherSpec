@@ -1,10 +1,4 @@
 name,slotId,schoolId,glyphSlots,runeSlots,bludgeonResistance,elementalResistance,monsterResistance,pierceResistance,slashResistance,poisonResistance,maxToxicity,armorPiercing,adrenaline,attackPower,critDamage,critChance,bleedChance,poisonChance,burnChance,dismemberChance,signs,aard,axii,igni,quen,yrden,experience
-None,armor,,,,,,,,,,,,,,,,,,,,,,,,,,
-None,trousers,,,,,,,,,,,,,,,,,,,,,,,,,,
-None,boots,,,,,,,,,,,,,,,,,,,,,,,,,,
-None,gauntlets,,,,,,,,,,,,,,,,,,,,,,,,,,
-None,steel,,,,,,,,,,,,,,,,,,,,,,,,,,
-None,silver,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ursine Armor - Grandmaster,armor,bear,3,0,25%,,32%,26%,32%,,,,22%,,,,,,,,,,,,,,
 Feline Armor - Grandmaster,armor,cat,3,0,,36%,15%,12%,17%,,,,,22%,,,,,,,,,,,,,
 Forgotten Wolven Armor - Grandmaster,armor,forgottenWolf,3,0,,30%,30%,18%,22%,,,,20%,20%,,,,,,,,,,,,,

@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-	import { Gear } from '$lib/types';
+	import { type Gear } from '$lib/types.svelte';
 	
 	interface Props {
 		gear: Gear;
@@ -7,15 +7,9 @@
 	}
 	
 	let { 
-		gear = $bindable(), 
-		labelSlot = false 
+		gear,
+		labelSlot = false
 	}: Props = $props();
-	
-	// const gear = $derived(mygear[0] ?? { id: "testId", name: "testName", slotId: "armor", iconPath: "" });
-	
-	const unequipped = $derived(gear.id === `${gear.slotId}-none`);
-	const gearName = $derived(unequipped ? "╳" : gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]);
-	const slotName = $derived(gear.slotId.charAt(0).toUpperCase() + gear.slotId.slice(1));
 </script>
 
 
@@ -23,9 +17,9 @@
 <div class="GearDisplay">
 	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
 	<div class="name shadowText">
-		<span class:italicized={!unequipped}>{gearName}</span>
+		<span style:font-style={"italic"}>{gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]}</span>
 		{#if labelSlot}
-			<span>{slotName}</span>
+			<span>{gear.slotId.charAt(0).toUpperCase() + gear.slotId.slice(1)}</span>
 		{/if}
 	</div>
 </div>
@@ -84,9 +78,5 @@
         var(--color-grey-1),
         transparent
         );
-    }
-
-    .italicized {
-        font-style: italic;
     }
 </style>
