@@ -3,13 +3,11 @@
 	import GearDisplay from './GearDisplay.svelte';
 	import { type Gear, GearSlot } from "$lib/types.svelte";
 
-	interface Props {
-		gearSlots: GearSlot[];
-	}
-
 	let {
 		gearSlots = $bindable([]),
-	}: Props = $props();
+	}: {
+		gearSlots: GearSlot[];
+	} = $props();
 
 	let nullGearSlot: GearSlot = new GearSlot("null");
 	let currentSlot: GearSlot = $state(nullGearSlot);

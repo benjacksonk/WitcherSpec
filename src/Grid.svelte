@@ -1,16 +1,6 @@
 ﻿<script lang="ts">
 	import type { Snippet } from 'svelte';
 	
-	type Props = {
-		children?: Snippet;
-		vertical?: boolean;
-		tracks?: string | number;
-		trackSizeMin?: string;
-		width?: string;
-		justifyContent?: string;
-		gap?: string;
-	}
-	
 	let {
 		children,
 		vertical = false,
@@ -19,7 +9,15 @@
 		width = "fit-content",
 		justifyContent = "space-evenly",
 		gap = "0",
-	}: Props = $props();
+	}: {
+		children?: Snippet;
+		vertical?: boolean;
+		tracks?: string | number;
+		trackSizeMin?: string;
+		width?: string;
+		justifyContent?: string;
+		gap?: string;
+	} = $props();
 </script>
 
 

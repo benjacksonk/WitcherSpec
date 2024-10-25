@@ -4,8 +4,7 @@ import gearDoc from "$lib/gearData.csv?raw";
 import Papa from "papaparse";
 
 
-const baseGearData = generateGearData();
-export const gearData = $state(baseGearData);
+export const gearData = $state(generateGearData());
 
 
 function generateGearData() {

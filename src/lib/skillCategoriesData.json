@@ -1,0 +1,577 @@
+﻿[
+  {
+    "name": "Combat",
+    "subcategories": [
+      {
+        "name": "Fast Attack",
+        "skills": [
+          {
+            "name": "Muscle Memory",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Precise Blows",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Whirl",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Crippling Strikes",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Strong Attack",
+        "skills": [
+          {
+            "name": "Strength Training",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Crushing Blows",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Rend",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Sunder Armor",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Defense",
+        "skills": [
+          {
+            "name": "Arrow Deflection",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Fleet Footed",
+            "tierIndex": 1,
+            "maxPoints": 1,
+            "description": ""
+          },
+          {
+            "name": "Counter Attack",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Deadly Precision",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Marksmanship",
+        "skills": [
+          {
+            "name": "Lightning Reflexes",
+            "tierIndex": 0,
+            "maxPoints": 1,
+            "description": ""
+          },
+          {
+            "name": "Cold Blood",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Anatomical Knowledge",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Crippling Shot",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Battle Trance",
+        "skills": [
+          {
+            "name": "Resolve",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Undying",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Razor Focus",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Flood of Anger",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Signs",
+    "subcategories": [
+      {
+        "name": "Aard",
+        "skills": [
+          {
+            "name": "Far-Reaching Aard",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Aard Sweep",
+            "tierIndex": 1,
+            "maxPoints": 1,
+            "description": ""
+          },
+          {
+            "name": "Aard Intensity",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Shock Wave",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Igni",
+        "skills": [
+          {
+            "name": "Melt Armor",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Firestream",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Igni Intensity",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Pyromaniac",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Yrden",
+        "skills": [
+          {
+            "name": "Sustained Glyphs",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Magic Trap",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Yrden Intensity",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Supercharged Glyphs",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Quen",
+        "skills": [
+          {
+            "name": "Exploding Shield",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Active Shield",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Quen Intensity",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Quen Discharge",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Axii",
+        "skills": [
+          {
+            "name": "Delusion",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Puppet",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Axii Intensity",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Domination",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alchemy",
+    "subcategories": [
+      {
+        "name": "Brewing",
+        "skills": [
+          {
+            "name": "Heightened Tolerance",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Refreshment",
+            "tierIndex": 1,
+            "maxPoints": 1,
+            "description": ""
+          },
+          {
+            "name": "Delayed Recovery",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Side Effects",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Oil Preparation",
+        "skills": [
+          {
+            "name": "Poisoned Blades",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Protective Coating",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Fixative",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Hunter Instinct",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Bomb Creation",
+        "skills": [
+          {
+            "name": "Steady Aim",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Pyrotechnics",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Efficiency",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Cluster Bombs",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Mutation",
+        "skills": [
+          {
+            "name": "Acquired Tolerance",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Tissue Transmutation",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Synergy",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Adaptation",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Trial of the Grasses",
+        "skills": [
+          {
+            "name": "Frenzy",
+            "tierIndex": 0,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Endure Pain",
+            "tierIndex": 1,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Fast Metabolism",
+            "tierIndex": 2,
+            "maxPoints": 3,
+            "description": ""
+          },
+          {
+            "name": "Killing Spree",
+            "tierIndex": 3,
+            "maxPoints": 3,
+            "description": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "General",
+    "skills": [
+      {
+        "name": "Sun and Stars",
+        "tierIndex": 0,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Survival Instinct",
+        "tierIndex": 0,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Cat School Techniques",
+        "tierIndex": 0,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Griffin School Techniques",
+        "tierIndex": 0,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Bear School Techniques",
+        "tierIndex": 0,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Steady Shot",
+        "tierIndex": 1,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Rage Management",
+        "tierIndex": 1,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Focus",
+        "tierIndex": 1,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Adrenaline Burst",
+        "tierIndex": 1,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Metabolic Control",
+        "tierIndex": 1,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Metabolism Boosts",
+        "tierIndex": 2,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Trick Shot",
+        "tierIndex": 2,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Advanced Pyrotechnics",
+        "tierIndex": 2,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Battle Frenzy",
+        "tierIndex": 2,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Strong Back",
+        "tierIndex": 2,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Gorged on Power",
+        "tierIndex": 3,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Gourmet",
+        "tierIndex": 3,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "In Combat's Fires",
+        "tierIndex": 3,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Heavy Artillery",
+        "tierIndex": 3,
+        "maxPoints": 1,
+        "description": ""
+      },
+      {
+        "name": "Attack is the Best Defense",
+        "tierIndex": 3,
+        "maxPoints": 1,
+        "description": ""
+      }
+    ]
+  }
+]

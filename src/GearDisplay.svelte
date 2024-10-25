@@ -1,15 +1,13 @@
 ﻿<script lang="ts">
 	import { type Gear } from '$lib/types.svelte';
 	
-	interface Props {
-		gear: Gear;
-		labelSlot?: boolean;
-	}
-	
 	let { 
 		gear,
 		labelSlot = false
-	}: Props = $props();
+	}: {
+		gear: Gear;
+		labelSlot?: boolean;
+	} = $props();
 </script>
 
 

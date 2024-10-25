@@ -1,4 +1,4 @@
-﻿import {capitalizeFirst, toIdString} from '$lib/common.svelte';
+﻿import { capitalizeFirst, toIdString } from '$lib/common.svelte';
 
 export type Gear = {
 	id: string,
@@ -44,5 +44,97 @@ export class GearSlot {
 		}
 		this.inventory = this.inventory.filter(({id}) => id !== gear.id);
 		return true;
+	}
+}
+
+export class Skill {
+	id: string = $state("");
+	name: string = $state("");
+	iconPath: string = $state("");
+	maxPoints: number = $state(0);
+	description: string = $state("");
+
+	_points: number = $state(0);
+
+	constructor(name: string, maxPoints: number, description: string, categoryId: string, subcategoryId?: string) {
+		let skillId = toIdString(name);
+		this.id = skillId;
+		this.name = name;
+		this.iconPath = 
+			`/images/abilities/skills/
+			${categoryId}/${subcategoryId ? `${subcategoryId}/` : ""}${skillId}.png`;
+		this.maxPoints = maxPoints;
+		this.description = description;
+	}
+	get points(): number {
+		return this._points;
+	}
+	
+	set points(val: number) {
+		this._points = Math.max(0, Math.min(val, this.maxPoints));
+	}
+
+	get isMax(): boolean {
+		return this.points >= this.maxPoints;
+	}
+
+	get isMin(): boolean {
+		return this.points <= 0;
+	}
+}
+
+export class SkillTier {
+	skills: Skill[] = $state([]);
+	prerequisitePoints: number = $state(0);
+	prerequisiteTiers: SkillTier[] = $state([]);
+	tiersAfter: SkillTier[] = $state([]);
+	
+	constructor(skills: Skill[], prerequisiteTiers: SkillTier[] = []) {
+		this.skills = skills;
+		this.prerequisiteTiers = prerequisiteTiers;
+		this.prerequisitePoints = 6 * prerequisiteTiers.length;
+	}
+	
+	get points() {
+		return this.skills.map(({points}) => points).reduce((a, b) => a + b, 0);
+	}
+
+	get pointsBefore(): number {
+		return this.prerequisiteTiers.map(({points}) => points).reduce((a, b) => a + b, 0);
+	}
+	
+	get canIncrease(): boolean {
+		return this.pointsBefore >= this.prerequisitePoints;
+	}
+	
+	get canDecrease(): boolean {
+		return !this.tiersAfter.some(otherTier =>
+			otherTier.points > 0
+			&& otherTier.pointsBefore - 1 < otherTier.prerequisitePoints
+		);
+	}
+}
+
+export type SkillSubcategory = {
+	id: string,
+	name: string,
+	iconPath: string, 
+}
+
+export class SkillCategory {
+	id: string = $state("");
+	name: string = $state("");
+	tiers: SkillTier[] = $state([]);
+	subcategories: SkillSubcategory[] = $state([]);
+	
+	constructor(name: string, tiers: SkillTier[], subcategories: SkillSubcategory[] = []) {
+		this.id = toIdString(name);
+		this.name = name;
+		this.tiers = tiers;
+		this.subcategories = subcategories;
+	}
+	
+	get points(): number {
+		return this.tiers.map(({points}) => points).reduce((a, b) => a + b, 0);
 	}
 }
