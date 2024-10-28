@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-    import { draggable } from "$lib/dragAndDrop.js"
+    import { draggable } from "$lib/dragAndDrop.svelte"
     import { Skill, type SkillSubcategory } from "$lib/types.svelte";
 
     let {

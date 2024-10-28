@@ -50,19 +50,23 @@ export class GearSlot {
 export class Skill {
 	id: string = $state("");
 	name: string = $state("");
+	categoryId: string = $state("");
 	iconPath: string = $state("");
 	maxPoints: number = $state(0);
 	description: string = $state("");
 
 	_points: number = $state(0);
 
-	constructor(name: string, maxPoints: number, description: string, categoryId: string, subcategoryId?: string) {
+	constructor(name: string, maxPoints: number, description: string, categoryId: string, subcategory?: SkillSubcategory) {
 		let skillId = toIdString(name);
 		this.id = skillId;
 		this.name = name;
+		this.categoryId = categoryId;
 		this.iconPath = 
 			`/images/abilities/skills/
-			${categoryId}/${subcategoryId ? `${subcategoryId}/` : ""}${skillId}.png`;
+			${categoryId}/
+			${subcategory != null ? `${subcategory.id}/` : ""}
+			${skillId}.png`;
 		this.maxPoints = maxPoints;
 		this.description = description;
 	}
@@ -136,5 +140,35 @@ export class SkillCategory {
 	
 	get points(): number {
 		return this.tiers.map(({points}) => points).reduce((a, b) => a + b, 0);
+	}
+}
+
+export class SkillSlot {
+	#categoryIds: string[] = $state([]);
+	#skill?: Skill = $state();
+	
+	constructor(categoryIds: string[] = ["combat","signs","alchemy","general"]) {
+		this.categoryIds = categoryIds;
+	}
+	
+	get skill(): Skill|undefined {
+		return this.#skill;
+	}
+	
+	set skill(skill: Skill|undefined) {
+		if (skill === undefined || this.categoryIds.includes(skill.categoryId)) {
+			this.#skill = skill;
+		}
+	}
+	
+	get categoryIds(): string[] {
+		return this.#categoryIds;
+	}
+	
+	set categoryIds(categoryIds: string[]) {
+		this.#categoryIds = categoryIds;
+		if (this.skill != null && !categoryIds.includes(this.skill.categoryId)) {
+			this.skill = undefined;
+		}
 	}
 }
