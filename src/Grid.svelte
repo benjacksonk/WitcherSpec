@@ -3,50 +3,34 @@
 	
 	let {
 		children,
-		vertical = false,
+		flowVertically = false,
 		tracks = "auto-fit",
-		trackSizeMin = "auto",
+		trackSize = "auto",
 		width = "fit-content",
-		justifyContent = "space-evenly",
 		gap = "0",
 	}: {
 		children?: Snippet;
-		vertical?: boolean;
+		flowVertically?: boolean;
 		tracks?: string | number;
-		trackSizeMin?: string;
+		trackSize?: string;
 		width?: string;
-		justifyContent?: string;
 		gap?: string;
 	} = $props();
+	
+	let grow: boolean = $derived(tracks != "auto-fit" && tracks != "auto-fill");
 </script>
 
 
 
-{#if vertical === true}
-	<div class="Grid"
-			 style:gap
-			 style:width
-			 style:justify-content={justifyContent}
-			 style:grid-auto-flow="row"
-			 style:grid-template-columns="repeat({tracks}, minmax({trackSizeMin}, 1fr))"
-	>
-		{#if children}
-			{@render children()}
-		{/if}
-	</div>
-{:else}
-	<div class="Grid"
-			 style:gap
-			 style:width
-			 style:justify-content={justifyContent}
-			 style:grid-auto-flow="column"
-			 style:grid-template-rows="repeat({tracks}, minmax({trackSizeMin}, 1fr))"
-	>
-		{#if children}
-			{@render children()}
-		{/if}
-	</div>
-{/if}
+<div class="Grid" style:gap style:width
+	 style:grid-auto-flow={flowVertically ? "column" : "row"}
+	 style:grid-template-columns={flowVertically ? "unset" : `repeat(${tracks}, ${grow ? `minmax(${trackSize}, 1fr)` : trackSize})`}
+	 style:grid-template-rows={flowVertically ? `repeat(${tracks}, ${grow ? `minmax(${trackSize}, 1fr)` : trackSize})` : "unset"}
+>
+	{#if children}
+		{@render children()}
+	{/if}
+</div>
 
 
 
@@ -55,7 +39,7 @@
         display: grid;
         grid-auto-rows: max-content;
         grid-auto-columns: max-content;
-        /*overflow: hidden;*/
-        /*overflow-y: scroll;*/
+		align-items: center;
+		justify-items: center;
     }
 </style>

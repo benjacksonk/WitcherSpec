@@ -1,0 +1,86 @@
+﻿[
+  {
+    "name": "Toxic Blood",
+    "points": 2,
+    "categoryIds": ["alchemy"],
+    "prerequisiteNames": [],
+    "description": "Each time you are injured in melee combat, the attacking opponent receives damage in the amount of 1.5% of damage dealt for every point of your Toxicity level (currently 1.5%, to a maximum of 150%)."
+  },
+  {
+    "name": "Euphoria",
+    "points": 3,
+    "categoryIds": ["alchemy"],
+    "prerequisiteNames": ["Toxic Blood"],
+    "description": "Each point of Toxicity increases damage dealt by swords and Sign Intensity by 0.75% (to a maximum of 75%)."
+  },
+  {
+    "name": "Mutated Skin",
+    "points": 5,
+    "categoryIds": ["alchemy", "combat"],
+    "prerequisiteNames": ["Euphoria"],
+    "description": "Each Adrenaline Point decreases damage received by 15% (to a maximum of 45%)."
+  },
+  {
+    "name": "Cat Eyes",
+    "points": 5,
+    "categoryIds": ["alchemy", "combat"],
+    "prerequisiteNames": ["Bloodbath", "Euphoria"],
+    "description": "Crossbow damage is now increased from 107 to 992 (values depend on crossbow used), and crossbow critical hit chance is increased by 50%. Crossbow bolts pierce and knock down or stun opponents. Opponents struck when they have full Vitality lose 15% of Vitality."
+  },
+  {
+    "name": "Metamorphosis",
+    "points": 7,
+    "categoryIds": ["alchemy", "combat", "signs"],
+    "prerequisiteNames": ["Cat Eyes"],
+    "description": "Applying critical effects to opponents activates a random decoction for 120s with no Toxicity cost. The maximum number of decoctions that can be activated simultaneously by the mutation is 3. Witcher Senses help you see better in dark places."
+  },
+  {
+    "name": "Deadly Counter",
+    "points": 2,
+    "categoryIds": ["combat"],
+    "prerequisiteNames": [],
+    "description": "Sword attacks deal 25% more damage to human opponents immune to counterattacks and monsters. In all other cases, if the attacker's Vitality is less than 25%, a counterattack immediately triggers a finisher."
+  },
+  {
+    "name": "Bloodbath",
+    "points": 3,
+    "categoryIds": ["combat"],
+    "prerequisiteNames": ["Deadly Counter"],
+    "description": "Each fatal blow dealt by a sword dismembers the enemy or activates a finisher. Each blow dealt by a weapon in melee combat increases Attack Power by 5% until combat ends (to a maximum of 250%). The bonus is lost if you take damage (not including damage from Toxicity)."
+  },
+  {
+    "name": "Adrenaline Rush",
+    "points": 5,
+    "categoryIds": ["combat", "signs"],
+    "prerequisiteNames": ["Bloodbath", "Piercing Cold"],
+    "description": "At start of combat, sword Attack Power and Sign Intensity increase for 30s by 30% for each foe (after first). So, when fighting 11 foes, the bonus is 300%. Once it wears off, sword Attack Power and Sign Intensity drop by 10% for each participating foe after first (modifier cannot exceed 70%). Duration: 30s."
+  },
+  {
+    "name": "Second Life",
+    "points": 7,
+    "categoryIds": ["alchemy", "combat", "signs"],
+    "prerequisiteNames": ["Adrenaline Rush"],
+    "description": "When Vitality reaches 0, you become temporarily invulnerable and regenerate 100% Vitality. The effect can only be triggered once every 180s."
+  },
+  {
+    "name": "Magic Sensibilities",
+    "points": 2,
+    "categoryIds": ["signs"],
+    "prerequisiteNames": [],
+    "description": "Signs can deal critical hits. Their critical hit chance and damage increase with Sign Intensity (currently 40% chance to deal an additional 198% damage). Opponents killed by critical hits from Signs explode."
+  },
+  {
+    "name": "Piercing Cold",
+    "points": 3,
+    "categoryIds": ["signs"],
+    "prerequisiteNames": ["Magic Sensibilities"],
+    "description": "When the Aard Sign is cast, it additionally has a 25% chance of freezing opponents. Opponents knocked down and frozen simultaneously die immediately. Opponents who are not frozen are dealt an additional 2972 damage."
+  },
+  {
+    "name": "Conductors of Magic",
+    "points": 5,
+    "categoryIds": ["signs"],
+    "prerequisiteNames": ["Piercing Cold"],
+    "description": "When drawn, magic, unique and witcher swords increase Sign damage dealt by 50% of their own damage dealt."
+  }
+]

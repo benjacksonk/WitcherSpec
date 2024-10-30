@@ -2,9 +2,9 @@
 import skillCategoriesData from "$lib/skillCategoriesData.json";
 import { Skill, SkillCategory, type SkillSubcategory, SkillTier } from "$lib/types.svelte";
 
-export const skillData = $state(generateSkillData());
+export const skillState = $state(generateSkillStateData());
 
-function generateSkillData() {
+function generateSkillStateData() {
     let categories = skillCategoriesData.map(categoryData => {        
         let id = toIdString(categoryData.name);
         let name = categoryData.name;        

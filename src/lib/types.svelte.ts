@@ -172,3 +172,57 @@ export class SkillSlot {
 		}
 	}
 }
+
+export class Mutation {
+	id: string = $state("");
+	name: string = $state("");
+	points: number = $state(0);
+	categoryIds: string[] = $state([]);
+	description: string = $state("");
+	prerequisiteIds: string[] = $state([]);
+	iconPath: string = $state("");
+	
+	constructor(name: string, points: number, categoryIds: string[], description: string = "", prerequisiteIds: string[] = []) {
+		let id = toIdString(name);
+		
+		this.id = id;
+		this.name = name;
+		this.points = points;
+		this.categoryIds = categoryIds;
+		this.description = description;
+		this.prerequisiteIds = prerequisiteIds;
+		this.iconPath = `/images/abilities/mutations/${id}.webp`
+
+		console.log(this.iconPath);
+	}
+}
+
+export class MutationSlot {
+	#mutation?: Mutation = $state();
+	inventory: Mutation[] = $state([]);
+	skillSlots: SkillSlot[] = $state([
+		new SkillSlot(),
+		new SkillSlot(),
+		new SkillSlot(),
+		new SkillSlot()
+	]);
+	
+	constructor(inventory: Mutation[]) {
+		this.inventory = inventory;
+	}
+	
+	get mutation(): Mutation|undefined {
+		return this.#mutation;
+	}
+	
+	set mutation(mutation: Mutation|undefined) {
+		if (this.mutation === mutation) {
+			return;
+		}
+		
+		this.#mutation = mutation;
+		this.skillSlots.forEach(skillSlot => {
+			skillSlot.categoryIds = mutation?.categoryIds ?? []
+		})
+	}
+}

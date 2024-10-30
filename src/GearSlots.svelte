@@ -13,12 +13,12 @@
 	let currentSlot: GearSlot = $state(nullGearSlot);
 	
 	
-	function handleOnclickSlot(event: MouseEvent, gearSlot: GearSlot) {
+	function handleOnClickSlot(event: MouseEvent, gearSlot: GearSlot) {
 		event.preventDefault();
 		currentSlot = (currentSlot === gearSlot ? nullGearSlot : gearSlot);
 	}
 	
-	function handleOnclickGear(event: MouseEvent, gearSlot: GearSlot, gear: Gear) {
+	function handleOnClickGear(event: MouseEvent, gearSlot: GearSlot, gear: Gear) {
 		event.preventDefault();
 		gearSlot.currentGear = gear;
 	}
@@ -26,11 +26,11 @@
 
 
 
-<div class="GearSlotControlTable">
+<div class="MutationSlotUI">
 	<div class="frameGrid">
 		<Grid gap="1px">
 			{#each gearSlots as gearSlot, i}
-				<button class="slotBtn plain" onmousedown={(event) => handleOnclickSlot(event, gearSlot)}>
+				<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
 					<GearDisplay gear={gearSlot.currentGear} labelSlot={true}/>
 				</button>
 			{/each}
@@ -40,7 +40,7 @@
 		<div class="frameGrid">
 			<Grid tracks={6} vertical={true} gap={"1px 0"}>
 				{#each currentSlot.inventory as gear, i}
-					<button class="gearBtn plain" onmousedown={(event) => handleOnclickGear(event, currentSlot, gear)}>
+					<button class="mutationBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
 						<GearDisplay gear={gear}/>
 					</button>
 				{/each}
@@ -52,7 +52,7 @@
 
 
 <style>
-    .GearSlotControlTable {
+    .MutationSlotUI {
         width: max-content;
         height: max-content;
         position: relative;
@@ -64,8 +64,8 @@
     }
 
     button.slotBtn {
-		width: fit-content;
-		height: fit-content;
+		width: max-content;
+		height: max-content;
 		display: flex;
 		
         border-style: solid;
@@ -76,7 +76,8 @@
 
     .popup {
         z-index: 1;
-        width: 100%;
+		width: max-content;
+		height: max-content;
         position: absolute;
         top: 100%;
         display: flex;
@@ -90,7 +91,7 @@
         width: max-content;
     }
 
-    button.gearBtn {
+    button.mutationBtn {
 		width: fit-content;
 		height: fit-content;
 		display: flex;
