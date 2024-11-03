@@ -3,21 +3,23 @@
 	
 	let { 
 		gear,
-		labelSlot = false
+		label = ""
 	}: {
-		gear: Gear;
-		labelSlot?: boolean;
+		gear: Gear|undefined;
+		label?: string;
 	} = $props();
 </script>
 
 
 
 <div class="GearDisplay">
-	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
+	<img src={gear?.iconPath ?? ""} alt={gear?.name ?? ""} class:hidden={gear === undefined}/>
 	<div class="name shadowText">
-		<span style:font-style={"italic"}>{gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]}</span>
-		{#if labelSlot}
-			<span>{gear.slotId.charAt(0).toUpperCase() + gear.slotId.slice(1)}</span>
+		<span style:font-style={"italic"}>
+			{gear === undefined ? "None" : (gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0])}
+		</span>
+		{#if label !== ""}
+			<span>{label}</span>
 		{/if}
 	</div>
 </div>

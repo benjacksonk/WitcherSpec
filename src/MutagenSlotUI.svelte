@@ -1,11 +1,11 @@
 ﻿<script lang="ts">
-    import type { Mutation, MutationSlot } from "$lib/types.svelte";
+    import type { Mutagen, MutagenSlot } from "$lib/types.svelte";
     import Grid from "./Grid.svelte";
-    
+
     let {
-        mutationSlot = $bindable()
+        mutagenSlot = $bindable()
     } : {
-        mutationSlot: MutationSlot
+        mutagenSlot: MutagenSlot
     } = $props();
 
     let removePopup: boolean = $state(true);
@@ -15,37 +15,37 @@
         removePopup = !removePopup;
     }
 
-    function handleOnClickMutation(event: MouseEvent, mutation: Mutation) {
+    function handleOnClickMutagen(event: MouseEvent, mutagen: Mutagen) {
         event.preventDefault();
-        mutationSlot.mutation = mutation;
+        mutagenSlot.mutagen = mutagen;
     }
 </script>
 
 
 
-<div class="MutationSlotUI">
+<div class="MutagenSlotUI">
     <button class="slotBtn plain" onmousedown={handleOnClickSlot}
-        class:combat={mutationSlot.mutation?.categoryIds.includes("combat") ?? false}
-        class:signs={mutationSlot.mutation?.categoryIds.includes("signs") ?? false}
-        class:alchemy={mutationSlot.mutation?.categoryIds.includes("alchemy") ?? false}
-        class:general={mutationSlot.mutation?.categoryIds.includes("general") ?? false}
+        class:combat={mutagenSlot.mutagen?.categoryId === "combat" ?? false}
+        class:signs={mutagenSlot.mutagen?.categoryId === "signs" ?? false}
+        class:alchemy={mutagenSlot.mutagen?.categoryId === "alchemy" ?? false}
+        class:general={mutagenSlot.mutagen?.categoryId === "general" ?? false}
     >
-        <img alt="" src={mutationSlot.mutation === undefined ? "" : mutationSlot.mutation.iconPath} height="64px" width="64px">
+        <img alt="" src={mutagenSlot.mutagen === undefined ? "" : mutagenSlot.mutagen.iconPath} height="64px" width="64px">
     </button>
     <div class="popup" class:removed={removePopup}>
         <div class="frameGrid">
-            <Grid tracks={4} gap={"1px"} trackSize={"50px"}>
-                {#each mutationSlot.inventory as mutation, i}
+            <Grid flowVertically={false} tracks={3} trackSize={"50px"} gap={"1px"}>
+                {#each mutagenSlot.inventory as mutagen, i}
                     <button
-                        class="mutationBtn plain"
-                        class:combat={mutation.categoryIds.includes("combat")}
-                        class:signs={mutation.categoryIds.includes("signs")}
-                        class:alchemy={mutation.categoryIds.includes("alchemy")}
-                        class:general={mutation.categoryIds.includes("general")}
-                        onmousedown={(event) => handleOnClickMutation(event, mutation)}
+                        class="mutagenBtn plain"
+                        class:combat={mutagen.categoryId === "combat"}
+                        class:signs={mutagen.categoryId === "signs"}
+                        class:alchemy={mutagen.categoryId === "alchemy"}
+                        class:general={mutagen.categoryId === "general"}
+                        onmousedown={(event) => handleOnClickMutagen(event, mutagen)}
                     >
-                        <img alt="" src={mutation.iconPath} height="50px" width="50px">
-                        <span class="mutationName shadowText">{mutation.name}</span>
+                        <img alt="" src={mutagen.iconPath} height="50px" width="50px">
+                        <span class="mutagenName shadowText">{mutagen.name}</span>
                     </button>
                 {/each}
             </Grid>
@@ -56,7 +56,7 @@
 
 
 <style>
-    .MutationSlotUI {
+    .MutagenSlotUI {
         height: max-content;
         position: relative;
     }
@@ -91,7 +91,7 @@
         width: max-content;
     }
 
-    button.mutationBtn {
+    button.mutagenBtn {
         width: 100%;
         height: 100%;
         display: grid;
@@ -101,8 +101,8 @@
         background-color: var(--color-key-8);
         padding: 0.5em;
     }
-    
-    .mutationName {
+
+    .mutagenName {
         width: min-content;
         color: var(--color-key-1);
     }

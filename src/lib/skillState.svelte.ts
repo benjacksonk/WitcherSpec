@@ -1,4 +1,4 @@
-﻿import { capitalizeFirst, toIdString } from '$lib/common.svelte';
+﻿import { toIdString } from '$lib/common.svelte';
 import skillCategoriesData from "$lib/skillCategoriesData.json";
 import { Skill, SkillCategory, type SkillSubcategory, SkillTier } from "$lib/types.svelte";
 
@@ -38,7 +38,7 @@ function generateSkillStateData() {
         }
         if (id !== "general") {
             tiers.forEach((tier, i) => {
-                tier.tiersAfter = tiers.slice(1 + i);
+                tier.setTiersAfter(tiers.slice(1 + i));
             });
         }
         

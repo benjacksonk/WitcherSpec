@@ -1,23 +1,35 @@
 ﻿<script lang="ts">
+import { mutagenState } from "./mutagenState.svelte";
 import { mutationState } from "$lib/mutationState.svelte";
 import SkillSlotUI from "./SkillSlotUI.svelte";
 import MutationSlotUI from "./MutationSlotUI.svelte";
-import Grid from "./Grid.svelte";
+import MutagenSlotUI from "./MutagenSlotUI.svelte";
 </script>
 
 
 
 <div class="SlotsUI">
-    <Grid tracks="5" flowVertically={true}>
+    {#each mutagenState.mutagenSlots as mutagenSlot, i}
+        <div class="mutagenQuadrant"
+             style:grid-area={`${i < 2 ? 1 : 2} / ${i % 2 === 0 ? 1 : 3}`}
+             style:flex-flow={`${i % 2 === 0 ? "row" : "row-reverse"} nowrap`}
+        >
+            <MutagenSlotUI bind:mutagenSlot={mutagenState.mutagenSlots[i]}/>
+            <div class="frameSkillSlotUIs">
+                {#each mutagenState.mutagenSlots[i].skillSlots as skillSlot, j}
+                    <SkillSlotUI bind:skillSlot={mutagenState.mutagenSlots[i].skillSlots[j]}/>
+                {/each}
+            </div>
+        </div>
+    {/each}
+    <div class="mutationColumn">
         <div class="frameMutationSlotUI">
             <MutationSlotUI bind:mutationSlot={mutationState.mutationSlot}/>
         </div>
         {#each mutationState.mutationSlot.skillSlots as skillSlot, i}
-            <div class="frameSkillSlotUI">
-                <SkillSlotUI bind:skillSlot={mutationState.mutationSlot.skillSlots[i]}/>
-            </div>
+            <SkillSlotUI bind:skillSlot={mutationState.mutationSlot.skillSlots[i]}/>
         {/each}
-    </Grid>
+    </div>
 </div>
 
 
@@ -26,18 +38,48 @@ import Grid from "./Grid.svelte";
     .SlotsUI {
         width: max-content;
         height: max-content;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        align-content: center;
+        justify-content: center;
+        gap: 1px;
+
+        grid-template: repeat(2, 1fr) / repeat(3, auto);
+        background-color: var(--color-key-6);
+    }
+
+    .mutagenQuadrant {
         display: flex;
+        padding: 20px 20px;
+        gap: 10px;
+        align-items: center;
+        justify-items: center;
+    }
+    
+    .mutagenQuadrant,
+    .mutationColumn {
+        background-color: var(--color-key-8);
+    }
+    
+    .frameSkillSlotUIs {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
     }
     
     .frameMutationSlotUI {
+        display: flex;
         grid-row: 3;
-        grid-column: 1;
     }
     
-    .frameSkillSlotUI {
-        display: flex;
-    }
-    .frameSkillSlotUI:nth-of-type([n]) {
-        grid-row: n;
+    .mutationColumn {
+        grid-area: span 2 / 2;
+        height: 100%;
+        display: grid;
+        grid-auto-flow: row;
+        justify-items: center;
+        align-content: space-evenly;
+        padding: 0 20px;
     }
 </style>

@@ -9,7 +9,7 @@
 		gearSlots: GearSlot[];
 	} = $props();
 
-	let nullGearSlot: GearSlot = new GearSlot("null");
+	let nullGearSlot: GearSlot = new GearSlot("null", []);
 	let currentSlot: GearSlot = $state(nullGearSlot);
 	
 	
@@ -26,21 +26,21 @@
 
 
 
-<div class="MutationSlotUI">
+<div class="GearSlotUI">
 	<div class="frameGrid">
-		<Grid gap="1px">
-			{#each gearSlots as gearSlot, i}
-				<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
-					<GearDisplay gear={gearSlot.currentGear} labelSlot={true}/>
-				</button>
-			{/each}
-		</Grid>
+	<Grid gap="1px" flowVertically={false} tracks={6}>
+		{#each gearSlots as gearSlot, i}
+			<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
+				<GearDisplay gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
+			</button>
+		{/each}
+	</Grid>
 	</div>
 	<div class="popup" class:removed={currentSlot === nullGearSlot}>
 		<div class="frameGrid">
-			<Grid tracks={6} vertical={true} gap={"1px 0"}>
+			<Grid tracks={6} flowVertically={false} gap={"1px 0"}>
 				{#each currentSlot.inventory as gear, i}
-					<button class="mutationBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
+					<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
 						<GearDisplay gear={gear}/>
 					</button>
 				{/each}
@@ -52,15 +52,12 @@
 
 
 <style>
-    .MutationSlotUI {
+    .GearSlotUI {
         width: max-content;
         height: max-content;
         position: relative;
+		display: flex;
         background-color: var(--color-grey-2);
-    }
-
-    .frameGrid {
-        display: flex;
     }
 
     button.slotBtn {
@@ -91,7 +88,7 @@
         width: max-content;
     }
 
-    button.mutationBtn {
+    button.gearBtn {
 		width: fit-content;
 		height: fit-content;
 		display: flex;

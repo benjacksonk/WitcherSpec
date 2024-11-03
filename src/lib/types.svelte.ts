@@ -1,59 +1,42 @@
-﻿import { capitalizeFirst, toIdString } from '$lib/common.svelte';
+﻿import { toIdString } from '$lib/common.svelte';
 
-export type Gear = {
-	id: string,
-	name: string,
-	iconPath: string,
-	slotId: string
-};
+export class Gear {
+	id: string;
+	name: string;
+	iconPath: string;
+	stats: any;
+	
+	constructor(name: string, slotId: string, stats: any) {
+		this.name = name;
+		this.id = `${slotId}-${toIdString(name)}`;
+		this.iconPath = name === "None" ? "" : `images/gear/${slotId}-${
+			name.toLowerCase().replaceAll(
+				new RegExp(String.raw`[^\w-]|${slotId}|${"sword"}`, 'gi'),
+				''
+			)
+		}.webp`
+		this.stats = stats;
+	}
+}
 
 export class GearSlot {
-	id: string = $state("");
-	name: string = $state("");
-	currentGear: Gear = $state({
-		id: `none`,
-		name: "None",
-		iconPath: "",
-		slotId: ""
-	});
+	readonly id: string = $state("");
+	currentGear?: Gear = $state();
 	inventory: Gear[] = $state([]);
 	
-	constructor(id: string, inventory: Gear[] = []) {
+	constructor(id: string, inventory: Gear[]) {
 		this.id = id;
-		this.name = capitalizeFirst(id);
-		this.currentGear = { 
-			id: `${id}-none`, 
-			name: "None", 
-			iconPath: "", 
-			slotId: id 
-		};
-		this.inventory = [this.currentGear, ...inventory];
-	}
-	
-	add(gear: Gear): boolean {
-		if (this.inventory.some(({id}) => id === gear.id)) {
-			return false;
-		}
-		this.inventory.push(gear);
-		return true;
-	}
-	
-	remove(gear: Gear): boolean {
-		if (!this.inventory.some(({id}) => id === gear.id)) {
-			return false;
-		}
-		this.inventory = this.inventory.filter(({id}) => id !== gear.id);
-		return true;
+		this.inventory = inventory;
 	}
 }
 
 export class Skill {
-	id: string = $state("");
-	name: string = $state("");
-	categoryId: string = $state("");
-	iconPath: string = $state("");
-	maxPoints: number = $state(0);
-	description: string = $state("");
+	readonly id: string = $state("");
+	readonly name: string = $state("");
+	readonly categoryId: string = $state("");
+	readonly iconPath: string = $state("");
+	readonly maxPoints: number = $state(0);
+	readonly description: string = $state("");
 
 	_points: number = $state(0);
 
@@ -88,10 +71,10 @@ export class Skill {
 }
 
 export class SkillTier {
-	skills: Skill[] = $state([]);
-	prerequisitePoints: number = $state(0);
-	prerequisiteTiers: SkillTier[] = $state([]);
-	tiersAfter: SkillTier[] = $state([]);
+	readonly skills: Skill[] = $state([]);
+	readonly prerequisitePoints: number = $state(0);
+	readonly prerequisiteTiers: SkillTier[] = $state([]);
+	#tiersAfter: SkillTier[] = $state([]);
 	
 	constructor(skills: Skill[], prerequisiteTiers: SkillTier[] = []) {
 		this.skills = skills;
@@ -100,11 +83,15 @@ export class SkillTier {
 	}
 	
 	get points() {
-		return this.skills.map(({points}) => points).reduce((a, b) => a + b, 0);
+		return this.skills
+			.map(({points}) => points)
+			.reduce((a, b) => a + b, 0);
 	}
 
 	get pointsBefore(): number {
-		return this.prerequisiteTiers.map(({points}) => points).reduce((a, b) => a + b, 0);
+		return this.prerequisiteTiers
+			.map(({points}) => points)
+			.reduce((a, b) => a + b, 0);
 	}
 	
 	get canIncrease(): boolean {
@@ -112,10 +99,16 @@ export class SkillTier {
 	}
 	
 	get canDecrease(): boolean {
-		return !this.tiersAfter.some(otherTier =>
+		return !this.#tiersAfter.some(otherTier =>
 			otherTier.points > 0
 			&& otherTier.pointsBefore - 1 < otherTier.prerequisitePoints
 		);
+	}
+	
+	setTiersAfter(tiersAfter: SkillTier[]) {
+		if (this.#tiersAfter !== tiersAfter) {
+			this.#tiersAfter = tiersAfter;
+		}
 	}
 }
 
@@ -126,10 +119,10 @@ export type SkillSubcategory = {
 }
 
 export class SkillCategory {
-	id: string = $state("");
-	name: string = $state("");
-	tiers: SkillTier[] = $state([]);
-	subcategories: SkillSubcategory[] = $state([]);
+	readonly id: string = $state("");
+	readonly name: string = $state("");
+	readonly tiers: SkillTier[] = $state([]);
+	readonly subcategories: SkillSubcategory[] = $state([]);
 	
 	constructor(name: string, tiers: SkillTier[], subcategories: SkillSubcategory[] = []) {
 		this.id = toIdString(name);
@@ -166,21 +159,25 @@ export class SkillSlot {
 	}
 	
 	set categoryIds(categoryIds: string[]) {
+		if (this.#categoryIds === categoryIds) {
+			return;
+		}
+		
 		this.#categoryIds = categoryIds;
-		if (this.skill != null && !categoryIds.includes(this.skill.categoryId)) {
+		if (this.skill !== undefined && !categoryIds.includes(this.skill.categoryId)) {
 			this.skill = undefined;
 		}
 	}
 }
 
 export class Mutation {
-	id: string = $state("");
-	name: string = $state("");
+	readonly id: string = $state("");
+	readonly name: string = $state("");
 	points: number = $state(0);
-	categoryIds: string[] = $state([]);
-	description: string = $state("");
-	prerequisiteIds: string[] = $state([]);
-	iconPath: string = $state("");
+	readonly categoryIds: string[] = $state([]);
+	readonly description: string = $state("");
+	readonly prerequisiteIds: string[] = $state([]);
+	readonly iconPath: string = $state("");
 	
 	constructor(name: string, points: number, categoryIds: string[], description: string = "", prerequisiteIds: string[] = []) {
 		let id = toIdString(name);
@@ -199,8 +196,8 @@ export class Mutation {
 
 export class MutationSlot {
 	#mutation?: Mutation = $state();
-	inventory: Mutation[] = $state([]);
-	skillSlots: SkillSlot[] = $state([
+	readonly inventory: Mutation[] = $state([]);
+	readonly skillSlots: SkillSlot[] = $state([
 		new SkillSlot(),
 		new SkillSlot(),
 		new SkillSlot(),
@@ -225,4 +222,38 @@ export class MutationSlot {
 			skillSlot.categoryIds = mutation?.categoryIds ?? []
 		})
 	}
+}
+
+export type Mutagen = {
+	name: string,
+	categoryId: string,
+	iconPath: string,
+}
+
+export class MutagenSlot {
+	mutagen?: Mutagen = $state();
+	readonly inventory: Mutagen[] = $state([
+		{
+			name: "Greater Blue Mutagen",
+			categoryId: "signs",
+			iconPath: "/images/mutagens/greaterbluemutagen.png"
+		},
+		{
+			name: "Greater Green Mutagen",
+			categoryId: "alchemy",
+			iconPath: "/images/mutagens/greatergreenmutagen.png"
+		},
+		{
+			name: "Greater Red Mutagen",
+			categoryId: "combat",
+			iconPath: "/images/mutagens/greaterredmutagen.png"
+		}
+	]);
+	readonly skillSlots: SkillSlot[] = $state([
+		new SkillSlot(),
+		new SkillSlot(),
+		new SkillSlot()
+	]);
+	
+	// ToDo: get buff() { // check skillSlots to get total buff }
 }

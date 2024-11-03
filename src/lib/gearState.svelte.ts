@@ -1,39 +1,55 @@
-﻿import { toIdString } from '$lib/common.svelte';
-import { type Gear, GearSlot } from "$lib/types.svelte";
+﻿import { Gear, GearSlot } from "$lib/types.svelte";
 import gearDoc from "$lib/gearData.csv?raw";
 import Papa from "papaparse";
 
 
-export const gearData = $state(generateGearData());
+export async function generateGearStateData(): Promise<ReturnType<typeof processParsedGearData>> {
 
+	// return processParsedGearData(Papa.parse<GearData>(gearDoc, { header: true }).data); // non-async
+	
+	type GearData = {
+		id: string,
+		slotId: string,
+		name: string,
+		iconPath: string,
+		stats: {}
+	};
+	
+	const gearState: Promise<ReturnType<typeof processParsedGearData>> = $state(
+		new Promise((resolve) => {
+			Papa.parse<GearData>(gearDoc, {
+				header: true,
+				dynamicTyping: true,
+				worker: true,
+				complete: (results) => {
+					resolve(processParsedGearData(results.data));
+				},
+			});
+		})
+	);
+	
+	return gearState;
 
-function generateGearData() {
+	function processParsedGearData(gearDataArray: GearData[]) {
 
-	return processParsedGearData(Papa.parse<Gear>(gearDoc, { header: true }).data);
-
-	// Papa.parse<Gear>(gearDoc, { header: true, complete: results => processParsedGearData(results.data) });
-
-	function processParsedGearData(gears: Gear[]) {
-
-		gears.forEach((gear) => {
-			gear.id = `${gear.slotId}-${toIdString(gear.name)}`;
-			gear.iconPath = gear.name === "None" ? "" : `images/gear/${gear.slotId}-${
-				gear.name.toLowerCase().replaceAll(
-					new RegExp(String.raw`[^\w-]|${gear.slotId}|${"sword"}`, 'gi'),
-					''
-				)
-			}.webp`;
-		});
-
-		let slotIds = gears
+		let slotIds = gearDataArray
 			.map(gear => gear.slotId)
 			.reduce((a: string[], b: string): string[] => a.includes(b) ? a : [...a, b], []);
 
-		let gearArraysBySlotId = slotIds.map(slotId => gears.filter(gear => gear.slotId === slotId));
-
-		let gearSlots: GearSlot[] = gearArraysBySlotId.map(
-			(slotGears) => {
-				return new GearSlot(slotGears[0].slotId, slotGears);
+		let gearSlots = 
+			slotIds.map(slotId => {
+				let slotGears = gearDataArray
+					.filter(gearData => gearData.slotId === slotId)
+					.map(gearData => {
+						let gearStats = Object.fromEntries(
+							Object.entries(gearData).filter(([id, value]) => {
+								return !["name", "slotId", "schoolId", "glyphSlots", "runeSlots"].includes(id)
+							})
+						);
+						return new Gear(gearData.name, gearData.slotId, gearStats);
+					});
+				
+				return new GearSlot(slotId, slotGears);
 			}
 		).sort((a,b) => {
 			return (a.id === "steel" || a.id === "silver") && (b.id !== "steel" && b.id !== "silver") ?
@@ -42,8 +58,7 @@ function generateGearData() {
 		});
 
 		return {
-			slots: gearSlots,
-			gears: gears,
+			slots: gearSlots
 		};
 	}
 }

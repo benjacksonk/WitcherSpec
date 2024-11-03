@@ -1,14 +1,12 @@
 <script lang="ts">
     import { setContext } from "svelte";
     import GearSlots from '../GearSlots.svelte';
-    import { gearData } from '$lib/gearState.svelte';
+    import { generateGearStateData } from '$lib/gearState.svelte';
     import AbilityTableUI from "../AbilityTableUI.svelte";
     import { skillState } from '$lib/skillState.svelte';
     import { Skill, SkillSlot } from "$lib/types.svelte";
-    import SkillSlotUI from "../SkillSlotUI.svelte";
-    import { mutationState } from "$lib/mutationState.svelte";
-    import MutationSlotUI from "../MutationSlotUI.svelte";
     import SlotsUI from "../SlotsUI.svelte";
+    import StatsUI from "../StatsUI.svelte";
 
     let points = $derived(skillState.points);
 
@@ -25,10 +23,13 @@
 
 
 
-<main>
-<!--    <GearSlots bind:gearSlots={gearData.slots}/>-->
+<main style:color="white">
+    {#await generateGearStateData() then gearState}
+        <GearSlots bind:gearSlots={gearState.slots}/>
+    {/await}
     <AbilityTableUI {points} bind:skillCategories={skillState.categories}/>
-    <SlotsUI/>
+    <SlotsUI/> 
+    <StatsUI/>
 </main>
 
 
@@ -41,5 +42,6 @@
         flex-flow: row wrap;
         align-content: start;
         background-color: var(--color-key-10);
+        gap: 0;
     }
 </style>
