@@ -2,20 +2,22 @@
 
 export class Gear {
 	id: string;
+	slotId: string;
 	name: string;
 	iconPath: string;
-	stats: any;
+	stats: Map<string, number>;
 	
-	constructor(name: string, slotId: string, stats: any) {
+	constructor(name: string, slotId: string, statEntries: [string, number][] = []) {
 		this.name = name;
 		this.id = `${slotId}-${toIdString(name)}`;
+		this.slotId = slotId;
 		this.iconPath = name === "None" ? "" : `images/gear/${slotId}-${
 			name.toLowerCase().replaceAll(
 				new RegExp(String.raw`[^\w-]|${slotId}|${"sword"}`, 'gi'),
 				''
 			)
 		}.webp`
-		this.stats = stats;
+		this.stats = new Map(statEntries);
 	}
 }
 

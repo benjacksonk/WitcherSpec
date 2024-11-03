@@ -2,19 +2,35 @@
 import gearDoc from "$lib/gearData.csv?raw";
 import Papa from "papaparse";
 
+export const gearState = $state(generateGearStateData());
 
-export async function generateGearStateData(): Promise<ReturnType<typeof processParsedGearData>> {
-
-	// return processParsedGearData(Papa.parse<GearData>(gearDoc, { header: true }).data); // non-async
-	
+function generateGearStateData() {
 	type GearData = {
 		id: string,
 		slotId: string,
 		name: string,
 		iconPath: string,
-		stats: {}
 	};
+
+	// non-async
+	let gears = Papa.parse<GearData>(gearDoc, {
+		header: true,
+		dynamicTyping: true
+	}).data.map(gearData => {
+		let statEntries: [string, number][] = Object.entries(gearData)
+			.filter(([key, value]) => {
+				return !["name", "slotId", "schoolId", "glyphSlots", "runeSlots"].includes(key);
+			})
+			.map(([key, value]) => {
+				return [key, Number(value)]
+			});
+		
+		return new Gear(gearData.name, gearData.slotId, statEntries);
+	});
 	
+	return processParsedGearData(gears);
+	
+	/* // async version
 	const gearState: Promise<ReturnType<typeof processParsedGearData>> = $state(
 		new Promise((resolve) => {
 			Papa.parse<GearData>(gearDoc, {
@@ -29,29 +45,17 @@ export async function generateGearStateData(): Promise<ReturnType<typeof process
 	);
 	
 	return gearState;
+	*/
 
-	function processParsedGearData(gearDataArray: GearData[]) {
+	function processParsedGearData(gears: Gear[]) {
 
-		let slotIds = gearDataArray
+		let slotIds = gears
 			.map(gear => gear.slotId)
 			.reduce((a: string[], b: string): string[] => a.includes(b) ? a : [...a, b], []);
 
-		let gearSlots = 
-			slotIds.map(slotId => {
-				let slotGears = gearDataArray
-					.filter(gearData => gearData.slotId === slotId)
-					.map(gearData => {
-						let gearStats = Object.fromEntries(
-							Object.entries(gearData).filter(([id, value]) => {
-								return !["name", "slotId", "schoolId", "glyphSlots", "runeSlots"].includes(id)
-							})
-						);
-						return new Gear(gearData.name, gearData.slotId, gearStats);
-					});
-				
-				return new GearSlot(slotId, slotGears);
-			}
-		).sort((a,b) => {
+		let gearSlots = slotIds.map(slotId => {
+			return new GearSlot(slotId, gears.filter(gear => gear.slotId === slotId));
+		}).sort((a,b) => {
 			return (a.id === "steel" || a.id === "silver") && (b.id !== "steel" && b.id !== "silver") ?
 				1 : (b.id === "steel" || b.id === "silver") && (a.id !== "steel" && a.id !== "silver") ?
 					-1 : a > b ? 1 : a < b ? -1 : 0;

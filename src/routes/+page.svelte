@@ -1,7 +1,7 @@
 <script lang="ts">
     import { setContext } from "svelte";
     import GearSlots from '../GearSlots.svelte';
-    import { generateGearStateData } from '$lib/gearState.svelte';
+    import { gearState } from '$lib/gearState.svelte';
     import AbilityTableUI from "../AbilityTableUI.svelte";
     import { skillState } from '$lib/skillState.svelte';
     import { Skill, SkillSlot } from "$lib/types.svelte";
@@ -9,12 +9,18 @@
     import StatsUI from "../StatsUI.svelte";
 
     let points = $derived(skillState.points);
-
-    let context = {
-        getSkillPerId
-    };
-    export const ContextType = typeof context;
-    setContext("geralt", context);
+    
+    let stats = $derived.by(() => {
+        return gearState.slots
+            .flatMap(slot => slot.currentGear?.stats ?? [])
+            .reduce(
+                (a, b) => {
+                    b.forEach((value, key) => a.set(key, (a.get(key) ?? 0) + (b.get(key) ?? 0)))
+                    return a;
+                },
+                new Map<string, number>()
+            );
+    });
     
     function getSkillPerId(id: string): Skill|undefined {
         return skillState.skillPerId.get(id);
@@ -24,12 +30,10 @@
 
 
 <main style:color="white">
-    {#await generateGearStateData() then gearState}
-        <GearSlots bind:gearSlots={gearState.slots}/>
-    {/await}
-    <AbilityTableUI {points} bind:skillCategories={skillState.categories}/>
-    <SlotsUI/> 
-    <StatsUI/>
+    <GearSlots bind:gearSlots={gearState.slots}/>
+<!--    <AbilityTableUI {points} bind:skillCategories={skillState.categories}/>-->
+<!--    <SlotsUI/> -->
+    <StatsUI {stats}/>
 </main>
 
 
