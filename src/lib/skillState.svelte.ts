@@ -47,7 +47,7 @@ function generateSkillStateData() {
     
     return {
         categories: categories,
-        skillPerId: new Map(categories.flatMap(
+        skillPerId: new Map<string, Skill>(categories.flatMap(
             category => category.tiers.flatMap(
                 tier => tier.skills.map(
                     skill => [skill.id, skill]

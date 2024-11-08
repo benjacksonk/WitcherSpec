@@ -5,7 +5,7 @@
 		gear,
 		label = ""
 	}: {
-		gear: Gear|undefined;
+		gear: Gear;
 		label?: string;
 	} = $props();
 </script>
@@ -13,10 +13,10 @@
 
 
 <div class="GearDisplay">
-	<img src={gear?.iconPath ?? ""} alt={gear?.name ?? ""} class:hidden={gear === undefined}/>
+	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
 	<div class="name shadowText">
 		<span style:font-style={"italic"}>
-			{gear === undefined ? "None" : (gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0])}
+			{gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]}
 		</span>
 		{#if label !== ""}
 			<span>{label}</span>

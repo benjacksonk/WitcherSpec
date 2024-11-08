@@ -1,16 +1,12 @@
 ﻿<script lang="ts">
+    import { getContext } from "svelte";
+    import { type GeraltContext } from "$lib/types.svelte";
     import SkillCategoryUI from "./SkillCategoryUI.svelte";
-    import { SkillCategory } from "$lib/types.svelte";
     
-    let {
-        points = 0,
-        skillCategories = $bindable([])
-    }: {
-        points?: number,
-        skillCategories: SkillCategory[]
-    } = $props();
-    
-    let tab: string = $state(skillCategories[0].id);
+    const { skillState } = getContext<GeraltContext>("geralt");
+
+    let points: number = $derived(skillState.points);
+    let tab: string = $state(skillState.categories[0].id);
 </script>
 
 
@@ -20,7 +16,7 @@
         <div class="framePoints">
             <h4 class="totalPoints">Points：{points}</h4>
         </div>
-        {#each skillCategories as btnCategory}
+        {#each skillState.categories as btnCategory}
             <button
                 class="tab {btnCategory.id}"
                 style:z-index={tab === btnCategory.id ? 2 : 0}
@@ -45,9 +41,9 @@
         </button>
     </div>
     <div class="frameTable">
-        {#each skillCategories as category, i}
+        {#each skillState.categories as category, i}
             <div class="frameCategory" class:removed={tab !== category.id}>
-                <SkillCategoryUI bind:category={skillCategories[i]}/>
+                <SkillCategoryUI bind:category={skillState.categories[i]}/>
             </div>
         {/each}
     </div>

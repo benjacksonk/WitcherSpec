@@ -1,39 +1,30 @@
 <script lang="ts">
     import { setContext } from "svelte";
-    import GearSlots from '../GearSlots.svelte';
+    import { type GeraltContext } from "$lib/types.svelte";
     import { gearState } from '$lib/gearState.svelte';
-    import AbilityTableUI from "../AbilityTableUI.svelte";
     import { skillState } from '$lib/skillState.svelte';
-    import { Skill, SkillSlot } from "$lib/types.svelte";
+    import { mutagenState } from "../mutagenState.svelte";
+    import { mutationState } from "$lib/mutationState.svelte";
+    import AbilityTableUI from "../AbilityTableUI.svelte";
+    import GearSlotsUI from '../GearSlotsUI.svelte';
     import SlotsUI from "../SlotsUI.svelte";
     import StatsUI from "../StatsUI.svelte";
-
-    let points = $derived(skillState.points);
     
-    let stats = $derived.by(() => {
-        return gearState.slots
-            .flatMap(slot => slot.currentGear?.stats ?? [])
-            .reduce(
-                (a, b) => {
-                    b.forEach((value, key) => a.set(key, (a.get(key) ?? 0) + (b.get(key) ?? 0)))
-                    return a;
-                },
-                new Map<string, number>()
-            );
+    setContext<GeraltContext>("geralt", {
+        gearState,
+        mutagenState,
+        mutationState,
+        skillState,
     });
-    
-    function getSkillPerId(id: string): Skill|undefined {
-        return skillState.skillPerId.get(id);
-    }
 </script>
 
 
 
 <main style:color="white">
-    <GearSlots bind:gearSlots={gearState.slots}/>
-<!--    <AbilityTableUI {points} bind:skillCategories={skillState.categories}/>-->
-<!--    <SlotsUI/> -->
-    <StatsUI {stats}/>
+    <GearSlotsUI/>
+    <AbilityTableUI/>
+    <SlotsUI/> 
+    <StatsUI/>
 </main>
 
 
@@ -43,7 +34,7 @@
         width: 100cqw;
         height: 100cqh;
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column nowrap;
         align-content: start;
         background-color: var(--color-key-10);
         gap: 0;

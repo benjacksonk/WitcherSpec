@@ -1,9 +1,11 @@
 ﻿<script lang="ts">
-import { mutagenState } from "./mutagenState.svelte";
-import { mutationState } from "$lib/mutationState.svelte";
+import { getContext } from "svelte";
+import type { GeraltContext } from "$lib/types.svelte";
 import SkillSlotUI from "./SkillSlotUI.svelte";
 import MutationSlotUI from "./MutationSlotUI.svelte";
 import MutagenSlotUI from "./MutagenSlotUI.svelte";
+
+const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 </script>
 
 

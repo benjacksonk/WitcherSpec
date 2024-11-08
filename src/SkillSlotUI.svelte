@@ -1,8 +1,9 @@
 ﻿<script lang="ts">
     import { getContext } from "svelte";
     import { dropzone } from "$lib/dragAndDrop.svelte";
-    import type { SkillSlot } from "$lib/types.svelte";
-    import ContextType from "./routes/+page.svelte"; 
+    import type {GeraltContext, SkillSlot} from "$lib/types.svelte";
+    
+    const { skillState } = getContext<GeraltContext>("geralt");
 
     let {
         skillSlot = $bindable()
@@ -12,10 +13,6 @@
     
     let categoryId = $derived(skillSlot.skill?.categoryId ?? "");
     let skillPercent = $derived(skillSlot.skill === undefined ? 0 : (100 * skillSlot.skill.points / skillSlot.skill.maxPoints));
-    
-    const {
-        getSkillPerId
-    }: ContextType = getContext("geralt");
     
     function handleClick(mouseEvent: MouseEvent) {
         if (skillSlot.skill) skillSlot.skill.points++;
@@ -32,7 +29,7 @@
 <div class="SkillSlotUI {categoryId}"
      use:dropzone={{
          onDrop(dragEvent: DragEvent, data: String) {
-             skillSlot.skill = getSkillPerId(data);
+             skillSlot.skill = skillState.skillPerId.get(data.toString());
          }
      }}
 >

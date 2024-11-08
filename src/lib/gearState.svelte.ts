@@ -1,36 +1,46 @@
-﻿import { Gear, GearSlot } from "$lib/types.svelte";
+﻿import { type GearData, Gear, GearSlot } from "$lib/types.svelte";
 import gearDoc from "$lib/gearData.csv?raw";
 import Papa from "papaparse";
+
+class GearState {
+	slots: GearSlot[] = $state([]);
+	steelSlot: GearSlot = $state(new GearSlot("noId", []));
+	silverSlot: GearSlot = $state(new GearSlot("noId", []));
+
+	get statsTotal() {
+		return this.slots
+			.flatMap(slot => slot.currentGear?.stats ?? [])
+			.reduce(
+				(a, b) => {
+					b.forEach((value, key) => a.set(key, ((a.get(key) ?? 0) + (b.get(key) ?? 0))));
+					return a;
+				},
+				new Map<string, number>()
+			);
+	}
+
+	constructor(gearSlots: GearSlot[]) {
+		this.slots = gearSlots;
+		this.steelSlot = gearSlots.find(slot => slot.id === "steel") ?? this.steelSlot;
+		this.silverSlot = gearSlots.find(slot => slot.id === "silver") ?? this.silverSlot;
+	}
+}
 
 export const gearState = $state(generateGearStateData());
 
 function generateGearStateData() {
-	type GearData = {
-		id: string,
-		slotId: string,
-		name: string,
-		iconPath: string,
-	};
 
 	// non-async
-	let gears = Papa.parse<GearData>(gearDoc, {
+	let gears: Gear[] =
+		Papa.parse<GearData>(gearDoc, {
 		header: true,
-		dynamicTyping: true
-	}).data.map(gearData => {
-		let statEntries: [string, number][] = Object.entries(gearData)
-			.filter(([key, value]) => {
-				return !["name", "slotId", "schoolId", "glyphSlots", "runeSlots"].includes(key);
-			})
-			.map(([key, value]) => {
-				return [key, Number(value)]
-			});
-		
-		return new Gear(gearData.name, gearData.slotId, statEntries);
-	});
+		dynamicTyping: true,
+		skipEmptyLines: true,
+	}).data.map(gearData => new Gear(gearData));
 	
 	return processParsedGearData(gears);
 	
-	/* // async version
+	/* async version *
 	const gearState: Promise<ReturnType<typeof processParsedGearData>> = $state(
 		new Promise((resolve) => {
 			Papa.parse<GearData>(gearDoc, {
@@ -43,9 +53,9 @@ function generateGearStateData() {
 			});
 		})
 	);
-	
+
 	return gearState;
-	*/
+	/**/
 
 	function processParsedGearData(gears: Gear[]) {
 
@@ -61,8 +71,8 @@ function generateGearStateData() {
 					-1 : a > b ? 1 : a < b ? -1 : 0;
 		});
 
-		return {
-			slots: gearSlots
-		};
+		return new GearState(
+			gearSlots
+		);
 	}
 }

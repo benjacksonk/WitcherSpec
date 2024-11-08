@@ -1,23 +1,20 @@
 ﻿<script lang="ts">
+	import { getContext } from "svelte";
 	import Grid from './Grid.svelte';
 	import GearDisplay from './GearDisplay.svelte';
-	import { type Gear, GearSlot } from "$lib/types.svelte";
+	import {Gear, GearSlot, type GeraltContext} from "$lib/types.svelte";
 
-	let {
-		gearSlots = $bindable([]),
-	}: {
-		gearSlots: GearSlot[];
-	} = $props();
+	const { gearState } = getContext<GeraltContext>("geralt");
 
 	let nullGearSlot: GearSlot = new GearSlot("null", []);
 	let currentSlot: GearSlot = $state(nullGearSlot);
-	
-	
+
+
 	function handleOnClickSlot(event: MouseEvent, gearSlot: GearSlot) {
 		event.preventDefault();
 		currentSlot = (currentSlot === gearSlot ? nullGearSlot : gearSlot);
 	}
-	
+
 	function handleOnClickGear(event: MouseEvent, gearSlot: GearSlot, gear: Gear) {
 		event.preventDefault();
 		gearSlot.currentGear = gear;
@@ -26,10 +23,10 @@
 
 
 
-<div class="GearSlotUI">
+<div class="GearSlotsUI">
 	<div class="frameGrid">
 	<Grid gap="1px" flowVertically={false} tracks={6}>
-		{#each gearSlots as gearSlot, i}
+		{#each gearState.slots as gearSlot, i}
 			<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
 				<GearDisplay gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
 			</button>
@@ -52,7 +49,7 @@
 
 
 <style>
-    .GearSlotUI {
+    .GearSlotsUI {
         width: max-content;
         height: max-content;
         position: relative;
