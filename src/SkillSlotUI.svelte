@@ -34,12 +34,12 @@
      }}
 >
     <div>
-        <button
+        <button class="plain"
             onclick={handleClick}
             oncontextmenu={handleContextMenu}
             style:background-image={`linear-gradient(in oklab to right, var(--color-key-6) ${skillPercent}%, var(--color-key-8) ${skillPercent}%)`}
         >
-            <img alt="" src={skillSlot.skill?.iconPath ?? ""} height="50px" width="50px">
+            <img alt="" src={skillSlot.skill?.iconPath ?? ""} height="64px" width="64px">
         </button>
     </div>
 </div>
@@ -48,7 +48,8 @@
 
 <style>
     .SkillSlotUI {
-        width: 50px; height: 50px;
+        width: max-content;
+        height: max-content;
         max-width: 100%;
         max-height: 100%;
         border: 1px solid tan;
@@ -65,17 +66,16 @@
 
 
     button {
-        display: flex;
-        flex: 0;
-        background: none;
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        height: fit-content;
-        width: fit-content;
+        /*display: flex;*/
+        /*flex: 0;*/
+        /*background: none;*/
+        /*border: none;*/
+        /*border-radius: 0;*/
+        /*padding: 0;*/
+        /*height: fit-content;*/
+        /*width: fit-content;*/
     }
     img {
-        object-fit: contain;
         filter: drop-shadow(0px 1px 1px var(--color-key-9));
     }
 </style>

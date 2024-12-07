@@ -22,7 +22,7 @@
 
 <main style:color="white">
     <GearSlotsUI/>
-    <AbilityTableUI/>
+<!--    <AbilityTableUI/>-->
     <SlotsUI/> 
     <StatsUI/>
 </main>
@@ -31,7 +31,7 @@
 
 <style>
     main {
-        width: 100cqw;
+        width: 100%;
         height: 100cqh;
         display: flex;
         flex-flow: column nowrap;

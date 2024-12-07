@@ -54,7 +54,7 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
     .mutagenQuadrant {
         display: flex;
         padding: 20px 20px;
-        gap: 10px;
+        gap: 20px;
         align-items: center;
         justify-items: center;
     }

@@ -276,17 +276,17 @@ export class MutagenSlot {
         {
             name: "Greater Blue Mutagen",
             categoryId: "signs",
-            iconPath: "/images/mutagens/greaterbluemutagen.png"
+            iconPath: "/images/mutagens/greaterbluemutagen.webp"
         },
         {
             name: "Greater Green Mutagen",
             categoryId: "alchemy",
-            iconPath: "/images/mutagens/greatergreenmutagen.png"
+            iconPath: "/images/mutagens/greatergreenmutagen.webp"
         },
         {
             name: "Greater Red Mutagen",
             categoryId: "combat",
-            iconPath: "/images/mutagens/greaterredmutagen.png"
+            iconPath: "/images/mutagens/greaterredmutagen.webp"
         }
     ]);
     readonly skillSlots: SkillSlot[] = $state([

@@ -30,11 +30,13 @@
         class:alchemy={mutagenSlot.mutagen?.categoryId === "alchemy" ?? false}
         class:general={mutagenSlot.mutagen?.categoryId === "general" ?? false}
     >
-        <img alt="" src={mutagenSlot.mutagen === undefined ? "" : mutagenSlot.mutagen.iconPath} height="64px" width="64px">
+        <span class="slotBtnContents">
+            <img alt="" src={mutagenSlot.mutagen === undefined ? "" : mutagenSlot.mutagen.iconPath} height="64px" width="64px">
+        </span>
     </button>
     <div class="popup" class:removed={removePopup}>
         <div class="frameGrid">
-            <Grid flowVertically={false} tracks={3} trackSize={"50px"} gap={"1px"}>
+            <Grid flowVertically={false} tracks={3} trackSize={"64px"} gap={"1px"}>
                 {#each mutagenSlot.inventory as mutagen, i}
                     <button
                         class="mutagenBtn plain"
@@ -44,7 +46,7 @@
                         class:general={mutagen.categoryId === "general"}
                         onmousedown={(event) => handleOnClickMutagen(event, mutagen)}
                     >
-                        <img alt="" src={mutagen.iconPath} height="50px" width="50px">
+                        <img alt="" src={mutagen.iconPath} height="64px" width="64px">
                         <span class="mutagenName shadowText">{mutagen.name}</span>
                     </button>
                 {/each}
@@ -57,19 +59,29 @@
 
 <style>
     .MutagenSlotUI {
+        width: max-content;
         height: max-content;
         position: relative;
     }
 
     button.slotBtn {
         aspect-ratio: 1;
-        width: 90px;
-        border-radius: 50%;
+        width: max-content;
+        height: max-content;
+        /*border-radius: 50%;*/
+        transform: rotate(45deg);
 
         justify-content: center;
         align-items: center;
         background-color: var(--color-key-7);
         border: 2px solid var(--color-key-5);
+        overflow: hidden;
+    }
+    
+    button.slotBtn > .slotBtnContents {
+        width: max-content;
+        height: max-content;
+        transform: rotate(-45deg);
     }
 
     .popup {

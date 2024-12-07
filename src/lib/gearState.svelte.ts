@@ -2,30 +2,6 @@
 import gearDoc from "$lib/gearData.csv?raw";
 import Papa from "papaparse";
 
-class GearState {
-	slots: GearSlot[] = $state([]);
-	steelSlot: GearSlot = $state(new GearSlot("noId", []));
-	silverSlot: GearSlot = $state(new GearSlot("noId", []));
-
-	get statsTotal() {
-		return this.slots
-			.flatMap(slot => slot.currentGear?.stats ?? [])
-			.reduce(
-				(a, b) => {
-					b.forEach((value, key) => a.set(key, ((a.get(key) ?? 0) + (b.get(key) ?? 0))));
-					return a;
-				},
-				new Map<string, number>()
-			);
-	}
-
-	constructor(gearSlots: GearSlot[]) {
-		this.slots = gearSlots;
-		this.steelSlot = gearSlots.find(slot => slot.id === "steel") ?? this.steelSlot;
-		this.silverSlot = gearSlots.find(slot => slot.id === "silver") ?? this.silverSlot;
-	}
-}
-
 export const gearState = $state(generateGearStateData());
 
 function generateGearStateData() {
@@ -71,8 +47,22 @@ function generateGearStateData() {
 					-1 : a > b ? 1 : a < b ? -1 : 0;
 		});
 
-		return new GearState(
-			gearSlots
-		);
+		return {
+			slots: gearSlots,
+			steelSlot: gearSlots.find(slot => slot.id === "steel") ?? new GearSlot("noId", []),
+			silverSlot: gearSlots.find(slot => slot.id === "silver") ?? new GearSlot("noId", []),
+
+			get statsTotal() {
+				return this.slots
+					.flatMap(slot => slot.currentGear?.stats ?? [])
+					.reduce(
+						(a, b) => {
+							b.forEach((value, key) => a.set(key, ((a.get(key) ?? 0) + (b.get(key) ?? 0))));
+							return a;
+						},
+						new Map<string, number>()
+					);
+			}
+		}
 	}
 }
