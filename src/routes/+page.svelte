@@ -23,7 +23,7 @@
 <main style:color="white">
     <GearSlotsUI/>
 <!--    <AbilityTableUI/>-->
-    <SlotsUI/> 
+<!--    <SlotsUI/> -->
     <StatsUI/>
 </main>
 

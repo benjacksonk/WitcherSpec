@@ -51,9 +51,9 @@
 
 <div class="StatsUI">
     <span></span>
-    <span></span>
     <span>Steel</span>
     <span>Silver</span>
+    <span></span>
     <span></span>
     {#each summarizedStats.entries() as [statKey, statVal]}
         <span class="plus right">+</span>
@@ -69,9 +69,9 @@
 <style>
     .StatsUI {
         display: grid;
-        grid-template-columns: max-content repeat(2, max-content) max-content max-content;
-        gap: 0.4em 0;
-        padding: 2em;
+        grid-template-columns: 30px 56px 56px 28px max-content;
+        gap: 0.4em 1px;
+        padding: 10px 0;
     }
     
     .right {
@@ -89,6 +89,6 @@
     }
     
     .statLabel {
-        margin-left: 1em;
+        /*margin-left: 1em;*/
     }
 </style>
