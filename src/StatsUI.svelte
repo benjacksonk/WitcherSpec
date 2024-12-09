@@ -50,11 +50,11 @@
 
 
 <div class="StatsUI">
-    <span></span>
-    <span>Steel</span>
-    <span>Silver</span>
-    <span></span>
-    <span></span>
+<!--    <span></span>-->
+<!--    <span>Silver</span>-->
+<!--    <span>Steel</span>-->
+<!--    <span></span>-->
+<!--    <span></span>-->
     {#each summarizedStats.entries() as [statKey, statVal]}
         <span class="plus right">+</span>
         <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.steel : 100 * statVal.steel).toFixed(0)}</span>

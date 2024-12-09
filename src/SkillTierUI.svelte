@@ -36,6 +36,7 @@
 <style>
     .SkillTier {
         width: 100%;
+        max-height: 100%;
         display: grid;
         grid-auto-flow: column;
         grid-auto-columns: minmax(0, 1fr);
@@ -51,5 +52,6 @@
 
     .frameSkillOrSubcategory {
         display: flex;
+        overflow: hidden;
     }
 </style>

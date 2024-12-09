@@ -43,8 +43,8 @@ function generateGearStateData() {
 			return new GearSlot(slotId, gears.filter(gear => gear.slotId === slotId));
 		}).sort((a,b) => {
 			return (a.id === "steel" || a.id === "silver") && (b.id !== "steel" && b.id !== "silver") ?
-				1 : (b.id === "steel" || b.id === "silver") && (a.id !== "steel" && a.id !== "silver") ?
-					-1 : a > b ? 1 : a < b ? -1 : 0;
+				-1 : (b.id === "steel" || b.id === "silver") && (a.id !== "steel" && a.id !== "silver") ?
+					1 : a > b ? 1 : a < b ? -1 : 0;
 		});
 
 		return {

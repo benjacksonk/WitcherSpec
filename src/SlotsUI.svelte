@@ -38,8 +38,8 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 
 <style>
     .SlotsUI {
-        width: max-content;
-        height: max-content;
+        width: fit-content;
+        height: fit-content;
         display: grid;
         align-items: center;
         justify-items: center;

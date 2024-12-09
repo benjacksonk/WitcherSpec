@@ -22,9 +22,11 @@
 
 <main style:color="white">
     <GearSlotsUI/>
-<!--    <AbilityTableUI/>-->
-<!--    <SlotsUI/> -->
-    <StatsUI/>
+    <div class="statsAndSlotsRow">
+        <StatsUI/>
+        <SlotsUI/>
+    </div>
+    <AbilityTableUI/>
 </main>
 
 
@@ -33,10 +35,17 @@
     main {
         width: 100%;
         height: 100cqh;
-        display: flex;
-        flex-flow: column nowrap;
-        align-content: start;
+        display: grid;
+        grid-template: max-content repeat(2, 1fr) / max-content;
+        justify-content: center;
         background-color: var(--color-key-10);
         gap: 0;
+    }
+    
+    .statsAndSlotsRow {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
     }
 </style>

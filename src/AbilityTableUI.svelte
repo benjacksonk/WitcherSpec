@@ -53,7 +53,7 @@
 
 <style>
     .AbilityTables {
-        width: fit-content;
+        width: 100%;
         height: fit-content;
         max-width: 100%;
         max-height: 100%;
@@ -61,6 +61,7 @@
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);
         background-color: var(--color-key-10);
+        overflow: hidden;
     }
 
     .tabs {
