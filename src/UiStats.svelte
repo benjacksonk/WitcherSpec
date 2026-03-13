@@ -49,29 +49,90 @@
 </script>
 
 
-<div class="StatsUI">
+
+<div class="UiStats">
 <!--    <span></span>-->
 <!--    <span>Silver</span>-->
 <!--    <span>Steel</span>-->
 <!--    <span></span>-->
 <!--    <span></span>-->
     {#each summarizedStats.entries() as [statKey, statVal]}
-        <span class="plus right">+</span>
-        <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.steel : 100 * statVal.steel).toFixed(0)}</span>
-        <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.silver : 100 * statVal.silver).toFixed(0)}</span>
-        <span class="unitLabel">{statKey.includes("oxic") || statKey.includes("rmor") ? "pts" : "%"}</span>
+    <div class="statLine">
+        <div class="totalPerSword">
+            <span class="plus right">+</span>
+            <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.steel : 100 * statVal.steel).toFixed(0)}</span>
+        </div>
+        <div class="totalPerSword">
+            <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.silver : 100 * statVal.silver).toFixed(0)}</span>
+            <span class="unitLabel">{statKey.includes("oxic") || statKey.includes("rmor") ? "pts" : "%"}</span>
+        </div>
+
         <span class="statLabel">{statKey}</span>
+    </div>
     {/each}
 </div>
 
 
 
 <style>
-    .StatsUI {
+    .UiStats {
+        contain: size;
+
+        min-height: 0;
+
+            height:
+            auto
+            /* 0  */
+            /* stretch */
+            /* min-content */
+            /* fit-content */
+            /* max-content */
+            /* calc-size(max-content, max(size, 100%)) */
+            /* 100px */
+            /* 100% */
+            
+            /* calc-size(
+                max-content, 
+                (size * (1 - sign(100%)))
+            ) */
+            ;
+
+        max-height: 100%;
+
+        background-color: #233;
+        
+        grid-column: 1 / -1;
         display: grid;
-        grid-template-columns: 30px 56px 56px 28px max-content;
+        flex-flow: column;
+        grid-template-columns: subgrid;
+        grid-auto-rows: minmax(0,1fr);
+
         gap: 0.4em 1px;
-        padding: 10px 0;
+        /* padding: 10px 0; */
+        overflow: clip auto;
+    }
+
+    .statLine {
+        grid-column: 1 / -1;
+        width: 100%;
+
+        /* contain: size; */
+
+        min-height: 0;
+        height:
+        auto
+        /* 100% */
+        /* 0 */
+        ;
+
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-template-rows: subgrid;
+    }
+    
+    .totalPerSword > *,
+    .statLabel {
+        margin: 0 0.2em;
     }
     
     .right {
@@ -84,11 +145,8 @@
         color: var(--color-grey-3);
     }
     
-    .StatsUI > * {
-        margin: 0 0.2em;
-    }
-    
     .statLabel {
+        grid-column: span 4;
         /*margin-left: 1em;*/
     }
 </style>

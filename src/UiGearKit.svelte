@@ -23,38 +23,35 @@
 
 
 
-<div class="GearSlotsUI">
-	<div class="frameGrid">
-	<Grid gap="1px" flowVertically={false} tracks={6}>
-		{#each gearState.slots as gearSlot, i}
-			<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
-				<GearDisplay gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
-			</button>
-		{/each}
-	</Grid>
-	</div>
+<div class="UiGearKit">
+	{#each gearState.slots as gearSlot, i}
+	<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
+		<GearDisplay gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
+	</button>
+	{/each}
+	
 	<div class="popup" class:removed={currentSlot === nullGearSlot}>
-		<div class="frameGrid">
-			<Grid tracks={6} flowVertically={false} gap={"1px 0"}>
-				{#each currentSlot.inventory as gear, i}
-					<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
-						<GearDisplay gear={gear}/>
-					</button>
-				{/each}
-			</Grid>
-		</div>
+		{#each currentSlot.inventory as gear, i}
+		<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
+			<GearDisplay gear={gear}/>
+		</button>
+		{/each}
 	</div>
 </div>
 
 
 
 <style>
-    .GearSlotsUI {
+    .UiGearKit {
+		overflow: clip;
         width: max-content;
-        height: max-content;
+        /* height: max-content; */
         position: relative;
-		display: flex;
         background-color: var(--color-grey-2);
+
+		grid-column: span 6;
+		display: grid;
+		grid-template: subgrid / subgrid;
     }
 
     button.slotBtn {
@@ -74,15 +71,13 @@
 		height: max-content;
         position: absolute;
         top: 100%;
-        display: flex;
+		left: 50%;
+		translate: -50%;
+        display: grid;
+		grid-template-columns: repeat(6, auto);
         justify-content: center;
-    }
-
-    .popup .frameGrid {
         background-color: var(--color-grey-1);
         outline: 1px solid white;
-        display: flex;
-        width: max-content;
     }
 
     button.gearBtn {

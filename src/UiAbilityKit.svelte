@@ -10,7 +10,7 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 
 
 
-<div class="SlotsUI">
+<div class="UiAbilityKit">
     {#each mutagenState.mutagenSlots as mutagenSlot, i}
         <div class="mutagenQuadrant"
              style:grid-area={`${i < 2 ? 1 : 2} / ${i % 2 === 0 ? 1 : 3}`}
@@ -37,7 +37,7 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 
 
 <style>
-    .SlotsUI {
+    .UiAbilityKit {
         width: fit-content;
         height: fit-content;
         display: grid;

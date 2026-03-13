@@ -11,7 +11,7 @@
 
 
 
-<div class="AbilityTables">
+<div class="UiAbilityBank">
     <div class="tabs">
         <div class="framePoints">
             <h4 class="totalPoints">Points：{points}</h4>
@@ -52,11 +52,11 @@
 
 
 <style>
-    .AbilityTables {
+    .UiAbilityBank {
         width: 100%;
-        height: fit-content;
-        max-width: 100%;
-        max-height: 100%;
+        /* height: fit-content; */
+        /* max-width: 100%; */
+        /* max-height: 100%; */
         display: grid;
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);

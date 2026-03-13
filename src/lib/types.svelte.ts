@@ -28,11 +28,11 @@ export class Gear {
     stats: Map<string, number>;
 
     constructor(gearData: GearData) {
-        let statEntries: [string, number][] = Object.entries(gearData)
-            .filter(([key, value]) =>
-                !["name", "slotid", "schoolid", "glyphslots", "runeslots"].includes(key.toLowerCase())
-            )
-            .map(([key, value]) => [key, Number(value)]);
+        let statEntries: [string, number][] 
+        = Object.entries(gearData).filter(
+            ([key, value]) =>
+            !["name", "slotid", "schoolid", "glyphslots", "runeslots"].includes(key.toLowerCase())
+        ).map(([key, value]) => [key, Number(value)]);
 
         this.name = gearData.name;
         this.slotId = gearData.slotId;
