@@ -53,15 +53,15 @@
 
 <style>
     .UiAbilityBank {
-        width: 100%;
-        /* height: fit-content; */
+        /* width: 700px; */
+        /* height: 500px; */
         /* max-width: 100%; */
         /* max-height: 100%; */
         display: grid;
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);
         background-color: var(--color-key-10);
-        overflow: hidden;
+        /* overflow: hidden; */
     }
 
     .tabs {

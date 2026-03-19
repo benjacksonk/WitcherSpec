@@ -19,7 +19,7 @@
 			{gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]}
 		</span>
 		{#if label !== ""}
-			<span>{label}</span>
+        <span>{label}</span>
 		{/if}
 	</div>
 </div>

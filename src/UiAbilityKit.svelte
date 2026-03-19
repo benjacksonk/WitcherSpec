@@ -38,17 +38,22 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 
 <style>
     .UiAbilityKit {
-        width: fit-content;
-        height: fit-content;
+        width: stretch;
+        height: stretch;
         display: grid;
-        align-items: center;
-        justify-items: center;
-        align-content: center;
-        justify-content: center;
-        gap: 1px;
+        /* justify-content: stretch; */
+        /* align-content: stretch; */
+        gap: 1px 0;
 
-        grid-template: repeat(2, 1fr) / repeat(3, auto);
+        grid-template: repeat(2, 1fr) / 1fr auto 1fr;
         background-color: var(--color-key-6);
+
+        :nth-child(2n).mutagenQuadrant {
+            justify-content: start;
+        }
+        :nth-child(2n+1).mutagenQuadrant {
+            justify-content: end;
+        }
     }
 
     .mutagenQuadrant {

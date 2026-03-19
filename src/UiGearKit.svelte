@@ -1,19 +1,11 @@
 ﻿<script lang="ts">
 	import { getContext } from "svelte";
-	import Grid from './Grid.svelte';
 	import GearDisplay from './GearDisplay.svelte';
 	import {Gear, GearSlot, type GeraltContext} from "$lib/types.svelte";
 
 	const { gearState } = getContext<GeraltContext>("geralt");
 
-	let nullGearSlot: GearSlot = new GearSlot("null", []);
-	let currentSlot: GearSlot = $state(nullGearSlot);
-
-
-	function handleOnClickSlot(event: MouseEvent, gearSlot: GearSlot) {
-		event.preventDefault();
-		currentSlot = (currentSlot === gearSlot ? nullGearSlot : gearSlot);
-	}
+	let currentSlot: GearSlot = $state(gearState.slots[0]);
 
 	function handleOnClickGear(event: MouseEvent, gearSlot: GearSlot, gear: Gear) {
 		event.preventDefault();
@@ -25,25 +17,25 @@
 
 <div class="UiGearKit">
 	{#each gearState.slots as gearSlot, i}
-	<button class="slotBtn plain" onmousedown={(event) => handleOnClickSlot(event, gearSlot)}>
+	<button popovertarget={`gearSelector${i}`} class="slotBtn plain">
 		<GearDisplay gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
 	</button>
-	{/each}
-	
-	<div class="popup" class:removed={currentSlot === nullGearSlot}>
-		{#each currentSlot.inventory as gear, i}
+
+	<div popover id={`gearSelector${i}`} class="gearSelector">
+		{#each gearSlot.inventory as gear, j}
 		<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
 			<GearDisplay gear={gear}/>
 		</button>
 		{/each}
 	</div>
+	{/each}
 </div>
 
 
 
 <style>
     .UiGearKit {
-		overflow: clip;
+		anchor-name: --ui-gear-kit;
         width: max-content;
         /* height: max-content; */
         position: relative;
@@ -65,19 +57,22 @@
 		border-bottom-width: 0;
     }
 
-    .popup {
-        z-index: 1;
+    .gearSelector {
 		width: max-content;
 		height: max-content;
         position: absolute;
-        top: 100%;
-		left: 50%;
+		position-anchor: --ui-gear-kit;
+        top: anchor(100%);
+		left: anchor(50%);
 		translate: -50%;
-        display: grid;
 		grid-template-columns: repeat(6, auto);
         justify-content: center;
         background-color: var(--color-grey-1);
-        outline: 1px solid white;
+        border: 1px solid white;
+
+		&:popover-open {
+        	display: grid;
+		}
     }
 
     button.gearBtn {

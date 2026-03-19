@@ -76,55 +76,18 @@
 
 <style>
     .UiStats {
-        contain: size;
-
-        min-height: 0;
-
-            height:
-            auto
-            /* 0  */
-            /* stretch */
-            /* min-content */
-            /* fit-content */
-            /* max-content */
-            /* calc-size(max-content, max(size, 100%)) */
-            /* 100px */
-            /* 100% */
-            
-            /* calc-size(
-                max-content, 
-                (size * (1 - sign(100%)))
-            ) */
-            ;
-
-        max-height: 100%;
-
-        background-color: #233;
-        
         grid-column: 1 / -1;
+        background-color: var(--color-grey-9);
+        color: white;
         display: grid;
         flex-flow: column;
         grid-template-columns: subgrid;
-        grid-auto-rows: minmax(0,1fr);
-
-        gap: 0.4em 1px;
-        /* padding: 10px 0; */
-        overflow: clip auto;
+        align-content: space-evenly;
     }
 
     .statLine {
         grid-column: 1 / -1;
         width: 100%;
-
-        /* contain: size; */
-
-        min-height: 0;
-        height:
-        auto
-        /* 100% */
-        /* 0 */
-        ;
-
         display: grid;
         grid-template-columns: subgrid;
         grid-template-rows: subgrid;
@@ -147,6 +110,6 @@
     
     .statLabel {
         grid-column: span 4;
-        /*margin-left: 1em;*/
+        /* margin-left: 1em; */
     }
 </style>

@@ -20,14 +20,15 @@
 
 
 
-<main style:color="white">
-    <UiAbilityBank/>
-
+<main>
     <div class="frameKits">
+        <UiAbilityBank/>
         <UiAbilityKit/>
+    </div>
 
-        <div class="gearAndStats">
-            <UiGearKit/>
+    <div class="gearAndStats">
+        <UiGearKit/>
+        <div class="statsWrapper">
             <UiStats/>
         </div>
     </div>
@@ -37,78 +38,46 @@
 
 <style>
     main {
-        width: 100%;
-        height: 100%;
-        /* max-height: 100dvh; */
-        overflow: clip auto;
-        background-color: var(--color-key-10);
+        /*overflow: hidden; /* Initially hide parent overflow to allow the second child to handle scrolling */
+        overflow-y: hidden;
+        height: 100dvh; /* Set a height for the parent to define the available space */
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(0, max-content));
 
-        /* gap: 0; */
-        flex-flow: column nowrap;
-        /* grid-auto-flow: column; */
-        grid-template-rows: max-content;
-        grid-auto-rows: minmax(0, 1fr);
-        align-content: stretch;
-        align-items: stretch;
+        flex-flow: row wrap;
+        /* align-content: center; */
+        justify-content: center;
+        background-color: black;
     }
 
-
-
     .frameKits {
-        width: 100%;
-
-        /* min-height: 0px; */
-            /* height: 100%; */
-        /* max-height: none; */
-        background-color: darkslategray;
-
-        overflow: clip visible;
-        /* grid-column: 1 / -1; */
+        background-color: teal;
+        overflow-y: auto;
+        height: 100%;
         display: flex;
-        flex-flow: row wrap;
-        align-items: stretch;
+        flex-flow: column nowrap;
+        /* align-content: stretch; */
+        /* align-items: stretch; */
+        /* justify-content: stretch; */
+        /* justify-items: stretch; */
     }
 
     .gearAndStats {
-        width: fit-content;
-        
-        background-color: #332;
-
-        min-height: 100%;
-
-        --size: calc-size(max-content, size);
-        --fits: calc-size(fit-content, sign(size));
-
-        /* --testSize: calc(var(--size) * 10); */
-
-        max-height: 
-        /* 100% */
-        /* stretch */
-        /* if(style(--fits: 0): max-content; else: 100%) */
-        /* min-content */
-        /* calc-size(min-content, min(size, 100%)) */
-        calc-size(min-content, max(size, 100%))
-        ;
-
-        height: 
-        /* 100% */
-        /* min-content */
-        /* fit-content */
-        /* max-content */
-        /* stretch */
-        /* calc-size(max-content, clamp(100%, size, min(size,100%))) */
-        ;
-
-        
-        overflow: clip visible;
         display: grid;
-
         grid-template-columns: repeat(6, max-content);
         grid-template-rows: max-content;
         grid-auto-rows: minmax(0, 1fr);
         gap: 0px 1px;
-        align-content: stretch;
-        align-items: stretch;
+        /* align-content: stretch; */
+        /* align-items: stretch; */
+        /* justify-content: stretch; */
+        /* justify-items: stretch; */
+    }
+
+    .statsWrapper {
+        grid-column: 1 / -1;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: subgrid;
     }
 </style>
