@@ -12,7 +12,7 @@
 
 
 
-<div class="GearDisplay">
+<div class="UiGear">
 	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
 	<div class="name shadowText">
 		<span style:font-style={"italic"}>
@@ -27,7 +27,7 @@
 
 
 <style>
-    .GearDisplay {
+    .UiGear {
         width: 80px;
         display: grid;
         grid-auto-flow: row;

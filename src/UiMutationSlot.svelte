@@ -15,7 +15,7 @@
 
 
 
-<div class="MutationSlotUI">
+<div class="UiMutationSlot">
     <button class="slotBtn plain" popovertarget="mutationSelector"
         class:combat={mutationSlot.mutation?.categoryIds.includes("combat") ?? false}
         class:signs={mutationSlot.mutation?.categoryIds.includes("signs") ?? false}
@@ -45,7 +45,7 @@
 
 
 <style>
-    .MutationSlotUI {
+    .UiMutationSlot {
         height: max-content;
         position: relative;
     }

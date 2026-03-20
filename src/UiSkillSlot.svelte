@@ -26,7 +26,7 @@
 
 
 
-<div class="SkillSlotUI {categoryId}"
+<div class="UiSkillSlot {categoryId}"
      use:dropzone={{
          onDrop(dragEvent: DragEvent, data: String) {
              skillSlot.skill = skillState.skillPerId.get(data.toString());
@@ -47,7 +47,7 @@
 
 
 <style>
-    .SkillSlotUI {
+    .UiSkillSlot {
         width: max-content;
         height: max-content;
         max-width: 100%;

@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
 	import { getContext } from "svelte";
-	import GearDisplay from './GearDisplay.svelte';
 	import {Gear, type GeraltContext} from "$lib/types.svelte";
+    import UiGear from "./UiGear.svelte";
 
 	const { gearState } = getContext<GeraltContext>("geralt");
 
@@ -16,13 +16,13 @@
 <div class="UiGearKit">
 	{#each gearState.slots as gearSlot, i}
 	<button popovertarget={`gearSelector${i}`} class="slotBtn plain">
-		<GearDisplay gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
+		<UiGear gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
 	</button>
 
 	<div popover id={`gearSelector${i}`} class="gearSelector">
 		{#each gearSlot.inventory as gear, j}
 		<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, gear)}>
-			<GearDisplay gear={gear}/>
+			<UiGear gear={gear}/>
 		</button>
 		{/each}
 	</div>

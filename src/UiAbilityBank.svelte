@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
     import { getContext } from "svelte";
     import { type GeraltContext } from "$lib/types.svelte";
-    import SkillCategoryUI from "./SkillCategoryUI.svelte";
+    import UiSkillCategory from "./UiSkillCategory.svelte";
     
     const { skillState } = getContext<GeraltContext>("geralt");
 
@@ -43,7 +43,7 @@
     <div class="frameTable">
         {#each skillState.categories as category, i}
             <div class="frameCategory" class:removed={tab !== category.id}>
-                <SkillCategoryUI bind:category={skillState.categories[i]}/>
+                <UiSkillCategory bind:category={skillState.categories[i]}/>
             </div>
         {/each}
     </div>

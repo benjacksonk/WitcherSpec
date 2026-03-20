@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
-    import SkillTierUI from "./SkillTierUI.svelte";
     import { SkillCategory, type SkillSubcategory } from "$lib/types.svelte";
+    import UiSkillTier from "./UiSkillTier.svelte";
     
     let {
         category = $bindable()
@@ -13,16 +13,16 @@
 
 
 
-<div class="SkillCategoryTable {category.id}">
+<div class="UiSkillCategory {category.id}">
     {#if subcategories.length > 0}
         <div class="frameTier">
-            <SkillTierUI subcategories={category.subcategories}/>
+            <UiSkillTier subcategories={category.subcategories}/>
         </div>
     {/if}
 
     {#each category.tiers as tier, i}
         <div class="frameTier" class:locked={!category.tiers[i].canIncrease}>
-            <SkillTierUI bind:tier={category.tiers[i]}/>
+            <UiSkillTier bind:tier={category.tiers[i]}/>
         </div>
     {/each}
 </div>
@@ -30,7 +30,7 @@
 
 
 <style>
-    .SkillCategoryTable {
+    .UiSkillCategory {
         width: 100%;
         height: 100%;
         display: grid;

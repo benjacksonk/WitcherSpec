@@ -1,9 +1,9 @@
 ﻿<script lang="ts">
 import { getContext } from "svelte";
 import type { GeraltContext } from "$lib/types.svelte";
-import SkillSlotUI from "./SkillSlotUI.svelte";
-import MutationSlotUI from "./MutationSlotUI.svelte";
-import MutagenSlotUI from "./MutagenSlotUI.svelte";
+import UiSkillSlot from "./UiSkillSlot.svelte";
+import UiMutationSlot from "./UiMutationSlot.svelte";
+import UiMutagenSlot from "./UiMutagenSlot.svelte";
 
 const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 </script>
@@ -12,24 +12,27 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 
 <div class="UiAbilityKit">
     {#each mutagenState.mutagenSlots as mutagenSlot, i}
-        <div class="mutagenQuadrant"
-             style:grid-area={`${i < 2 ? 1 : 2} / ${i % 2 === 0 ? 1 : 3}`}
-             style:flex-flow={`${i % 2 === 0 ? "row" : "row-reverse"} nowrap`}
-        >
-            <MutagenSlotUI bind:mutagenSlot={mutagenState.mutagenSlots[i]}/>
-            <div class="frameSkillSlotUIs">
-                {#each mutagenState.mutagenSlots[i].skillSlots as skillSlot, j}
-                    <SkillSlotUI bind:skillSlot={mutagenState.mutagenSlots[i].skillSlots[j]}/>
-                {/each}
-            </div>
+    <div class="mutagenQuadrant"
+            style:grid-area={`${i < 2 ? 1 : 2} / ${i % 2 === 0 ? 1 : 3}`}
+            style:flex-flow={`${i % 2 === 0 ? "row" : "row-reverse"} nowrap`}
+    >
+        <UiMutagenSlot bind:mutagenSlot={mutagenState.mutagenSlots[i]}/>
+        
+        <div class="frameSkillSlotUIs">
+            {#each mutagenState.mutagenSlots[i].skillSlots as skillSlot, j}
+            <UiSkillSlot bind:skillSlot={mutagenState.mutagenSlots[i].skillSlots[j]}/>
+            {/each}
         </div>
+    </div>
     {/each}
+
     <div class="mutationColumn">
         <div class="frameMutationSlotUI">
-            <MutationSlotUI bind:mutationSlot={mutationState.mutationSlot}/>
+            <UiMutationSlot bind:mutationSlot={mutationState.mutationSlot}/>
         </div>
+
         {#each mutationState.mutationSlot.skillSlots as skillSlot, i}
-            <SkillSlotUI bind:skillSlot={mutationState.mutationSlot.skillSlots[i]}/>
+        <UiSkillSlot bind:skillSlot={mutationState.mutationSlot.skillSlots[i]}/>
         {/each}
     </div>
 </div>
