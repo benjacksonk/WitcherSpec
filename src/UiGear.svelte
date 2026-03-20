@@ -8,11 +8,14 @@
 		gear: Gear;
 		label?: string;
 	} = $props();
+
+    const uid = $props.id();
+    const tooltipId = $derived(`gear-${uid}-tooltip`);
 </script>
 
 
 
-<div class="UiGear">
+<button class="UiGear" interestfor={tooltipId}>
 	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
 	<div class="name shadowText">
 		<span style:font-style={"italic"}>
@@ -22,12 +25,24 @@
         <span>{label}</span>
 		{/if}
 	</div>
+</button>
+
+<div id={tooltipId} popover="hint" class="gearStatsTooltip">
+    {#each gear.stats.entries() as [statKey, statVal]}
+    <div class="tooltipStatLine">
+        <span>+</span>
+        <span>{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal : 100 * statVal).toFixed(0)}</span>
+        <span>{statKey.includes("oxic") || statKey.includes("rmor") ? "pts" : "%"}</span>
+        <span>{statKey}</span>
+    </div>
+    {/each}
 </div>
 
 
 
 <style>
     .UiGear {
+        interest-delay: 0s;
         width: 80px;
         display: grid;
         grid-auto-flow: row;
@@ -35,6 +50,45 @@
         justify-content: stretch;
         justify-items: center;
         background-color: var(--color-grey-1);
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        
+        span {
+            text-align: center;
+            width: 100%;
+            height: 1.4lh;
+            align-content: center;
+            font-size: var(--h4-size);
+            color: white;
+            font-weight: bold;
+        }
+        span:first-of-type {
+            background: linear-gradient(in oklab to bottom,
+            var(--color-grey-2),
+            transparent
+            );
+            font-family: var(--h-font);
+            font-size: var(--h5-size);
+        }
+        span:not(:first-of-type) {
+            background: linear-gradient(in oklab to bottom,
+            transparent,
+            var(--color-grey-1),
+            transparent
+            );
+        }
+    }
+
+    .gearStatsTooltip {
+        position: absolute;
+        top: anchor(100%);
+        left: anchor(50%);
+        translate: -50%;
+        border: 1px solid white;
+        background-color: #222;
+        color: white;
+        padding: 1em;
     }
 
     img {
@@ -53,30 +107,5 @@
         grid-auto-rows: max-content;
         align-content: space-between;
         justify-items: center;
-    }
-
-    span {
-        text-align: center;
-        width: 100%;
-        height: 1.4lh;
-        align-content: center;
-        font-size: var(--h4-size);
-        color: white;
-        font-weight: bold;
-    }
-    span:first-of-type {
-        background: linear-gradient(in oklab to bottom,
-        var(--color-grey-2),
-        transparent
-        );
-        font-family: var(--h-font);
-        font-size: var(--h5-size);
-    }
-    span:not(:first-of-type) {
-        background: linear-gradient(in oklab to bottom,
-        transparent,
-        var(--color-grey-1),
-        transparent
-        );
     }
 </style>
