@@ -1,15 +1,13 @@
 ﻿<script lang="ts">
 	import { getContext } from "svelte";
 	import GearDisplay from './GearDisplay.svelte';
-	import {Gear, GearSlot, type GeraltContext} from "$lib/types.svelte";
+	import {Gear, type GeraltContext} from "$lib/types.svelte";
 
 	const { gearState } = getContext<GeraltContext>("geralt");
 
-	let currentSlot: GearSlot = $state(gearState.slots[0]);
-
-	function handleOnClickGear(event: MouseEvent, gearSlot: GearSlot, gear: Gear) {
+	function handleOnClickGear(event: MouseEvent, gear: Gear) {
 		event.preventDefault();
-		gearSlot.currentGear = gear;
+		gearState.slots.find(slot => slot.inventory.includes(gear))!.currentGear = gear;
 	}
 </script>
 
@@ -23,7 +21,7 @@
 
 	<div popover id={`gearSelector${i}`} class="gearSelector">
 		{#each gearSlot.inventory as gear, j}
-		<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, currentSlot, gear)}>
+		<button class="gearBtn plain" onmousedown={(event) => handleOnClickGear(event, gear)}>
 			<GearDisplay gear={gear}/>
 		</button>
 		{/each}
