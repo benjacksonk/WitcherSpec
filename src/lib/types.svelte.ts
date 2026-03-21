@@ -20,14 +20,15 @@ export type GearData = {
 };
 
 export class Gear {
-    name: string = $state("noName");
-    slotId: string = $state("noSlot");
-    schoolId: string = "noSchool";
-    glyphSlots: number = $state(0);
-    runeSlots: number = $state(0);
+    name: string;
+    slot: GearSlot;
+    slotId: string;
+    schoolId: string;
+    glyphSlots: number;
+    runeSlots: number;
     stats: Map<string, number>;
 
-    constructor(gearData: GearData) {
+    constructor(gearData: GearData, gearSlot: GearSlot) {
         let statEntries: [string, number][] 
         = Object.entries(gearData).filter(
             ([key, value]) =>
@@ -35,6 +36,7 @@ export class Gear {
         ).map(([key, value]) => [key, Number(value)]);
 
         this.name = gearData.name;
+        this.slot = gearSlot;
         this.slotId = gearData.slotId;
         this.schoolId = gearData.schoolId;
         this.glyphSlots = gearData.glyphSlots;
@@ -50,25 +52,19 @@ export class Gear {
     }
 
     get iconPath(): string {
-        return this.name === "None" ? "" : `images/gear/${this.slotId}-${this.id}.webp`;
+        return this.name === "noName" ? "" : `images/gear/${this.slotId}-${this.id}.webp`;
     }
 }
 
 export class GearSlot {
-    readonly id: string = $state("noId");
-    currentGear: Gear = $state(new Gear({
-        name: "noName",
-        slotId: "noSlot",
-        schoolId: "noSchool",
-        glyphSlots: 0,
-        runeSlots: 0
-    }));
-    inventory: Gear[] = $state([]);
+    readonly id: string;
+    inventory: Gear[];
+    currentGear: Gear = $state(new Gear({name: "noName", slotId: "noSlot", schoolId: "noSchool", glyphSlots: 0, runeSlots: 0}, this));
 
-    constructor(id: string, inventory: Gear[]) {
+    constructor(id: string, gearDatas: GearData[]) {
         this.id = id;
-        this.currentGear = inventory[0];
-        this.inventory = inventory;
+        this.inventory = gearDatas.map(gearData => new Gear(gearData, this));
+        this.currentGear = this.inventory[0];
     }
 }
 
