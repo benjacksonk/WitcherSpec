@@ -20,10 +20,12 @@
 
 <button class="UiGear" interestfor={tooltipId}>
 	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
-	<div class="name shadowText">
+	
+    <div class="name shadowText">
 		<span style:font-style={"italic"}>
 			{gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]}
 		</span>
+
 		{#if label !== ""}
         <span>{label}</span>
 		{/if}
@@ -33,7 +35,7 @@
 
 
 {#if relevantStatEntries.length > 0}
-<div id={tooltipId} popover="hint" class="gearStatsTooltip">
+<div id={tooltipId} popover="hint" class="tooltip gearStatsTooltip">
     <span class="gearStatsTooltipName">{gear.name}</span>
 
     <div class="gearStatsTooltipData">
@@ -41,8 +43,8 @@
         <div class="tooltipStatLine">
             <div class="tooltipStatDiff">
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
-                <span style:color={statVal < gear.slot.currentGear.stats.get(statKey)! ? "var(--color-combat-2)" : "var(--color-alchemy-2)"}>            
-                    {#if (statVal - gear.slot.currentGear.stats.get(statKey)!) > 0}+{/if}{((statVal - gear.slot.currentGear.stats.get(statKey)!)* (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}{" |"}
+                <span style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-1)`}>            
+                    {#if (statVal - gear.slot.currentGear.stats.get(statKey)!) > 0}+{/if}{((statVal - gear.slot.currentGear.stats.get(statKey)!)* (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}
                 </span>
                 {/if}
             </div>
@@ -101,21 +103,12 @@
     }
 
     .gearStatsTooltip {
-        width: max-content;
-        position: absolute;
-        top: anchor(100%);
-        left: anchor(50%);
-        translate: -50%;
-        border: 1px solid white;
-        background-color: #222;
-        color: white;
-        padding: 1em;
-        flex-flow: column nowrap;
-        gap: 0.5em 0em;
-
         &:popover-open {
             display: flex;
         }
+
+        flex-flow: column nowrap;
+        gap: 0.5em 0em;
     }
 
     .gearStatsTooltipName {
@@ -151,10 +144,12 @@
         text-align: left;
     }
     .tooltipStatValue {
-        margin-left: 0.5em;
+        margin-left: 1em;
     }
     .tooltipStatUnit {
         margin-left: 0.25em;
+        color: var(--color-grey-1);
+        font-weight: 500;
     }
     .tooltipStatName {
         margin-left: 1em;

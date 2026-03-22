@@ -89,8 +89,8 @@
 		--color-grey-8:  oklab(var(--ok-l-8)  0 0);
 		--color-grey-9:  oklab(var(--ok-l-9)  0 0);
 		--color-grey-10: oklab(var(--ok-l-10) 0 0);
-		/* --color-grey-11: oklab(var(--ok-l-11) 0 0); */
-		/* --color-grey-12: oklab(var(--ok-l-12) 0 0); */
+		--color-grey-11: oklab(var(--ok-l-11) 0 0);
+		--color-grey-12: oklab(var(--ok-l-12) 0 0);
 		--hue-combat: 28;
 		--color-combat-1:  oklch(var(--ok-l-1)  var(--ok-c-1)  var(--hue-combat));
 		--color-combat-2:  oklch(var(--ok-l-2)  var(--ok-c-2)  var(--hue-combat));
@@ -300,5 +300,21 @@
 		--color-key-8: var(--color-mutations-8);
 		--color-key-9: var(--color-mutations-9);
 		--color-key-10: var(--color-mutations-10);
+	}
+
+	.tooltip {
+        pointer-events: none;
+        width: max-content;
+        position: absolute;
+        top: calc(anchor(100%) - 1.5em);
+        left: anchor(50%);
+        translate: -50%;
+        backdrop-filter: blur(4.24px);
+        box-shadow: 0 2px 8px 1px var(--color-grey-12);
+        color: white;
+        background-color: #2a2a2afa;
+        border: 2px solid var(--color-grey-8);
+        border-radius: 8px;
+        padding: 1em;
 	}
 </style>

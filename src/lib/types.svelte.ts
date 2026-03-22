@@ -52,7 +52,7 @@ export class Gear {
     }
 
     get iconPath(): string {
-        return this.name === "noName" ? "" : `images/gear/${this.slotId}-${this.id}.webp`;
+        return this.name === "None" ? "" : `images/gear/${this.slotId}-${this.id}.webp`;
     }
 }
 
