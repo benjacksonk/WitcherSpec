@@ -16,35 +16,36 @@
         <div class="framePoints">
             <h4 class="totalPoints">Points：{points}</h4>
         </div>
+
         {#each skillState.categories as btnCategory}
-            <button
-                class="tab {btnCategory.id}"
-                style:z-index={tab === btnCategory.id ? 2 : 0}
-                style:border-bottom-color={tab === btnCategory.id ? "var(--color-key-8)" : "transparent"}
-                onmousedown={(e) => {if (e.button === 0) tab = btnCategory.id}}
-                disabled={tab === btnCategory.id}
-            >
-                <h4 class="categoryName">{btnCategory.name}</h4>
-                <h4 class="categoryPoints">{btnCategory.points || 0}</h4>
-            </button>
+        <button
+        class="tab {btnCategory.id}"
+        style:z-index={tab === btnCategory.id ? 2 : 0}
+        style:border-bottom-color={tab === btnCategory.id ? "var(--color-key-8)" : "transparent"}
+        onmousedown={(e) => {if (e.button === 0) tab = btnCategory.id}}
+        disabled={tab === btnCategory.id}
+        >
+            <h4 class="categoryName">{btnCategory.name}</h4>
+            <h4 class="categoryPoints">{btnCategory.points || 0}</h4>
+        </button>
         {/each}
 
         <button
-            class="tab mutations"
-            class:zIndex1={tab === "mutations"}
-            style:border-bottom-color={tab === "mutations" ? "var(--color-key-8)" : "transparent"}
-            onmousedown={(e) => {if (e.button === 0) tab = "mutations"}}
-            disabled={tab === "mutations"}
+        class="tab mutations"
+        style:border-bottom-color={tab === "mutations" ? "var(--color-key-8)" : "transparent"}
+        onmousedown={(e) => {if (e.button === 0) tab = "mutations"}}
+        disabled={tab === "mutations"}
         >
             <h4 class="categoryName">Mutations</h4>
             <h4 class="categoryPoints">0</h4>
         </button>
     </div>
+
     <div class="frameTable">
         {#each skillState.categories as category, i}
-            <div class="frameCategory" class:removed={tab !== category.id}>
-                <UiSkillCategory bind:category={skillState.categories[i]}/>
-            </div>
+        <div class="frameCategory" class:hidden={tab !== category.id}>
+            <UiSkillCategory bind:category={skillState.categories[i]}/>
+        </div>
         {/each}
     </div>
 </div>
@@ -53,15 +54,10 @@
 
 <style>
     .UiAbilityBank {
-        /* width: 700px; */
-        /* height: 500px; */
-        /* max-width: 100%; */
-        /* max-height: 100%; */
         display: grid;
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);
         background-color: var(--color-key-10);
-        /* overflow: hidden; */
     }
 
     .tabs {
@@ -120,19 +116,12 @@
 
     .frameTable {
         z-index: 1;
-        width: 100%;
-        height: 100%;
         display: grid;
-        grid-auto-flow: row;
-        grid-auto-rows: minmax(0, 1fr);
     }
 
     .frameCategory {
-        height: 100%;
-        display: flex;
-    }
-    
-    .zIndex1 {
-        z-index: 1;
+        grid-row: 1;
+        grid-column: 1;
+        display: grid;
     }
 </style>
