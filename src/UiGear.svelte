@@ -36,23 +36,22 @@
 
 {#if relevantStatEntries.length > 0}
 <div id={tooltipId} popover="hint" class="tooltip gearStatsTooltip">
-    <span class="gearStatsTooltipName">{gear.name}</span>
+    <h4 class="gearStatsTooltipName">{gear.name}</h4>
 
     <div class="gearStatsTooltipData">
         {#each relevantStatEntries as [statKey, statVal]}
         <div class="tooltipStatLine">
-            <div class="tooltipStatDiff">
+            <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-4)`}>
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
-                <span style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-1)`}>            
-                    {#if (statVal - gear.slot.currentGear.stats.get(statKey)!) > 0}+{/if}{((statVal - gear.slot.currentGear.stats.get(statKey)!)* (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}
-                </span>
+                <p class="diffUnit">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
+                <p class="diffMagnitude">{(Math.abs(statVal - gear.slot.currentGear.stats.get(statKey)!) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
                 {/if}
             </div>
 
             <div class="tooltipStatBase">
-                <span class="tooltipStatValue">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal : 100 * statVal).toFixed(0)}</span>
-                <span class="tooltipStatUnit">{statKey.includes("oxic") || statKey.includes("rmor") ? "pts" : "%"}</span>
-                <span class="tooltipStatName">{statKey}</span>
+                <p class="tooltipStatValue">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal : 100 * statVal).toFixed(0)}</p>
+                <p class="tooltipStatUnit">{statKey.includes("oxic") || statKey.includes("rmor") ? "pts" : "%"}</p>
+                <p class="tooltipStatName">{statKey}</p>
             </div>
         </div>
         {/each}
@@ -112,7 +111,8 @@
     }
 
     .gearStatsTooltipName {
-        font-weight: bold;
+        color: var(--color-grey-9);
+        font-weight: 600;
     }
 
     .gearStatsTooltipData {
@@ -124,6 +124,12 @@
         grid-column: span 5;
         display: grid;
         grid-template-columns: subgrid;
+        font-weight: 500;
+    }
+
+    .tooltipStatDiff {
+        grid-column: span 2;
+        font-weight: 600;
     }
 
     .tooltipStatDiff, 
@@ -143,13 +149,15 @@
     .tooltipStatName {
         text-align: left;
     }
+    .diffMagnitude {
+        margin-left: 0.5em;
+    }
     .tooltipStatValue {
         margin-left: 1em;
     }
     .tooltipStatUnit {
         margin-left: 0.25em;
-        color: var(--color-grey-1);
-        font-weight: 500;
+        color: var(--color-grey-10);
     }
     .tooltipStatName {
         margin-left: 1em;

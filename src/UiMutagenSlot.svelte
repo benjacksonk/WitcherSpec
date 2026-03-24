@@ -19,27 +19,23 @@
 
 <div class="UiMutagenSlot">
     <button popovertarget={`mutagenGrid-${uid}`} class="slotBtn plain"
-        class:combat={mutagenSlot.mutagen?.categoryId === "combat"}
-        class:signs={mutagenSlot.mutagen?.categoryId === "signs"}
-        class:alchemy={mutagenSlot.mutagen?.categoryId === "alchemy"}
-        class:general={mutagenSlot.mutagen?.categoryId === "general"}
+    class:combat={mutagenSlot.mutagen?.categoryId === "combat"}
+    class:signs={mutagenSlot.mutagen?.categoryId === "signs"}
+    class:alchemy={mutagenSlot.mutagen?.categoryId === "alchemy"}
+    class:general={mutagenSlot.mutagen?.categoryId === "general"}
     >
-        <span class="slotBtnContents">
-            <img alt="" src={mutagenSlot.mutagen === undefined ? "" : mutagenSlot.mutagen.iconPath} height="64px" width="64px"
-            style:anchor-name={`--mutagen-${uid}-icon`}
-            />
-        </span>
+        <img class="mutagenIcon" alt="" src={mutagenSlot.mutagen?.iconPath ?? ""} height="64px" width="64px" style:anchor-name={`--mutagen-${uid}-icon`}/>
     </button>
 
     <div popover id={`mutagenGrid-${uid}`} class="mutagenGrid" style:position-anchor={`--mutagen-${uid}-icon`}>
         {#each mutagenSlot.inventory as mutagen, i}
         <button
-            class="mutagenBtn plain"
-            class:combat={mutagen.categoryId === "combat"}
-            class:signs={mutagen.categoryId === "signs"}
-            class:alchemy={mutagen.categoryId === "alchemy"}
-            class:general={mutagen.categoryId === "general"}
-            onmousedown={(event) => handleOnClickMutagen(event, mutagen)}
+        class="mutagenBtn plain"
+        class:combat={mutagen.categoryId === "combat"}
+        class:signs={mutagen.categoryId === "signs"}
+        class:alchemy={mutagen.categoryId === "alchemy"}
+        class:general={mutagen.categoryId === "general"}
+        onmousedown={(event) => handleOnClickMutagen(event, mutagen)}
         >
             <img alt="" src={mutagen.iconPath} height="64px" width="64px">
             <span class="mutagenName shadowText">{mutagen.name}</span>
@@ -52,9 +48,9 @@
 
 <style>
     .UiMutagenSlot {
-        width: max-content;
-        height: max-content;
-        position: relative;
+        display: grid;
+        align-content: center;
+        justify-content: center;
     }
 
     button.slotBtn {
@@ -71,9 +67,7 @@
         overflow: hidden;
     }
     
-    button.slotBtn > .slotBtnContents {
-        width: max-content;
-        height: max-content;
+    button.slotBtn > img.mutagenIcon {
         transform: rotate(-45deg);
     }
 

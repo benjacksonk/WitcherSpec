@@ -38,6 +38,7 @@
 		--ok-k2: 0.03;
 		--ok-k3: calc((1 + var(--ok-k1)) / (1 + var(--ok-k2)));
 		--ok-cr-asymptote: -0.5;
+		--ok-lr-0:  pow(2, -1 / 16);
 		--ok-lr-1:  pow(2, -1 / 4);
 		--ok-lr-2:  pow(2, -2 / 4);
 		--ok-lr-3:  pow(2, -3 / 4);
@@ -50,6 +51,7 @@
 		--ok-lr-10: pow(2,-10 / 4);
 		--ok-lr-11: pow(2,-11 / 4);
 		--ok-lr-12: pow(2,-12 / 4);
+		--ok-l-0:  calc((var(--ok-lr-0)  * (var(--ok-lr-0)  + var(--ok-k1))) / (var(--ok-k3) * (var(--ok-lr-0)  + var(--ok-k2))));
 		--ok-l-1:  calc((var(--ok-lr-1)  * (var(--ok-lr-1)  + var(--ok-k1))) / (var(--ok-k3) * (var(--ok-lr-1)  + var(--ok-k2))));
 		--ok-l-2:  calc((var(--ok-lr-2)  * (var(--ok-lr-2)  + var(--ok-k1))) / (var(--ok-k3) * (var(--ok-lr-2)  + var(--ok-k2))));
 		--ok-l-3:  calc((var(--ok-lr-3)  * (var(--ok-lr-3)  + var(--ok-k1))) / (var(--ok-k3) * (var(--ok-lr-3)  + var(--ok-k2))));
@@ -79,6 +81,7 @@
 		--ok-c-10: calc(var(--ok-c-max) * (((1 - var(--ok-cr-asymptote)) * exp(-1 * pow(var(--ok-lr-10)  - var(--my-v-lr), 2) / var(--ok-w))) + var(--ok-cr-asymptote)));
 		/* --ok-c-11: calc(var(--ok-c-max) * exp(-1 * pow(var(--ok-lr-11) - var(--my-v-lr), 2) / var(--ok-w))); */
 		/* --ok-c-12: calc(var(--ok-c-max) * exp(-1 * pow(var(--ok-lr-12) - var(--my-v-lr), 2) / var(--ok-w))); */
+		--color-grey-0:  oklab(var(--ok-l-0)  0 0);
 		--color-grey-1:  oklab(var(--ok-l-1)  0 0);
 		--color-grey-2:  oklab(var(--ok-l-2)  0 0);
 		--color-grey-3:  oklab(var(--ok-l-3)  0 0);
@@ -194,9 +197,14 @@
 		width: fit-content;
 		height: fit-content;
 		display: flex;
-	}
-	button:not([disabled]) {
-		cursor: pointer;
+		
+		&:not([disabled]) {
+			cursor: pointer;
+		}
+
+		&[interestfor] {
+			interest-delay: 0s;
+		}
 	}
 
 	img {
@@ -306,15 +314,34 @@
         pointer-events: none;
         width: max-content;
         position: absolute;
-        top: calc(anchor(100%) - 1.5em);
+        top: anchor(100%);
         left: anchor(50%);
         translate: -50%;
-        backdrop-filter: blur(4.24px);
         box-shadow: 0 2px 8px 1px var(--color-grey-12);
-        color: white;
-        background-color: #2a2a2afa;
-        border: 2px solid var(--color-grey-8);
+        color: black;
+        border: 2px solid var(--color-grey-1);
         border-radius: 8px;
         padding: 1em;
+		overflow: visible;
+		background:	linear-gradient(in oklab to bottom, white, transparent),
+					linear-gradient(in oklab to right, var(--color-grey-1) -100%, var(--color-grey-0) 50%, var(--color-grey-1) 200%);
+
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            translate: -50%;
+            rotate: 45deg;
+            width: 12px;
+            height: 12px;
+        }
+        &::before {
+            top: calc((-12px * (1 / 2)) - 2px);
+            background: var(--color-grey-1);
+        }
+        &::after {
+            top: calc((-12px * (1 / 2)) + (2px * (sqrt(2) - 1)));
+			background: white;
+        }
 	}
 </style>

@@ -12,11 +12,10 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
 
 <div class="UiAbilityKit">
     {#each mutagenState.mutagenSlots as mutagenSlot, i}
-    <div class="mutagenQuadrant"
-            style:grid-area={`${i < 2 ? 1 : 2} / ${i % 2 === 0 ? 1 : 3}`}
-            style:flex-flow={`${i % 2 === 0 ? "row" : "row-reverse"} nowrap`}
-    >
-        <UiMutagenSlot bind:mutagenSlot={mutagenState.mutagenSlots[i]}/>
+    <div class="mutagenQuadrant">
+        <div class="frameMutagenSlot">
+            <UiMutagenSlot bind:mutagenSlot={mutagenState.mutagenSlots[i]}/>
+        </div>
         
         <div class="frameSkillSlotUIs">
             {#each mutagenState.mutagenSlots[i].skillSlots as skillSlot, j}
@@ -27,13 +26,15 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
     {/each}
 
     <div class="mutationColumn">
-        <div class="frameMutationSlotUI">
-            <UiMutationSlot bind:mutationSlot={mutationState.mutationSlot}/>
-        </div>
+        <div class="frameMutationColumnSlots">
+            <div class="frameUiMutationSlot">
+                <UiMutationSlot bind:mutationSlot={mutationState.mutationSlot}/>
+            </div>
 
-        {#each mutationState.mutationSlot.skillSlots as skillSlot, i}
-        <UiSkillSlot bind:skillSlot={mutationState.mutationSlot.skillSlots[i]}/>
-        {/each}
+            {#each mutationState.mutationSlot.skillSlots as skillSlot, i}
+            <UiSkillSlot bind:skillSlot={mutationState.mutationSlot.skillSlots[i]}/>
+            {/each}
+        </div>
     </div>
 </div>
 
@@ -44,52 +45,79 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
         width: stretch;
         height: stretch;
         display: grid;
-        /* justify-content: stretch; */
+        /* align-items: end; */
         /* align-content: stretch; */
         gap: 1px 0;
 
-        grid-template: repeat(2, 1fr) / 1fr auto 1fr;
+        grid-template: 1fr repeat(2, max-content) 1fr / 1fr auto 1fr;
         background-color: var(--color-key-6);
 
         :nth-child(2n).mutagenQuadrant {
             justify-content: start;
+
+            .frameSkillSlotUIs {
+                grid-column: 1;
+            }
         }
-        :nth-child(2n+1).mutagenQuadrant {
-            justify-content: end;
+        :nth-child(n+3).mutagenQuadrant {
+            align-items: start;
+
+            > * {
+                grid-row: 1;
+            }
         }
     }
 
     .mutagenQuadrant {
-        display: flex;
-        padding: 20px 20px;
-        gap: 20px;
-        align-items: center;
-        justify-items: center;
+        grid-row: span 2;
+        display: grid;
+        grid-template: subgrid / repeat(2, minmax(0, max-content));
+        gap: 0 30px;
+        justify-content: end;
+        align-items: end;
+        
+        > * {
+            grid-row: 2;
+        }
     }
     
     .mutagenQuadrant,
     .mutationColumn {
         background-color: var(--color-key-8);
+        padding: 21px 0;
     }
     
     .frameSkillSlotUIs {
+        grid-column: 2;
+        height: max-content;
         display: flex;
         flex-flow: column nowrap;
-        gap: 10px;
+        gap: 13px;
+    }
+
+    .frameMutagenSlot {
+        display: grid;
+        grid-template: subgrid / subgrid;
     }
     
-    .frameMutationSlotUI {
+    .frameUiMutationSlot {
         display: flex;
         grid-row: 3;
     }
     
     .mutationColumn {
-        grid-area: span 2 / 2;
-        height: 100%;
+        grid-row: 1 / -1;
+        grid-column: 2;
         display: grid;
-        grid-auto-flow: row;
+        grid-template: subgrid / subgrid;
+        padding: 0 20px;
+    }
+
+    .frameMutationColumnSlots {
+        grid-row: 2 / span 2;
+        display: grid;
+        grid-template-columns: subgrid;
         justify-items: center;
         align-content: space-evenly;
-        padding: 0 20px;
     }
 </style>

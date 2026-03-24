@@ -46,8 +46,6 @@
 
 <style>
     .UiMutationSlot {
-        height: max-content;
-        position: relative;
     }
 
     button.slotBtn {

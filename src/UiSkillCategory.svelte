@@ -9,10 +9,12 @@
     } = $props();
 
     let subcategories: SkillSubcategory[] = $derived(category.subcategories ?? []);
+    let uid = $props.id();
+    let tooltips = $state(new Map());
     
-    function handleClick(mouseEvent: MouseEvent, skill: Skill) {
+    function handleClick(mouseEvent: MouseEvent, skill: Skill, tierCanIncrease: boolean) {
         mouseEvent.preventDefault();
-        if (skill.isMax === false) {
+        if (tierCanIncrease && skill.isMax === false) {
             skill.points++;
         }
     }
@@ -43,17 +45,25 @@
     <div class="skillRow" class:locked={tier.canIncrease === false}>
         {#each tier.skills as skill, j}
         <button
-        disabled={!tier.canIncrease}
+        interestfor={`${uid}-skill-${skill.id}`}
+        // disabled={!tier.canIncrease}
         class="skill"
+        class:locked={tier.canIncrease === false}
         class:learned={skill.points > 0}
         use:draggable={skill.id}
-        onclick={(event) => handleClick(event, skill)}
+        onclick={(event) => handleClick(event, skill, tier.canIncrease)}
         oncontextmenu={(event) => handleContextMenu(event, skill, tier.canDecrease)}
         style:background-image={`linear-gradient(in oklab to right, var(--color-key-5) ${100 * skill.points / skill.maxPoints}%, transparent ${100 * skill.points / skill.maxPoints}%)`}
         >
             <img alt="" src={skill.iconPath} class="icon skillIcon"/>
-            <span class="name">{skill.name}</span>
+            <p class="name">{skill.name}</p>
         </button>
+
+        <div popover="hint" id={`${uid}-skill-${skill.id}`} class="tooltip skillTooltip">
+            <h4>{skill.name}</h4>
+            <p>{skill.description}</p>
+            <p>Points: {skill.points} / {skill.maxPoints}</p>
+        </div>
         {/each}
     </div>
     {/each}
@@ -132,22 +142,30 @@
         border: 1px solid transparent;
         border-radius: 2px;
         font-family: var(--font);
-        color: rgba(255 255 255 / 85%);
+        font-weight: 500;
+        color: var(--color-grey-1);
         padding: 0;
+
+        &:hover {
+            background-color: var(--color-key-7);
+        }
+
+        &.locked {
+            color: var(--color-grey-2);
+
+            &:hover {
+                background-color: var(--color-key-8);
+            }
+        }
 
         &.learned {
             color: white;
             border-color: var(--color-key-5);
             background-color: var(--color-key-6);
-        }
-        &:disabled {
-            color: rgba(255 255 255 / 70%);
-        }
-        &:not(.learned):enabled:hover {
-            background-color: var(--color-key-7);
-        }
-        &.learned:enabled:hover {
-            border-color: var(--color-key-3);
+
+            &:hover {
+                border-color: var(--color-key-3);
+            }
         }
     }
 
@@ -156,11 +174,20 @@
         text-align: left;
         text-overflow: ellipsis;
         overflow: hidden;
+        text-wrap-style: balance;
         margin-left: -7px;
     }
 
     .subcategoryName {
         text-wrap: nowrap;
         color: var(--color-key-1);
+    }
+    
+    .skillTooltip {
+        h4 {
+            margin: 0 0 0.25em 0;
+            color: var(--color-key-6);
+            font-weight: 600;
+        }
     }
 </style>
