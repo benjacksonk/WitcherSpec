@@ -10,7 +10,6 @@
 
     let subcategories: SkillSubcategory[] = $derived(category.subcategories ?? []);
     let uid = $props.id();
-    let tooltips = $state(new Map());
     
     function handleClick(mouseEvent: MouseEvent, skill: Skill, tierCanIncrease: boolean) {
         mouseEvent.preventDefault();
@@ -46,14 +45,13 @@
         {#each tier.skills as skill, j}
         <button
         interestfor={`${uid}-skill-${skill.id}`}
-        // disabled={!tier.canIncrease}
         class="skill"
         class:locked={tier.canIncrease === false}
         class:learned={skill.points > 0}
         use:draggable={skill.id}
         onclick={(event) => handleClick(event, skill, tier.canIncrease)}
         oncontextmenu={(event) => handleContextMenu(event, skill, tier.canDecrease)}
-        style:background-image={`linear-gradient(in oklab to right, var(--color-key-5) ${100 * skill.points / skill.maxPoints}%, transparent ${100 * skill.points / skill.maxPoints}%)`}
+        style:--skill-progress={skill.points / skill.maxPoints}
         >
             <img alt="" src={skill.iconPath} class="icon skillIcon"/>
             <p class="name">{skill.name}</p>
@@ -81,7 +79,7 @@
         gap: 0 7px;
         color: white;
         background-color: var(--color-key-9);
-        border: 1px solid var(--color-key-10);
+        /* border: 1px solid var(--color-key-11); */
         border-top: none;
     }
     
@@ -91,18 +89,23 @@
         grid-template: subgrid / subgrid;
         color: white;
         background-color: var(--color-key-8);
-        border-top: 1px solid var(--color-key-9);
+        border-style: solid;
+        border-width: 0 1px 1px;
+        border-color: var(--color-key-9);
         padding: 4px 7px;
+        
+        &:first-child {
+            border-top: 1px solid var(--color-key-6);
+            background-color: var(--color-key-8);
+        }
+
+        &:not(.locked):has(+ .locked) {
+            border-bottom-color: transparent;
+        }
 
         &.locked {
-            background-color: var(--color-key-9);
-        }
-        
-        &:first-of-type {
-            border-top-color: var(--color-key-7);
-        }
-        &:not(:first-of-type).locked {
-            border-top-color: var(--color-key-10);
+            background-color: var(--color-key-10);
+            border-color: var(--color-key-11);
         }
     }
 
@@ -132,14 +135,16 @@
         &:hover {
             .subcategoryName,
             .name {
-                    overflow: visible;
+                overflow: visible;
             }
         }
     }
 
     button.skill {
         background: none;
-        border: 1px solid transparent;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
         border-radius: 2px;
         font-family: var(--font);
         font-weight: 500;
@@ -147,23 +152,30 @@
         padding: 0;
 
         &:hover {
-            background-color: var(--color-key-7);
+            background-image: linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-7));
+            border-top-color: var(--color-key-5);
         }
 
         &.locked {
-            color: var(--color-grey-2);
+            color: var(--color-grey-3);
 
             &:hover {
-                background-color: var(--color-key-8);
+                color: var(--color-grey-2);
+                background-image: linear-gradient(in oklab to bottom, var(--color-key-8), var(--color-key-9));
+                border-top-color: var(--color-key-8);
             }
         }
 
         &.learned {
-            color: white;
+            color: var(--color-grey-0);
             border-color: var(--color-key-5);
             background-color: var(--color-key-6);
+            background-image: linear-gradient(in oklab to right, var(--color-key-5) calc(100% * var(--skill-progress)), transparent calc(100% * var(--skill-progress))),
+                              linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-7))
+            ;
 
             &:hover {
+                color: white;
                 border-color: var(--color-key-3);
             }
         }
@@ -181,6 +193,7 @@
     .subcategoryName {
         text-wrap: nowrap;
         color: var(--color-key-1);
+        font-weight: 600;
     }
     
     .skillTooltip {

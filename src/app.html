@@ -79,8 +79,8 @@
 		--ok-c-8:  calc(var(--ok-c-max) * (((1 - var(--ok-cr-asymptote)) * exp(-1 * pow(var(--ok-lr-8)   - var(--my-v-lr), 2) / var(--ok-w))) + var(--ok-cr-asymptote)));
 		--ok-c-9:  calc(var(--ok-c-max) * (((1 - var(--ok-cr-asymptote)) * exp(-1 * pow(var(--ok-lr-9)   - var(--my-v-lr), 2) / var(--ok-w))) + var(--ok-cr-asymptote)));
 		--ok-c-10: calc(var(--ok-c-max) * (((1 - var(--ok-cr-asymptote)) * exp(-1 * pow(var(--ok-lr-10)  - var(--my-v-lr), 2) / var(--ok-w))) + var(--ok-cr-asymptote)));
-		/* --ok-c-11: calc(var(--ok-c-max) * exp(-1 * pow(var(--ok-lr-11) - var(--my-v-lr), 2) / var(--ok-w))); */
-		/* --ok-c-12: calc(var(--ok-c-max) * exp(-1 * pow(var(--ok-lr-12) - var(--my-v-lr), 2) / var(--ok-w))); */
+		--ok-c-11: calc(var(--ok-c-max) * (((1 - var(--ok-cr-asymptote)) * exp(-1 * pow(var(--ok-lr-11)  - var(--my-v-lr), 2) / var(--ok-w))) + var(--ok-cr-asymptote)));
+		--ok-c-12: calc(var(--ok-c-max) * (((1 - var(--ok-cr-asymptote)) * exp(-1 * pow(var(--ok-lr-12)  - var(--my-v-lr), 2) / var(--ok-w))) + var(--ok-cr-asymptote)));
 		--color-grey-0:  oklab(var(--ok-l-0)  0 0);
 		--color-grey-1:  oklab(var(--ok-l-1)  0 0);
 		--color-grey-2:  oklab(var(--ok-l-2)  0 0);
@@ -105,6 +105,8 @@
 		--color-combat-8:  oklch(var(--ok-l-8)  var(--ok-c-8)  var(--hue-combat));
 		--color-combat-9:  oklch(var(--ok-l-9)  var(--ok-c-9)  var(--hue-combat));
 		--color-combat-10: oklch(var(--ok-l-10) var(--ok-c-10) var(--hue-combat));
+		--color-combat-11: oklch(var(--ok-l-11) var(--ok-c-11) var(--hue-combat));
+		--color-combat-12: oklch(var(--ok-l-12) var(--ok-c-12) var(--hue-combat));
 		--hue-signs: 248;
 		--color-signs-1:  oklch(var(--ok-l-1)  var(--ok-c-1)  var(--hue-signs));
 		--color-signs-2:  oklch(var(--ok-l-2)  var(--ok-c-2)  var(--hue-signs));
@@ -116,6 +118,8 @@
 		--color-signs-8:  oklch(var(--ok-l-8)  var(--ok-c-8)  var(--hue-signs));
 		--color-signs-9:  oklch(var(--ok-l-9)  var(--ok-c-9)  var(--hue-signs));
 		--color-signs-10: oklch(var(--ok-l-10) var(--ok-c-10) var(--hue-signs));
+		--color-signs-11: oklch(var(--ok-l-11) var(--ok-c-11) var(--hue-signs));
+		--color-signs-12: oklch(var(--ok-l-12) var(--ok-c-12) var(--hue-signs));
 		--hue-alchemy: 138;
 		--color-alchemy-1:  oklch(var(--ok-l-1)  var(--ok-c-1)  var(--hue-alchemy));
 		--color-alchemy-2:  oklch(var(--ok-l-2)  var(--ok-c-2)  var(--hue-alchemy));
@@ -127,6 +131,8 @@
 		--color-alchemy-8:  oklch(var(--ok-l-8)  var(--ok-c-8)  var(--hue-alchemy));
 		--color-alchemy-9:  oklch(var(--ok-l-9)  var(--ok-c-9)  var(--hue-alchemy));
 		--color-alchemy-10: oklch(var(--ok-l-10) var(--ok-c-10) var(--hue-alchemy));
+		--color-alchemy-11: oklch(var(--ok-l-11) var(--ok-c-11) var(--hue-alchemy));
+		--color-alchemy-12: oklch(var(--ok-l-12) var(--ok-c-12) var(--hue-alchemy));
 		--hue-general: 83;
 		--color-general-1:  oklch(var(--ok-l-1)  var(--ok-c-1)  var(--hue-general));
 		--color-general-2:  oklch(var(--ok-l-2)  var(--ok-c-2)  var(--hue-general));
@@ -138,6 +144,8 @@
 		--color-general-8:  oklch(var(--ok-l-8)  var(--ok-c-8)  var(--hue-general));
 		--color-general-9:  oklch(var(--ok-l-9)  var(--ok-c-9)  var(--hue-general));
 		--color-general-10: oklch(var(--ok-l-10) var(--ok-c-10) var(--hue-general));
+		--color-general-11: oklch(var(--ok-l-11) var(--ok-c-11) var(--hue-general));
+		--color-general-12: oklch(var(--ok-l-12) var(--ok-c-12) var(--hue-general));
 		--color-mutations: var(--color-grey);
 		--color-mutations-1: var(--color-grey-1);
 		--color-mutations-2: var(--color-grey-2);
@@ -149,6 +157,8 @@
 		--color-mutations-8: var(--color-grey-8);
 		--color-mutations-9: var(--color-grey-9);
 		--color-mutations-10: var(--color-grey-10);
+		--color-mutations-11: var(--color-grey-11);
+		--color-mutations-12: var(--color-grey-12);
 		--color-key: var(--color-grey);
 		--color-key-1:  var(--color-grey-1);
 		--color-key-2:  var(--color-grey-2);
@@ -160,8 +170,8 @@
 		--color-key-8:  var(--color-grey-8);
 		--color-key-9:  var(--color-grey-9);
 		--color-key-10: var(--color-grey-10);
-		/* --color-key-11: var(--color-grey-11); */
-		/* --color-key-12: var(--color-grey-12); */
+		--color-key-11: var(--color-grey-11);
+		--color-key-12: var(--color-grey-12);
 	}
 
 	html {
@@ -257,6 +267,8 @@
 		--color-key-8: var(--color-combat-8);
 		--color-key-9: var(--color-combat-9);
 		--color-key-10: var(--color-combat-10);
+		--color-key-11: var(--color-combat-11);
+		--color-key-12: var(--color-combat-12);
 	}
 	.signs {
 		--color-key-1: var(--color-signs-1);
@@ -269,6 +281,8 @@
 		--color-key-8: var(--color-signs-8);
 		--color-key-9: var(--color-signs-9);
 		--color-key-10: var(--color-signs-10);
+		--color-key-11: var(--color-signs-11);
+		--color-key-12: var(--color-signs-12);
 	}
 	.alchemy {
 		--color-key-1: var(--color-alchemy-1);
@@ -281,6 +295,8 @@
 		--color-key-8: var(--color-alchemy-8);
 		--color-key-9: var(--color-alchemy-9);
 		--color-key-10: var(--color-alchemy-10);
+		--color-key-11: var(--color-alchemy-11);
+		--color-key-12: var(--color-alchemy-12);
 	}
 	.general {
 		--color-key-1: var(--color-general-1);
@@ -293,6 +309,8 @@
 		--color-key-8: var(--color-general-8);
 		--color-key-9: var(--color-general-9);
 		--color-key-10: var(--color-general-10);
+		--color-key-11: var(--color-general-11);
+		--color-key-12: var(--color-general-12);
 	}
 	.alchemy.combat {}
 	.alchemy.signs {}
@@ -308,6 +326,8 @@
 		--color-key-8: var(--color-mutations-8);
 		--color-key-9: var(--color-mutations-9);
 		--color-key-10: var(--color-mutations-10);
+		--color-key-11: var(--color-mutations-11);
+		--color-key-12: var(--color-mutations-12);
 	}
 
 	.tooltip {

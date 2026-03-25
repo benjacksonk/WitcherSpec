@@ -20,8 +20,7 @@
         {#each skillState.categories as btnCategory}
         <button
         class="tab {btnCategory.id}"
-        style:z-index={tab === btnCategory.id ? 2 : 0}
-        style:border-bottom-color={tab === btnCategory.id ? "var(--color-key-8)" : "transparent"}
+        class:activeTab={tab === btnCategory.id}
         onmousedown={(e) => {if (e.button === 0) tab = btnCategory.id}}
         disabled={tab === btnCategory.id}
         >
@@ -72,7 +71,7 @@
 
     .framePoints,
     .tab {
-        border: 1px solid transparent;
+        border-style: solid;
         border-top-width: 2px;
         border-radius: 50% 50% 0 0;
         padding: 0.79cap 0.79cap 0.5cap 0.79cap;
@@ -85,6 +84,8 @@
 
     .framePoints {
         grid-template: 100% / 100%;
+        border-color: transparent;
+        border-width: 1px;
     }
 
     .totalPoints {
@@ -98,12 +99,29 @@
     .tab {
         grid-template: 100% / max-content auto;
         gap: 11px;
-        background-color: var(--color-key-8);
+        z-index: 0;
+        background: linear-gradient(in oklab to bottom, var(--color-key-8), var(--color-key-8));
+        border-width: 2px 2px 0;
+        border-color: var(--color-key-7);
         border-top-color: var(--color-key-7);
+        color: var(--color-key-2);
+
+        &:not(.activeTab):hover {
+            background: linear-gradient(in oklab to bottom, var(--color-key-7), var(--color-key-8));
+            color: var(--color-key-1);
+        }
+
+        &.activeTab {
+            z-index: 2;
+            background: linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-8));
+            border-width: 2px 1px 0;
+            border-color: var(--color-key-6);
+            border-top-color: var(--color-key-5);
+            color: white;
+        }
     }
 
     .categoryPoints {
-        color: var(--color-key-1);
     }
 
     .categoryName {
@@ -111,7 +129,6 @@
         text-wrap: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        color: var(--color-key-1);
     }
 
     .frameTable {
