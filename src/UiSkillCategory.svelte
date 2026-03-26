@@ -58,7 +58,7 @@
         </button>
 
         <div popover="hint" id={`${uid}-skill-${skill.id}`} class="tooltip skillTooltip">
-            <h4>{skill.name}</h4>
+            <h4 class="tooltipHeader">{skill.name}</h4>
             <p>{skill.description}</p>
             <p>Points: {skill.points} / {skill.maxPoints}</p>
         </div>
@@ -110,6 +110,10 @@
         &.locked {
             background: var(--color-key-9);
             border-color: var(--color-key-10);
+
+            .name {
+                filter: drop-shadow(0px 1px 1px var(--color-key-10));
+            }
         }
     }
 
@@ -137,9 +141,8 @@
         align-items: center;
 
         &:hover {
-            .subcategoryName,
             .name {
-                overflow: visible;
+                /* overflow: visible; */
             }
         }
     }
@@ -191,6 +194,7 @@
     }
 
     .name {
+        max-width: min-content;
         padding: 0 11px;
         text-align: left;
         text-overflow: ellipsis;
@@ -200,12 +204,11 @@
     }
 
     .subcategoryName {
-        text-wrap: nowrap;
         color: var(--color-key-0);
     }
     
     .skillTooltip {
-        h4 {
+        .tooltipHeader {
             margin: 0 0 0.25em 0;
             color: var(--color-key-6);
             font-weight: 600;

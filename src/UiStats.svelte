@@ -74,7 +74,7 @@
     .UiStats {
         grid-column: 1 / -1;
         background-color: var(--color-grey-9);
-        color: white;
+        colwhite;
         display: grid;
         flex-flow: column;
         grid-template-columns: subgrid;
@@ -98,7 +98,7 @@
     }
     .statLabel {
         grid-column: span 4;
-        /* margin-left: 1em; */
+        margin-left: 0.5em;
     }
 
     .totalPerSword {
@@ -112,11 +112,9 @@
             margin-right: 1em;
         }
 
-        &.silver {
-            background-image: linear-gradient(in oklab to right, transparent, oklch(from var(--color-key-9) l 0.00618 h) 50%);
-        }
+        &.silver,
         &.steel {
-            background-image: linear-gradient(in oklab to left, transparent, oklch(from var(--color-key-9) l 0.00618 h) 50%);
+            background-color: oklch(from var(--color-key-9) l 0.00618 h);
         }
     }
 
@@ -139,6 +137,6 @@
 
     .value {
         text-align: right;
-        color: oklch(from var(--color-key-0) l 0.1 h);
+        color: oklch(from var(--color-key-0) l calc(c * 0.5) h);
     }
 </style>
