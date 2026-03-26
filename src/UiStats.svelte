@@ -51,25 +51,20 @@
 
 
 <div class="UiStats">
-<!--    <span></span>-->
-<!--    <span>Silver</span>-->
-<!--    <span>Steel</span>-->
-<!--    <span></span>-->
-<!--    <span></span>-->
     {#each summarizedStats.entries() as [statKey, statVal]}
-    <div class="statLine">
-        <div class="totalPerSword">
-            <span class="plus right">+</span>
-            <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.steel : 100 * statVal.steel).toFixed(0)}</span>
-        </div>
+    <p class="statLine">
+        <span class="totalPerSword silver">
+            <span class="plus">+</span>
+            <span class="value">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.steel : 100 * statVal.steel).toFixed(0)}</span>
+        </span>
         
-        <div class="totalPerSword">
-            <span class="value right">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.silver : 100 * statVal.silver).toFixed(0)}</span>
+        <span class="totalPerSword steel">
+            <span class="value">{(statKey.includes("oxic") || statKey.includes("rmor") ? statVal.silver : 100 * statVal.silver).toFixed(0)}</span>
             <span class="unitLabel">{statKey.includes("oxic") || statKey.includes("rmor") ? "pts" : "%"}</span>
-        </div>
+        </span>
 
         <span class="statLabel">{statKey}</span>
-    </div>
+    </p>
     {/each}
 </div>
 
@@ -83,7 +78,7 @@
         display: grid;
         flex-flow: column;
         grid-template-columns: subgrid;
-        align-content: space-evenly;
+        align-content: stretch;
     }
 
     .statLine {
@@ -92,25 +87,58 @@
         display: grid;
         grid-template-columns: subgrid;
         grid-template-rows: subgrid;
+        align-items: center;
+        font-weight: 500;
+        color: var(--color-grey-0);
     }
     
     .totalPerSword > *,
     .statLabel {
         margin: 0 0.2em;
     }
+    .statLabel {
+        grid-column: span 4;
+        /* margin-left: 1em; */
+    }
+
+    .totalPerSword {
+        grid-column: span 2;
+        display: grid;
+        grid-template: subgrid / subgrid;
+        /* background-color: oklch(from var(--color-key-9) l 0.03 h); */
+        align-items: center;
+
+        &:first-child .value {
+            margin-right: 1em;
+        }
+
+        &.silver {
+            background-image: linear-gradient(in oklab to right, transparent, oklch(from var(--color-key-9) l 0.00618 h) 50%);
+        }
+        &.steel {
+            background-image: linear-gradient(in oklab to left, transparent, oklch(from var(--color-key-9) l 0.00618 h) 50%);
+        }
+    }
+
+    .plus {
+        margin-left: 0.5em;
+    }
     
-    .right {
-        text-align: right;
-        align-self: end;
+    .plus,
+    .value,
+    .unitLabel {
+        display: grid;
+        grid-template: subgrid / subgrid;
+        align-items: center;
     }
     
     .plus,
     .unitLabel {
-        color: var(--color-grey-3);
+        color: var(--color-grey-2);
     }
-    
-    .statLabel {
-        grid-column: span 4;
-        /* margin-left: 1em; */
+
+    .value {
+        text-align: right;
+        color: oklch(from var(--color-key-0) l 0.1 h);
     }
 </style>

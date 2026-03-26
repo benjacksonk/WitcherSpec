@@ -74,13 +74,11 @@
         width: stretch;
         height: stretch;
         display: grid;
-        grid-template-columns: repeat(5, 1fr minmax(0, 2.618fr));
+        grid-template-columns: 0 repeat(5, 1fr minmax(0, 2.618fr)) 0;
         grid-auto-rows: minmax(0, 1fr);
         gap: 0 7px;
         color: white;
         background-color: var(--color-key-9);
-        /* border: 1px solid var(--color-key-11); */
-        border-top: none;
     }
     
     .skillRow {
@@ -92,20 +90,26 @@
         border-style: solid;
         border-width: 0 1px 1px;
         border-color: var(--color-key-9);
-        padding: 4px 7px;
+        padding: 4px 0;
+
+        &:before, &:after {
+            content: "";
+            contain: strict;
+        }
         
         &:first-child {
-            border-top: 1px solid var(--color-key-6);
+            border-top: 2px solid var(--color-key-7);
             background-color: var(--color-key-8);
         }
 
         &:not(.locked):has(+ .locked) {
             border-bottom-color: transparent;
+            filter: drop-shadow(0 3px 1.5px var(--color-key-10));
         }
 
         &.locked {
-            background-color: var(--color-key-10);
-            border-color: var(--color-key-11);
+            background: var(--color-key-9);
+            border-color: var(--color-key-10);
         }
     }
 
@@ -145,29 +149,34 @@
         border-width: 1px;
         border-style: solid;
         border-color: transparent;
-        border-radius: 2px;
+        border-radius: 4px;
         font-family: var(--font);
         font-weight: 500;
-        color: var(--color-grey-1);
+        color: oklch(from var(--color-key-1) l 0.02 h);
         padding: 0;
 
         &:hover {
+            color: oklch(from var(--color-key-0) l 0.01 h);
             background-image: linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-7));
+            border-color: var(--color-key-6);
             border-top-color: var(--color-key-5);
+            border-bottom-color: var(--color-key-7);
         }
 
         &.locked {
-            color: var(--color-grey-3);
+            color: oklch(from var(--color-key-2) l 0.03 h);
 
             &:hover {
-                color: var(--color-grey-2);
-                background-image: linear-gradient(in oklab to bottom, var(--color-key-8), var(--color-key-9));
-                border-top-color: var(--color-key-8);
+                color: oklch(from var(--color-key-0) l 0.01 h);
+                background-image: linear-gradient(in oklab to bottom, var(--color-key-8), var(--color-key-7));
+                border-color: var(--color-key-7);
+                border-top-color: var(--color-key-7);
+                border-bottom-color: var(--color-key-7);
             }
         }
 
         &.learned {
-            color: var(--color-grey-0);
+            color: oklch(from var(--color-key-0) l 0.01 h);
             border-color: var(--color-key-5);
             background-color: var(--color-key-6);
             background-image: linear-gradient(in oklab to right, var(--color-key-5) calc(100% * var(--skill-progress)), transparent calc(100% * var(--skill-progress))),
@@ -192,8 +201,7 @@
 
     .subcategoryName {
         text-wrap: nowrap;
-        color: var(--color-key-1);
-        font-weight: 600;
+        color: var(--color-key-0);
     }
     
     .skillTooltip {

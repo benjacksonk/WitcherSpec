@@ -39,9 +39,10 @@
         position: relative;
         background-color: var(--color-grey-2);
 
-		grid-column: span 6;
+		grid-column: 1 / -1;
 		display: grid;
 		grid-template: subgrid / subgrid;
+		gap: 1px;
     }
 
     button.slotBtn {
@@ -53,6 +54,11 @@
 		border-color: var(--color-grey-1);
 		border-width: 2px;
 		border-bottom-width: 0;
+
+		&:nth-of-type(1),
+		&:nth-of-type(2) {
+			grid-column: span 2;
+		}
     }
 
     .gearSelector {

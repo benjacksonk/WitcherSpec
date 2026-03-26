@@ -21,6 +21,8 @@ export type GearData = {
 
 export class Gear {
     name: string;
+    nickname: string;
+    styleName: string;
     slot: GearSlot;
     slotId: string;
     schoolId: string;
@@ -36,6 +38,8 @@ export class Gear {
         ).map(([key, value]) => [key, Number(value)]);
 
         this.name = gearData.name;
+        this.nickname = this.name.includes("Grandmaster") ? this.name.replace(" - Grandmaster", "") : this.name;
+        this.styleName = this.name.includes("Leather") ? "Kaer Morhen" : this.name.split(" ")[0];
         this.slot = gearSlot;
         this.slotId = gearData.slotId;
         this.schoolId = gearData.schoolId;

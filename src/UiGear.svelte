@@ -21,13 +21,11 @@
 <button class="UiGear" interestfor={tooltipId}>
 	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
 	
-    <div class="name shadowText">
-		<span style:font-style={"italic"}>
-			{gear.name.includes("Leather") ? "Kaer Morhen" : gear.name.split(" ")[0]}
-		</span>
+    <div class="texts">
+		<p class="gearNickname shadowText">{gear.styleName}</p>
 
 		{#if label !== ""}
-        <span>{label}</span>
+        <p class="slotLabel shadowText">{label}</p>
 		{/if}
 	</div>
 </button>
@@ -35,15 +33,19 @@
 
 
 {#if relevantStatEntries.length > 0}
-<div id={tooltipId} popover="hint" class="tooltip gearStatsTooltip">
-    <h4 class="gearStatsTooltipName">{gear.name}</h4>
+<div id={tooltipId} popover="hint" 
+class="tooltip gearStatsTooltip"
+class:silver={gear.slotId === "silver"}
+class:steel={gear.slotId === "steel"}
+>
+    <h4 class="gearStatsTooltipName">{gear.nickname}</h4>
 
     <div class="gearStatsTooltipData">
         {#each relevantStatEntries as [statKey, statVal]}
         <div class="tooltipStatLine">
             <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-4)`}>
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
-                <p class="diffUnit">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
+                <p class="diffSign">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
                 <p class="diffMagnitude">{(Math.abs(statVal - gear.slot.currentGear.stats.get(statKey)!) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
                 {/if}
             </div>
@@ -74,31 +76,55 @@
         padding: 0;
         border: none;
         border-radius: 0;
+
+        &:hover {
+            background-image: linear-gradient(to bottom, transparent, var(--color-grey-0));
+
+            .slotLabel {
+                background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-0), transparent);
+            }
+        }
+    }
+
+    img {
+        width: 64px;
+        height: 128px;
+    }
+
+    .texts {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: -100%;
+        margin-bottom: -100%;
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-rows: max-content;
+        align-content: space-between;
+        justify-items: center;
+    }
         
-        span {
-            text-align: center;
-            width: 100%;
-            height: 1.4lh;
-            align-content: center;
-            font-size: var(--h4-size);
-            color: white;
-            font-weight: bold;
-        }
-        span:first-of-type {
-            background: linear-gradient(in oklab to bottom,
-            var(--color-grey-2),
-            transparent
-            );
-            font-family: var(--h-font);
-            font-size: var(--h5-size);
-        }
-        span:not(:first-of-type) {
-            background: linear-gradient(in oklab to bottom,
-            transparent,
-            var(--color-grey-1),
-            transparent
-            );
-        }
+    .gearNickname,
+    .slotLabel {
+        text-align: center;
+        width: 100%;
+        height: 1.4lh;
+        align-content: center;
+        color: white;
+    }
+
+    .gearNickname {
+        background: linear-gradient(in oklab to bottom, oklab(from var(--color-grey-2) l a b / 50%), transparent);
+        font-family: var(--h-font);
+        font-weight: 700;
+        font-size: var(--h4-size);
+    }
+    
+    .slotLabel {
+        background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-1), transparent);
+        font-family: var(--h-font);
+        font-weight: 700;
+        font-size: var(--h4-size);
     }
 
     .gearStatsTooltip {
@@ -111,7 +137,7 @@
     }
 
     .gearStatsTooltipName {
-        color: var(--color-grey-9);
+        color: var(--color-key-6);
         font-weight: 600;
     }
 
@@ -121,6 +147,7 @@
     }
 
     .tooltipStatLine {
+        color: var(--color-grey-9);
         grid-column: span 5;
         display: grid;
         grid-template-columns: subgrid;
@@ -129,7 +156,6 @@
 
     .tooltipStatDiff {
         grid-column: span 2;
-        font-weight: 600;
     }
 
     .tooltipStatDiff, 
@@ -149,6 +175,8 @@
     .tooltipStatName {
         text-align: left;
     }
+    .diffSign {
+    }
     .diffMagnitude {
         margin-left: 0.5em;
     }
@@ -157,27 +185,9 @@
     }
     .tooltipStatUnit {
         margin-left: 0.25em;
-        color: var(--color-grey-10);
+        color: var(--color-grey-4);
     }
     .tooltipStatName {
         margin-left: 1em;
-    }
-
-    img {
-        width: 64px;
-        height: 128px;
-    }
-
-    .name {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        top: -100%;
-        margin-bottom: -100%;
-        display: grid;
-        grid-auto-flow: row;
-        grid-auto-rows: max-content;
-        align-content: space-between;
-        justify-items: center;
     }
 </style>

@@ -64,10 +64,10 @@
 
     .gearAndStats {
         display: grid;
-        grid-template-columns: repeat(6, max-content);
+        grid-template-columns: repeat(8, max-content);
         grid-template-rows: max-content;
         grid-auto-rows: minmax(0, 1fr);
-        gap: 0px 1px;
+        /* gap: 0px 1px; */
         /* align-content: stretch; */
         /* align-items: stretch; */
         /* justify-content: stretch; */
