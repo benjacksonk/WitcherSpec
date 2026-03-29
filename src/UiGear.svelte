@@ -2,18 +2,20 @@
 	import { type Gear } from '$lib/types.svelte';
 	
 	let { 
-		gear,
-		label = ""
+		gear
 	}: {
 		gear: Gear;
-		label?: string;
 	} = $props();
 
     const uid = $props.id();
     const tooltipId = $derived(`gear-${uid}-tooltip`);
 
+    let label = $derived(gear.slot.description ?? gear.slot.name);
+
     let relevantStatEntries 
-    = $derived(Array.from(gear.stats.entries().filter(([statKey, statVal]) => statVal != 0 || gear.slot.currentGear.stats.get(statKey) != statVal)));
+    = $derived(Array.from(gear.stats.entries().filter(([statKey, statVal]) => 
+        statVal !== 0 || gear.slot.currentGear.stats.get(statKey) !== statVal
+    )));
 </script>
 
 
@@ -22,7 +24,7 @@
 	<img src={gear.iconPath} alt={gear.name} class:hidden={gear.name === "None"}/>
 	
     <div class="texts">
-		<p class="gearNickname shadowText">{gear.styleName}</p>
+		<p class="gearNickname shadowText">{(gear.styleName ?? gear.name).replaceAll("_"," ")}</p>
 
 		{#if label !== ""}
         <p class="slotLabel shadowText">{label}</p>
@@ -35,10 +37,10 @@
 {#if relevantStatEntries.length > 0}
 <div id={tooltipId} popover="hint" 
 class="tooltip gearStatsTooltip"
-class:silver={gear.slotId === "silver"}
-class:steel={gear.slotId === "steel"}
+class:silver={gear.slot.name.toLowerCase() === "silver"}
+class:steel={gear.slot.name.toLowerCase() === "steel"}
 >
-    <h4 class="gearStatsTooltipName">{gear.nickname}</h4>
+    <h4 class="gearStatsTooltipName">{gear.name.replaceAll("_", " ")}</h4>
 
     <div class="gearStatsTooltipData">
         {#each relevantStatEntries as [statKey, statVal]}
@@ -46,7 +48,10 @@ class:steel={gear.slotId === "steel"}
             <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-4)`}>
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
                 <p class="diffSign">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
-                <p class="diffMagnitude">{(Math.abs(statVal - gear.slot.currentGear.stats.get(statKey)!) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
+                <p class="diffMagnitude">{(Math.abs(statVal - 
+                // 5
+                gear.slot.currentGear.stats.get(statKey)!
+                ) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
                 {/if}
             </div>
 

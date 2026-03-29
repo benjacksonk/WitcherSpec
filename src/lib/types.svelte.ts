@@ -1,74 +1,54 @@
 ﻿import { toIdString } from '$lib/common.svelte';
-import type { gearState } from "$lib/gearState.svelte";
+import { getStatsFromSpec, type GearState } from "$lib/gearState.svelte";
 import type { mutagenState } from "../mutagenState.svelte";
 import type { mutationState } from "$lib/mutationState.svelte";
 import type { skillState } from "$lib/skillState.svelte";
 
 export type GeraltContext = {
-    gearState: typeof gearState,
+    gearState: typeof GearState,
     mutagenState: typeof mutagenState,
     mutationState: typeof mutationState,
     skillState: typeof skillState,
 }
 
-export type GearData = {
+export type StatEntitySpec = {
     name: string,
-    slotId: string,
-    schoolId: string,
-    glyphSlots: number,
-    runeSlots: number
-};
+    description: string,
+    kind: string,
+    rank: number,
+}
 
 export class Gear {
-    name: string;
-    nickname: string;
-    styleName: string;
-    slot: GearSlot;
-    slotId: string;
-    schoolId: string;
-    glyphSlots: number;
-    runeSlots: number;
-    stats: Map<string, number>;
+    readonly name: string;
+    readonly styleName: string;
+    readonly stats: Map<string, number>;
+    readonly slot: GearSlot;
 
-    constructor(gearData: GearData, gearSlot: GearSlot) {
-        let statEntries: [string, number][] 
-        = Object.entries(gearData).filter(
-            ([key, value]) =>
-            !["name", "slotid", "schoolid", "glyphslots", "runeslots"].includes(key.toLowerCase())
-        ).map(([key, value]) => [key, Number(value)]);
-
-        this.name = gearData.name;
-        this.nickname = this.name.includes("Grandmaster") ? this.name.replace(" - Grandmaster", "") : this.name;
-        this.styleName = this.name.includes("Leather") ? "Kaer Morhen" : this.name.split(" ")[0];
+    constructor(gearSpec: StatEntitySpec, gearSlot: GearSlot) {
         this.slot = gearSlot;
-        this.slotId = gearData.slotId;
-        this.schoolId = gearData.schoolId;
-        this.glyphSlots = gearData.glyphSlots;
-        this.runeSlots = gearData.runeSlots;
-        this.stats = new Map(statEntries);
+        this.name = gearSpec.name;
+        this.styleName = gearSpec.description ?? this.name.replace(`_${this.slot.name}`, "");
+        this.stats = getStatsFromSpec(gearSpec);
     }
-
-    get id(): string {
-        return this.name.toLowerCase().replaceAll(
-            new RegExp(String.raw`[^\w-]|${this.slotId}|${"sword"}`, 'gi'),
-            ''
-        );
-    }
+    
+    // get id(): string { return this.name.toLowerCase().replaceAll(new RegExp(String.raw`[^\w-]|${this.slotId}|${"sword"}`, 'gi'), ''); }
 
     get iconPath(): string {
-        return this.name === "None" ? "" : `images/gear/${this.slotId}-${this.id}.webp`;
+        return this.name === "None" ? "" : 
+        `images/gear/${`${this.slot.name}-${this.styleName ?? this.name}`.toLowerCase()}.webp`;
     }
 }
 
 export class GearSlot {
-    readonly id: string;
-    inventory: Gear[];
-    currentGear: Gear = $state(new Gear({name: "noName", slotId: "noSlot", schoolId: "noSchool", glyphSlots: 0, runeSlots: 0}, this));
+    readonly name: string;
+    readonly description: string;
+    readonly inventory: Gear[];
+    currentGear = $state<Gear>(new Gear({ name: "None", description: "", kind: "", rank: 0 }, this));
 
-    constructor(id: string, gearDatas: GearData[]) {
-        this.id = id;
-        this.inventory = gearDatas.map(gearData => new Gear(gearData, this));
-        this.currentGear = this.inventory[0];
+    constructor(spec: StatEntitySpec, gearDatas: StatEntitySpec[]) {
+        this.name = spec.name;
+        this.description = spec.description;
+        this.inventory = [this.currentGear, ...gearDatas.map(gearData => new Gear(gearData, this))];
     }
 }
 

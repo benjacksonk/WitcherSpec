@@ -1,7 +1,7 @@
 <script lang="ts">
     import { setContext } from "svelte";
     import { type GeraltContext } from "$lib/types.svelte";
-    import { gearState } from '$lib/gearState.svelte';
+    import { GearState } from '$lib/gearState.svelte';
     import { skillState } from '$lib/skillState.svelte';
     import { mutagenState } from "../mutagenState.svelte";
     import { mutationState } from "$lib/mutationState.svelte";
@@ -11,7 +11,7 @@
     import UiStats from "../UiStats.svelte";
     
     setContext<GeraltContext>("geralt", {
-        gearState,
+        gearState: GearState,
         mutagenState,
         mutationState,
         skillState,

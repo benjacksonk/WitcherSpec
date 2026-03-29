@@ -16,7 +16,7 @@
 <div class="UiGearKit">
 	{#each gearState.slots as gearSlot, i}
 	<button popovertarget={`gearSelector${i}`} class="slotBtn plain">
-		<UiGear gear={gearSlot.currentGear} label={gearSlot.id.charAt(0).toUpperCase() + gearSlot.id.slice(1)}/>
+		<UiGear gear={gearSlot.currentGear}/>
 	</button>
 
 	<div popover id={`gearSelector${i}`} class="gearSelector">

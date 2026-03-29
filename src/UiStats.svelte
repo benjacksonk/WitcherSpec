@@ -9,8 +9,8 @@
 
         gearState.statsTotal.forEach((statValue, statKey) => {
             statMap.set(statKey, {
-                steel: statValue - (gearState.silverSlot.currentGear.stats.get(statKey) ?? 0),
-                silver: statValue - (gearState.steelSlot.currentGear.stats.get(statKey) ?? 0)
+                steel: statValue - ((gearState.silverSlot.currentGear.stats.get(statKey) ?? 0)),
+                silver: statValue - ((gearState.steelSlot.currentGear.stats.get(statKey) ?? 0))
             })
         })
 
@@ -74,7 +74,6 @@
     .UiStats {
         grid-column: 1 / -1;
         background-color: var(--color-grey-9);
-        colwhite;
         display: grid;
         flex-flow: column;
         grid-template-columns: subgrid;

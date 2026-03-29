@@ -1,6 +1,4 @@
-﻿import Papa from "papaparse";
-
-export function toIdString(str: string) {
+﻿export function toIdString(str: string) {
 	return str.toLowerCase().replaceAll(/\W/g,'');
 }
 

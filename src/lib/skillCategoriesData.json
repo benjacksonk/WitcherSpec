@@ -4,12 +4,23 @@
     "subcategories": [
       {
         "name": "Fast Attack",
+        "description": "Perform fast melee attack with either sword.",
         "skills": [
           {
             "name": "Muscle Memory",
             "tierIndex": 0,
             "maxPoints": 3,
-            "description": ""
+            "levels": [
+              {
+                "description": "Increases fast attack damage by 5%."
+              },
+              {
+                "description": "Increases fast attack damage by 10%."
+              },
+              {
+                "description": "Increases fast attack damage by 15%."
+              }
+            ]
           },
           {
             "name": "Precise Blows",
@@ -33,6 +44,7 @@
       },
       {
         "name": "Strong Attack",
+        "description": "",
         "skills": [
           {
             "name": "Strength Training",
@@ -62,6 +74,7 @@
       },
       {
         "name": "Defense",
+        "description": "",
         "skills": [
           {
             "name": "Arrow Deflection",
@@ -91,6 +104,7 @@
       },
       {
         "name": "Marksmanship",
+        "description": "",
         "skills": [
           {
             "name": "Lightning Reflexes",
@@ -120,6 +134,7 @@
       },
       {
         "name": "Battle Trance",
+        "description": "",
         "skills": [
           {
             "name": "Resolve",
@@ -154,6 +169,7 @@
     "subcategories": [
       {
         "name": "Aard",
+        "description": "",
         "skills": [
           {
             "name": "Far-Reaching Aard",
@@ -183,6 +199,7 @@
       },
       {
         "name": "Igni",
+        "description": "",
         "skills": [
           {
             "name": "Melt Armor",
@@ -212,6 +229,7 @@
       },
       {
         "name": "Yrden",
+        "description": "",
         "skills": [
           {
             "name": "Sustained Glyphs",
@@ -241,6 +259,7 @@
       },
       {
         "name": "Quen",
+        "description": "",
         "skills": [
           {
             "name": "Exploding Shield",
@@ -270,6 +289,7 @@
       },
       {
         "name": "Axii",
+        "description": "",
         "skills": [
           {
             "name": "Delusion",
@@ -304,6 +324,7 @@
     "subcategories": [
       {
         "name": "Brewing",
+        "description": "",
         "skills": [
           {
             "name": "Heightened Tolerance",
@@ -333,6 +354,7 @@
       },
       {
         "name": "Oil Preparation",
+        "description": "",
         "skills": [
           {
             "name": "Poisoned Blades",
@@ -362,6 +384,7 @@
       },
       {
         "name": "Bomb Creation",
+        "description": "",
         "skills": [
           {
             "name": "Steady Aim",
@@ -391,6 +414,7 @@
       },
       {
         "name": "Mutation",
+        "description": "",
         "skills": [
           {
             "name": "Acquired Tolerance",
@@ -420,6 +444,7 @@
       },
       {
         "name": "Trial of the Grasses",
+        "description": "",
         "skills": [
           {
             "name": "Frenzy",
