@@ -11,16 +11,16 @@
     let subcategories: SkillSubcategory[] = $derived(category.subcategories ?? []);
     let uid = $props.id();
     
-    function handleClick(mouseEvent: MouseEvent, skill: Skill, tierCanIncrease: boolean) {
+    function handleClick(mouseEvent: MouseEvent, skill: Skill) {
         mouseEvent.preventDefault();
-        if (tierCanIncrease && skill.isMax === false) {
+        if (skill.canIncrease) {
             skill.points++;
         }
     }
     
-    function handleContextMenu(mouseEvent: MouseEvent, skill: Skill, tierCanDecrease: boolean) {
+    function handleContextMenu(mouseEvent: MouseEvent, skill: Skill) {
         mouseEvent.preventDefault();
-        if (tierCanDecrease && skill.isMin === false) {
+        if (skill.canDecrease) {
             skill.points--;
         }
     }
@@ -28,7 +28,7 @@
 
 
 
-<div class="UiSkillCategory {category.id}">
+<div class="UiSkillCategory {category.name.toLowerCase()}">
     {#if subcategories.length > 0}
     <div class="skillRow">
         {#each category.subcategories as subcategory, i}
@@ -41,26 +41,26 @@
     {/if}
 
     {#each category.tiers as tier, i}
-    <div class="skillRow" class:locked={tier.canIncrease === false}>
-        {#each tier.skills as skill, j}
+    <div class="skillRow" class:locked={category.unlockedTiers < 1 + i}>
+        {#each tier as skill, j}
         <button
-        interestfor={`${uid}-skill-${skill.id}`}
+        interestfor={`${uid}-skill-${skill.name}`}
         class="skill"
-        class:locked={tier.canIncrease === false}
+        class:locked={category.unlockedTiers < 1 + i}
         class:learned={skill.points > 0}
-        use:draggable={skill.id}
-        onclick={(event) => handleClick(event, skill, tier.canIncrease)}
-        oncontextmenu={(event) => handleContextMenu(event, skill, tier.canDecrease)}
-        style:--skill-progress={skill.points / skill.maxPoints}
+        use:draggable={skill.name}
+        onclick={(event) => handleClick(event, skill)}
+        oncontextmenu={(event) => handleContextMenu(event, skill)}
+        style:--skill-progress={skill.progress}
         >
             <img alt="" src={skill.iconPath} class="icon skillIcon"/>
             <p class="name">{skill.name}</p>
         </button>
 
-        <div popover="hint" id={`${uid}-skill-${skill.id}`} class="tooltip skillTooltip">
+        <div popover="hint" id={`${uid}-skill-${skill.name}`} class="tooltip skillTooltip">
             <h4 class="tooltipHeader">{skill.name}</h4>
-            <p>{skill.description}</p>
-            <p>Points: {skill.points} / {skill.maxPoints}</p>
+            <p>{skill.currentLevelDescription}</p>
+            <p>Points: {skill.points} / {skill.levels.length - 1}</p>
         </div>
         {/each}
     </div>

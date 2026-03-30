@@ -11,8 +11,8 @@
         skillSlot: SkillSlot
     } = $props();
     
-    let categoryId = $derived(skillSlot.skill?.categoryId ?? "");
-    let skillPercent = $derived(skillSlot.skill === undefined ? 0 : (100 * skillSlot.skill.points / skillSlot.skill.maxPoints));
+    let categoryName = $derived(skillSlot.skill?.category.name.toLowerCase() ?? "");
+    let skillPercent = $derived(skillSlot.skill === undefined ? 0 : (100 * skillSlot.skill.progress));
     
     function handleClick(mouseEvent: MouseEvent) {
         if (skillSlot.skill) skillSlot.skill.points++;
@@ -26,10 +26,10 @@
 
 
 
-<div class="UiSkillSlot {categoryId}"
+<div class="UiSkillSlot {categoryName}"
      use:dropzone={{
          onDrop(dragEvent: DragEvent, data: String) {
-             skillSlot.skill = skillState.skillPerId.get(data.toString());
+             skillSlot.skill = skillState.skillPerName.get(data.toString());
          }
      }}
 >

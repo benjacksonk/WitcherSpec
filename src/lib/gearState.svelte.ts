@@ -1,23 +1,7 @@
-﻿import Papa from "papaparse";
-import statsDataSource from "$lib/statData.csv?raw";
-import { GearSlot, type StatEntitySpec } from "./types.svelte";
+﻿import { allStatEntitySpecs } from "./common.svelte";
+import { GearSlot, Skill, SkillCategory, type StatEntitySpec } from "./types.svelte";
 
-export const allStatEntitySpecs = Papa.parse<StatEntitySpec>(statsDataSource, {
-	header: true,
-	dynamicTyping: true,
-	skipEmptyLines: true,
-}).data;
-
-const statNames = allStatEntitySpecs.filter(spec => spec.kind.toLowerCase() === "stat").map(spec => spec.name);
-
-export function getStatsFromSpec(statEntitySpec: StatEntitySpec) {	
-	return new Map(statNames.map(name => {
-		let val = Number(Object.entries(statEntitySpec).find(([k, v]) => k === name)?.[1]);
-		return [name, Number.isNaN(val) ? 0 : val];
-	}));
-}
-
-export const GearState = $state(generateGearStateData(allStatEntitySpecs));
+export const gearState = $state(generateGearStateData(allStatEntitySpecs));
 
 function generateGearStateData(gearSpecs: StatEntitySpec[]) {
 	let gearSlotSpecs = gearSpecs.filter(spec => spec.kind.toLowerCase() === "gear");

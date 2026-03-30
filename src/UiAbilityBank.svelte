@@ -6,7 +6,7 @@
     const { skillState } = getContext<GeraltContext>("geralt");
 
     let points: number = $derived(skillState.points);
-    let tab: string = $state(skillState.categories[0].id);
+    let tab: string = $state(skillState.categories[0].name);
 </script>
 
 
@@ -20,10 +20,10 @@
 
         {#each skillState.categories as btnCategory}
         <button
-        class="tab {btnCategory.id}"
-        class:activeTab={tab === btnCategory.id}
-        onmousedown={(e) => {if (e.button === 0) tab = btnCategory.id}}
-        disabled={tab === btnCategory.id}
+        class="tab {btnCategory.name.toLowerCase()}"
+        class:activeTab={tab === btnCategory.name}
+        onmousedown={(e) => {if (e.button === 0) tab = btnCategory.name}}
+        disabled={tab === btnCategory.name}
         >
             <span class="categoryName">{btnCategory.name}</span>
             <span class="categoryPoints">{btnCategory.points || 0}</span>
@@ -42,7 +42,7 @@
 
     <div class="frameTable">
         {#each skillState.categories as category, i}
-        <div class="frameCategory" class:hidden={tab !== category.id}>
+        <div class="frameCategory" class:hidden={tab !== category.name}>
             <UiSkillCategory bind:category={skillState.categories[i]}/>
         </div>
         {/each}
