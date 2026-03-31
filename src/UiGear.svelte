@@ -37,8 +37,8 @@
 {#if relevantStatEntries.length > 0}
 <div id={tooltipId} popover="hint" 
 class="tooltip gearStatsTooltip"
-class:silver={gear.slot.name.toLowerCase() === "silver"}
-class:steel={gear.slot.name.toLowerCase() === "steel"}
+class:silver={gear.slot.name.toLowerCase().includes("silver")}
+class:steel={gear.slot.name.toLowerCase().includes("steel")}
 >
     <h4 class="gearStatsTooltipName">{gear.name.replaceAll("_", " ")}</h4>
 
