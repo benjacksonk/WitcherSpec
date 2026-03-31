@@ -34,7 +34,7 @@
         {#each category.subcategories as subcategory, i}
         <div class="subcategoryHeader">
             <img alt="" src={subcategory.iconPath} class="icon subcategoryIcon"/>
-            <h4 class="name subcategoryName">{subcategory.name}</h4>
+            <h4 class="name subcategoryName">{subcategory.name.replaceAll("_", " ")}</h4>
         </div>
         {/each}
     </div>
@@ -54,11 +54,11 @@
         style:--skill-progress={skill.progress}
         >
             <img alt="" src={skill.iconPath} class="icon skillIcon"/>
-            <p class="name">{skill.name}</p>
+            <p class="name">{skill.name.replaceAll("_", " ")}</p>
         </button>
 
         <div popover="hint" id={`${uid}-skill-${skill.name}`} class="tooltip skillTooltip">
-            <h4 class="tooltipHeader">{skill.name}</h4>
+            <h4 class="tooltipHeader">{skill.name.replaceAll("_", " ")}</h4>
             <p>{skill.currentLevelDescription}</p>
             <p>Points: {skill.points} / {skill.levels.length - 1}</p>
         </div>
