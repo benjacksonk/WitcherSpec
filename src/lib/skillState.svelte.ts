@@ -7,11 +7,14 @@ function generateSkillStateData(statEntitySpecs: StatEntitySpec[]) {
 	let skillCategorySpecs = statEntitySpecs.filter(spec => spec.kind.toLowerCase() === "skills");
 
 	let categories = skillCategorySpecs.map(categorySpec => {
-		let subcategorySpecs = statEntitySpecs.filter(spec => spec.kind === categorySpec.name);
+		let subcategorySpecs = statEntitySpecs.filter(spec => spec.kind === categorySpec.name && spec.kind.toLowerCase() !== "general");
 		
-		let skillAndUpgradeSpecs = statEntitySpecs.filter(spec => 
-			subcategorySpecs.map(subcategorySpec => subcategorySpec.name).includes(spec.kind)
-		).map((skillSpec): [StatEntitySpec, StatEntitySpec[]] => [
+		let skillBaseSpecs = statEntitySpecs.filter(spec => subcategorySpecs.length > 0 ? 
+			subcategorySpecs.map(subcategorySpec => subcategorySpec.name).includes(spec.kind) : 
+			spec.kind === categorySpec.name
+		);
+		
+		let skillAndUpgradeSpecs = skillBaseSpecs.map((skillSpec): [StatEntitySpec, StatEntitySpec[]] => [
 			skillSpec,
 			statEntitySpecs.filter(upgradeSpec => upgradeSpec.kind === skillSpec.name)
 		]);

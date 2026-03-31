@@ -107,6 +107,10 @@ export class SkillCategory {
             skillAndUpgradeSpec[1]
         ));
         this.tiers = Map.groupBy(this.skills, skill => skill.tier).values().toArray();
+
+        if (this.name.toLowerCase() === "general" && this.subcategories.length > 0) {
+            console.warn(`General category "${this.name}" ERRONEOUSLY has ${this.subcategories.length} subcategories.`);
+        }
     }
 
     get points(): number {
@@ -135,50 +139,6 @@ export class SkillSubcategory {
         this.iconPath = `/images/abilities/skills/${skillCategory.name}/${spec.name}.png`.replaceAll("_", "").replaceAll("-", "").toLowerCase();
     }
 }
-/**
-export class SkillTier {
-    readonly skills: Skill[];
-    readonly prerequisitePoints: number;
-    readonly prerequisiteTiers: SkillTier[];
-
-    readonly #tiersAfter: SkillTier[];
-
-    constructor(skills: Skill[], prerequisiteTiers: SkillTier[] = []) {
-        this.skills = skills;
-        this.prerequisiteTiers = prerequisiteTiers;
-        this.prerequisitePoints = 6 * prerequisiteTiers.length;
-    }
-
-    get points() {
-        return this.skills
-            .map(({points}) => points)
-            .reduce((a, b) => a + b, 0);
-    }
-
-    get pointsBefore(): number {
-        return this.prerequisiteTiers
-            .map(({points}) => points)
-            .reduce((a, b) => a + b, 0);
-    }
-
-    get canIncrease(): boolean {
-        return this.pointsBefore >= this.prerequisitePoints;
-    }
-
-    get canDecrease(): boolean {
-        return !this.#tiersAfter.some(otherTier =>
-            otherTier.points > 0
-            && otherTier.pointsBefore - 1 < otherTier.prerequisitePoints
-        );
-    }
-
-    setTiersAfter(tiersAfter: SkillTier[]) {
-        if (this.#tiersAfter !== tiersAfter) {
-            this.#tiersAfter = tiersAfter;
-        }
-    }
-}
-/**/
 
 export class Skill {
     readonly name: string;
@@ -216,7 +176,7 @@ export class Skill {
             : ""
         }${
             spec.name
-        }.png`.replaceAll("_","").replaceAll("-", "").toLowerCase();
+        }.png`.replaceAll("_","").replaceAll("-", "").replaceAll("'", "").toLowerCase();
     }
 
     get points(): number {

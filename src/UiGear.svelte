@@ -48,10 +48,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
             <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-4)`}>
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
                 <p class="diffSign">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
-                <p class="diffMagnitude">{(Math.abs(statVal - 
-                // 5
-                gear.slot.currentGear.stats.get(statKey)!
-                ) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
+                <p class="diffMagnitude">{(Math.abs(statVal - gear.slot.currentGear.stats.get(statKey)!) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
                 {/if}
             </div>
 
