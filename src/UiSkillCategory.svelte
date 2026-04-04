@@ -78,7 +78,7 @@
         grid-auto-rows: minmax(0, 1fr);
         gap: 0 7px;
         color: white;
-        background-color: var(--color-key-17);
+        background-color: var(--color-key-18);
     }
     
     .skillRow {
@@ -86,10 +86,10 @@
         display: grid;
         grid-template: subgrid / subgrid;
         color: white;
-        background-color: var(--color-key-16);
+        background-color: var(--color-key-17);
         border-style: solid;
         border-width: 0 1px 1px;
-        border-color: var(--color-key-17);
+        border-color: var(--color-key-18);
         padding: 4px 0;
 
         &:before, &:after {
@@ -98,21 +98,21 @@
         }
         
         &:first-child {
-            border-top: 2px solid var(--color-key-15);
-            background-color: var(--color-key-16);
+            border-top: 2px solid var(--color-key-16);
+            background-color: var(--color-key-17);
         }
 
         &:not(.locked):has(+ .locked) {
             border-bottom-color: transparent;
-            filter: drop-shadow(0 3px 1.5px var(--color-key-18));
+            filter: drop-shadow(0 3px 1.5px var(--color-key-20));
         }
 
         &.locked {
-            background: var(--color-key-17);
-            border-color: var(--color-key-18);
+            background: var(--color-key-19);
+            border-color: var(--color-key-20);
 
             .name {
-                filter: drop-shadow(0px 1px 1px var(--color-key-18));
+                filter: drop-shadow(0px 1px 1px var(--color-key-20));
             }
         }
     }
@@ -126,7 +126,7 @@
 
     img.icon,
     .name {
-        filter: drop-shadow(0px 1px 1px var(--color-key-17));
+        filter: drop-shadow(0px 1px 1px var(--color-key-18));
     }
 
     .subcategoryHeader,
@@ -152,43 +152,44 @@
         border-width: 1px;
         border-style: solid;
         border-color: transparent;
-        border-radius: 4px;
+        border-radius: 6px;
         font-family: var(--font);
         font-weight: 500;
-        color: oklch(from var(--color-key-1) l 0.02 h);
+        color: var(--color-key-1);
         padding: 0;
 
         &:hover {
-            color: oklch(from var(--color-key-0) l 0.01 h);
+            border-color: var(--color-key-13) var(--color-key-14) var(--color-key-14);
             background-image: linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-15));
-            border-color: var(--color-key-14);
-            border-top-color: var(--color-key-13);
-            border-bottom-color: var(--color-key-15);
+        }
+
+        &:hover, 
+        &.learned {
+            color: var(--color-key-0);
         }
 
         &.locked {
-            color: oklch(from var(--color-key-2) l 0.03 h);
+            color: var(--color-key-2);
 
             &:hover {
-                color: oklch(from var(--color-key-0) l 0.01 h);
-                background-image: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-15));
-                border-color: var(--color-key-15);
-                border-top-color: var(--color-key-15);
-                border-bottom-color: var(--color-key-15);
+                color: var(--color-key-1);
+                border-color: var(--color-key-16) var(--color-key-16) var(--color-key-17);
+                background-image: linear-gradient(in oklab to bottom, var(--color-key-18), var(--color-key-17));
             }
         }
 
         &.learned {
-            color: oklch(from var(--color-key-0) l 0.01 h);
-            border-color: var(--color-key-13);
+            border-color: var(--color-key-12) var(--color-key-13) var(--color-key-14);
             background-color: var(--color-key-14);
             background-image: linear-gradient(in oklab to right, var(--color-key-13) calc(100% * var(--skill-progress)), transparent calc(100% * var(--skill-progress))),
                               linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-15))
             ;
+            filter: drop-shadow(0px 1px 1px var(--color-key-18));
 
             &:hover {
                 color: white;
-                border-color: var(--color-key-1);
+                border-color: var(--color-key-7);
+                filter: drop-shadow(0 0 3px var(--color-key-7));
             }
         }
     }
@@ -204,13 +205,13 @@
     }
 
     .subcategoryName {
-        color: var(--color-key-0);
+        color: var(--color-key-2);
     }
     
     .skillTooltip {
         .tooltipHeader {
             margin: 0 0 0.25em 0;
-            color: var(--color-key-14);
+            color: var(--color-key-15);
             font-weight: 600;
         }
     }

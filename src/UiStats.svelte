@@ -73,7 +73,7 @@
 <style>
     .UiStats {
         grid-column: 1 / -1;
-        background-color: var(--color-grey-19);
+        background-color: var(--color-grey-22);
         display: grid;
         flex-flow: column;
         grid-template-columns: subgrid;
@@ -104,7 +104,7 @@
         grid-column: span 2;
         display: grid;
         grid-template: subgrid / subgrid;
-        /* background-color: oklch(from var(--color-key-19) l 0.03 h); */
+        /* background-color: oklch(from var(--color-key-22) l 0.03 h); */
         align-items: center;
 
         &:first-child .value {
@@ -113,7 +113,7 @@
 
         &.silver,
         &.steel {
-            background-color: oklch(from var(--color-key-19) l 0.00618 h);
+            background-color: oklch(from var(--color-key-22) l 0.00618 h);
         }
     }
 
