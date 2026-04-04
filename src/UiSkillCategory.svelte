@@ -78,7 +78,7 @@
         grid-auto-rows: minmax(0, 1fr);
         gap: 0 7px;
         color: white;
-        background-color: var(--color-key-9);
+        background-color: var(--color-key-17);
     }
     
     .skillRow {
@@ -86,10 +86,10 @@
         display: grid;
         grid-template: subgrid / subgrid;
         color: white;
-        background-color: var(--color-key-8);
+        background-color: var(--color-key-16);
         border-style: solid;
         border-width: 0 1px 1px;
-        border-color: var(--color-key-9);
+        border-color: var(--color-key-17);
         padding: 4px 0;
 
         &:before, &:after {
@@ -98,21 +98,21 @@
         }
         
         &:first-child {
-            border-top: 2px solid var(--color-key-7);
-            background-color: var(--color-key-8);
+            border-top: 2px solid var(--color-key-15);
+            background-color: var(--color-key-16);
         }
 
         &:not(.locked):has(+ .locked) {
             border-bottom-color: transparent;
-            filter: drop-shadow(0 3px 1.5px var(--color-key-10));
+            filter: drop-shadow(0 3px 1.5px var(--color-key-18));
         }
 
         &.locked {
-            background: var(--color-key-9);
-            border-color: var(--color-key-10);
+            background: var(--color-key-17);
+            border-color: var(--color-key-18);
 
             .name {
-                filter: drop-shadow(0px 1px 1px var(--color-key-10));
+                filter: drop-shadow(0px 1px 1px var(--color-key-18));
             }
         }
     }
@@ -126,7 +126,7 @@
 
     img.icon,
     .name {
-        filter: drop-shadow(0px 1px 1px var(--color-key-9));
+        filter: drop-shadow(0px 1px 1px var(--color-key-17));
     }
 
     .subcategoryHeader,
@@ -160,10 +160,10 @@
 
         &:hover {
             color: oklch(from var(--color-key-0) l 0.01 h);
-            background-image: linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-7));
-            border-color: var(--color-key-6);
-            border-top-color: var(--color-key-5);
-            border-bottom-color: var(--color-key-7);
+            background-image: linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-15));
+            border-color: var(--color-key-14);
+            border-top-color: var(--color-key-13);
+            border-bottom-color: var(--color-key-15);
         }
 
         &.locked {
@@ -171,24 +171,24 @@
 
             &:hover {
                 color: oklch(from var(--color-key-0) l 0.01 h);
-                background-image: linear-gradient(in oklab to bottom, var(--color-key-8), var(--color-key-7));
-                border-color: var(--color-key-7);
-                border-top-color: var(--color-key-7);
-                border-bottom-color: var(--color-key-7);
+                background-image: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-15));
+                border-color: var(--color-key-15);
+                border-top-color: var(--color-key-15);
+                border-bottom-color: var(--color-key-15);
             }
         }
 
         &.learned {
             color: oklch(from var(--color-key-0) l 0.01 h);
-            border-color: var(--color-key-5);
-            background-color: var(--color-key-6);
-            background-image: linear-gradient(in oklab to right, var(--color-key-5) calc(100% * var(--skill-progress)), transparent calc(100% * var(--skill-progress))),
-                              linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-7))
+            border-color: var(--color-key-13);
+            background-color: var(--color-key-14);
+            background-image: linear-gradient(in oklab to right, var(--color-key-13) calc(100% * var(--skill-progress)), transparent calc(100% * var(--skill-progress))),
+                              linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-15))
             ;
 
             &:hover {
                 color: white;
-                border-color: var(--color-key-3);
+                border-color: var(--color-key-1);
             }
         }
     }
@@ -210,7 +210,7 @@
     .skillTooltip {
         .tooltipHeader {
             margin: 0 0 0.25em 0;
-            color: var(--color-key-6);
+            color: var(--color-key-14);
             font-weight: 600;
         }
     }

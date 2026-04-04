@@ -56,7 +56,7 @@
         display: grid;
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);
-        background-color: var(--color-key-10);
+        background-color: var(--color-key-18);
     }
 
     .tabs {
@@ -92,16 +92,16 @@
 
     .tab {
         z-index: 0;
-        background: linear-gradient(in oklab to bottom, var(--color-key-7), var(--color-key-9));
+        background: linear-gradient(in oklab to bottom, var(--color-key-15), var(--color-key-17));
         border-width: 2px 2px 0;
-        border-color: var(--color-key-6) var(--color-key-7);
+        border-color: var(--color-key-14) var(--color-key-15);
         color: var(--color-key-2);
 
         &.activeTab {
             z-index: 2;
-            background: linear-gradient(in oklab to bottom, var(--color-key-6), var(--color-key-8));
+            background: linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-16));
             border-width: 2px 2px 0;
-            border-color: var(--color-key-5) var(--color-key-7);
+            border-color: var(--color-key-13) var(--color-key-15);
             color: var(--color-key-0);
         }
         &:not(.activeTab) {
@@ -109,8 +109,8 @@
 
             &:hover {
                 padding-top: 9px;
-                background: linear-gradient(in oklab to bottom, var(--color-key-7), var(--color-key-8));
-                border-color: var(--color-key-5) var(--color-key-7);
+                background: linear-gradient(in oklab to bottom, var(--color-key-15), var(--color-key-16));
+                border-color: var(--color-key-13) var(--color-key-15);
                 color: var(--color-key-1);
             }
         }

@@ -45,7 +45,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     <div class="gearStatsTooltipData">
         {#each relevantStatEntries as [statKey, statVal]}
         <div class="tooltipStatLine">
-            <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-4)`}>
+            <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-11)`}>
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
                 <p class="diffSign">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
                 <p class="diffMagnitude">{(Math.abs(statVal - gear.slot.currentGear.stats.get(statKey)!) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
@@ -139,7 +139,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
 
     .gearStatsTooltipName {
-        color: var(--color-key-6);
+        color: var(--color-key-16);
         font-weight: 600;
     }
 
@@ -149,7 +149,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
 
     .tooltipStatLine {
-        color: var(--color-grey-9);
+        color: var(--color-grey-19);
         grid-column: span 5;
         display: grid;
         grid-template-columns: subgrid;
@@ -181,13 +181,14 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
     .diffMagnitude {
         margin-left: 0.5em;
+        font-weight: 600;
     }
     .tooltipStatValue {
         margin-left: 1em;
     }
     .tooltipStatUnit {
         margin-left: 0.25em;
-        color: var(--color-grey-4);
+        color: var(--color-grey-14);
     }
     .tooltipStatName {
         margin-left: 1em;

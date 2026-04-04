@@ -55,8 +55,8 @@
 
         justify-content: center;
         align-items: center;
-        background-color: var(--color-key-7);
-        border: 2px solid var(--color-key-5);
+        background-color: var(--color-key-17);
+        border: 2px solid var(--color-key-15);
     }
 
     #mutationSelector {
@@ -89,7 +89,7 @@
         grid-auto-flow: row;
         justify-items: center;
 
-        background-color: var(--color-key-8);
+        background-color: var(--color-key-18);
         padding: 0.5em;
     }
 

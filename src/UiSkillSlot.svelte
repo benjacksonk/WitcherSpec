@@ -37,7 +37,7 @@
         <button class="plain"
             onclick={handleClick}
             oncontextmenu={handleContextMenu}
-            style:background-image={`linear-gradient(in oklab to right, var(--color-key-6) ${skillPercent}%, var(--color-key-8) ${skillPercent}%)`}
+            style:background-image={`linear-gradient(in oklab to right, var(--color-key-16) ${skillPercent}%, var(--color-key-18) ${skillPercent}%)`}
         >
             <img alt="" src={skillSlot.skill?.iconPath ?? ""} height="64px" width="64px">
         </button>
@@ -76,6 +76,6 @@
         /*width: fit-content;*/
     }
     img {
-        filter: drop-shadow(0px 1px 1px var(--color-key-9));
+        filter: drop-shadow(0px 1px 1px var(--color-key-19));
     }
 </style>

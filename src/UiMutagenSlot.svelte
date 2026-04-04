@@ -38,7 +38,7 @@
         onmousedown={(event) => handleOnClickMutagen(event, mutagen)}
         >
             <img alt="" src={mutagen.iconPath} height="64px" width="64px">
-            <span class="mutagenName shadowText">{mutagen.name}</span>
+            <span class="mutagenName">{mutagen.name}</span>
         </button>
         {/each}
     </div>
@@ -62,8 +62,8 @@
 
         justify-content: center;
         align-items: center;
-        background-color: var(--color-key-7);
-        border: 2px solid var(--color-key-5);
+        background-color: var(--color-key-17);
+        border: 2px solid var(--color-key-15);
         overflow: hidden;
     }
     
@@ -72,8 +72,12 @@
     }
 
     .mutagenGrid {
-        background-color: var(--color-grey-6);
-        border: 1px solid white;
+        background: var(--color-grey-9);
+        border-style: solid;
+        border-width: 2px;
+        border-color: var(--color-grey-9);
+        border-radius: 6px;
+        box-shadow: 0 2px 8px 1px var(--color-grey-12);
         width: fit-content;
         gap: 1px;
         grid-auto-flow: row;
@@ -91,16 +95,23 @@
     button.mutagenBtn {
         width: 100%;
         height: 100%;
+        padding: 0.5em;
         display: grid;
         grid-auto-flow: row;
         justify-items: center;
+        color: var(--color-key-0);
+        background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-15));
+        box-shadow: inset 0 0 0px 1px var(--color-key-14);
 
-        background-color: var(--color-key-8);
-        padding: 0.5em;
+        &:hover {
+            color: var(--color-key-16);
+            box-shadow: inset 0 0 3px 1px var(--color-key-2);
+            background: linear-gradient(in oklab to bottom, var(--color-key-0), var(--color-key-1));
+        }
     }
 
     .mutagenName {
         width: min-content;
-        color: var(--color-key-1);
+        font-weight: 600;
     }
 </style>
