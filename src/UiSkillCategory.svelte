@@ -79,7 +79,7 @@
         gap: 0 7px;
         color: white;
         background-color: var(--color-key-17);
-        border-top: 2px solid var(--color-key-17);
+        border-top: 2px solid var(--color-key-13);
     }
     
     .subcategoryRow,

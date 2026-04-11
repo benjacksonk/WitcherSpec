@@ -56,7 +56,7 @@
         display: grid;
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);
-        background-color: var(--color-key-22);
+        background-color: var(--color-key-4);
     }
 
     .tabs {
@@ -87,21 +87,21 @@
     .frameTotalPoints {
         border-color: transparent;
         border-width: 1px;
-        color: var(--color-key-1);
+        color: var(--color-key-50);
     }
 
     .tab {
         z-index: 0;
         background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
         border-width: 2px 2px 0;
-        border-color: var(--color-key-16) var(--color-key-17);
+        border-color: var(--color-key-16) var(--color-key-13);
         color: var(--color-key-42);
 
         &.activeTab {
             z-index: 2;
             background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
             border-width: 2px 2px 0;
-            border-color: var(--color-key-16) var(--color-key-17);
+            border-color: var(--color-key-17) var(--color-key-13);
             color: var(--color-key-50);
         }
         &:not(.activeTab) {
@@ -109,8 +109,8 @@
 
             &:hover {
                 padding-top: 9px;
-                background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
-                border-color: var(--color-key-14) var(--color-key-16);
+                background: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-10));
+                border-color: var(--color-key-17);
                 color: var(--color-key-46);
             }
         }

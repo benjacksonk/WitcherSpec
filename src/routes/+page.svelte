@@ -37,31 +37,29 @@
 
 
 <style lang="scss">
-    $lr-vertex: sqrt(1 / 2); // relative lightness point [0-1] where chroma is max
+    $lr-vertex: sqrt(1 / 2); // [0-1] lightness (relative to white) where chromas are max
     $lr-min: 0;
     $lr-max: 1;
     $lr-range: $lr-max - $lr-min;
     $lr-vertex-subdivision: calc(33 / 52); // coordinated with a chroma apex at lr-subdivision-32
-    
     @function calculate-lr($lr-subdivision) {
         $lr-p: log(($lr-vertex - $lr-min) / $lr-range, $lr-vertex-subdivision);
         @return calc($lr-min + ($lr-range * pow($lr-subdivision, $lr-p)));
     }
 
+    $l-k1: 0.206;
+    $l-k2: 0.03;
+    $l-k3: calc((1 + $l-k1) / (1 + $l-k2));
     @function lr-to-l($lr) {
-        $l-k1: 0.206;
-        $l-k2: 0.03;
-        $l-k3: calc((1 + $l-k1) / (1 + $l-k2));
         $l: calc(($lr * ($lr + $l-k1)) / ($l-k3 * ($lr + $l-k2)));
         @return $l;
     }
     
-    $chroma-max: 0.147;                       // [0-1] max chroma safe within all hues of chosen palette
-    $anchor-lr: calculate-lr(calc(11 / 52));  // [0-1] anchor point color's lightness (relative to white)
-    $anchor-cr: 0.52;                         // [0-1] anchor point color's max chroma at $anchor-lr (relative to $chroma-max)
-
+    $chroma-max: 0.147;                      // [0-1] max chroma safe within all hues of chosen palette
+    $anchor-lr: calculate-lr(calc(11 / 52)); // [0-1] anchor point color's lightness (relative to white)
+    $anchor-cr: 0.52;                        // [0-1] anchor point color's max chroma at $anchor-lr (relative to $chroma-max)
+    $chroma-b: log($anchor-cr, $anchor-lr / $lr-vertex);
     @function calculate-chroma-limit($lr) {
-        $chroma-b: log($anchor-cr, $anchor-lr / $lr-vertex);
         $isBright: $lr-vertex > $lr;
         $c-ratio: if(
             sass($isBright): pow($lr / $lr-vertex, $chroma-b);
@@ -156,18 +154,19 @@
         top: anchor(100%);
         left: anchor(50%);
         translate: -50%;
-        box-shadow: 0 2px 8px 1px var(--color-grey-22);
+        box-shadow: 0 2px 8px 1px var(--color-grey-4);
         color: black;
-        border: 2px solid oklch(from var(--color-key-1) l calc(c * 0.15) h);
+        border: 2px solid var(--color-key-48);
         border-radius: 8px;
         padding: 1em;
 		overflow: visible;
 		background:	linear-gradient(in oklab to bottom, white, transparent),
 					linear-gradient(in oklab to right, 
-						oklch(from var(--color-key-1) l c h / 0.125), 
-						oklch(from var(--color-key-0) l c h / 0.125) 44% 56%, 
-						oklch(from var(--color-key-1) l c h / 0.125)),
-					white;
+						var(--color-key-50), 
+						white, 
+						white, 
+						var(--color-key-50)
+                    );
 
         &::before, &::after {
             content: "";
@@ -180,7 +179,7 @@
         }
         &::before {
             top: calc((-12px * (1 / 2)) - 2px);
-			background-color: oklch(from var(--color-key-1) l calc(c * 0.15) h);
+			background-color: var(--color-key-48);
         }
         &::after {
             top: calc((-12px * (1 / 2)) + (2px * (sqrt(2) - 1)));
