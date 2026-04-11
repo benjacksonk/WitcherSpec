@@ -50,7 +50,7 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
         gap: 1px 0;
 
         grid-template: 1fr repeat(2, max-content) 1fr / 1fr auto 1fr;
-        background-color: var(--color-key-16);
+        background-color: var(--color-key-10);
 
         :nth-child(2n).mutagenQuadrant {
             justify-content: start;
@@ -83,7 +83,7 @@ const { mutagenState, mutationState } = getContext<GeraltContext>("geralt");
     
     .mutagenQuadrant,
     .mutationColumn {
-        background-color: var(--color-key-18);
+        background-color: var(--color-key-4);
         padding: 21px 0;
     }
     

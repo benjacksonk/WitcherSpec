@@ -73,7 +73,7 @@
 <style>
     .UiStats {
         grid-column: 1 / -1;
-        background-color: var(--color-grey-22);
+        background-color: var(--color-grey-4);
         display: grid;
         flex-flow: column;
         grid-template-columns: subgrid;
@@ -88,7 +88,7 @@
         grid-template-rows: subgrid;
         align-items: center;
         font-weight: 500;
-        color: var(--color-grey-0);
+        color: var(--color-grey-46);
     }
     
     .totalPerSword > *,
@@ -104,7 +104,6 @@
         grid-column: span 2;
         display: grid;
         grid-template: subgrid / subgrid;
-        /* background-color: oklch(from var(--color-key-22) l 0.03 h); */
         align-items: center;
 
         &:first-child .value {
@@ -113,7 +112,7 @@
 
         &.silver,
         &.steel {
-            background-color: oklch(from var(--color-key-22) l 0.00618 h);
+            background-color: oklch(from var(--color-key-4) l 0.00618 h);
         }
     }
 
@@ -131,11 +130,11 @@
     
     .plus,
     .unitLabel {
-        color: var(--color-grey-2);
+        color: var(--color-grey-35);
     }
 
     .value {
         text-align: right;
-        color: oklch(from var(--color-key-0) l calc(c * 0.5) h);
+        color: var(--color-key-46);
     }
 </style>

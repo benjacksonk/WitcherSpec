@@ -37,7 +37,7 @@
         width: max-content;
         /* height: max-content; */
         position: relative;
-        background-color: var(--color-grey-2);
+        background-color: var(--color-grey-39);
 
 		grid-column: 1 / -1;
 		display: grid;
@@ -51,7 +51,7 @@
 		display: flex;
 		
         border-style: solid;
-		border-color: var(--color-grey-1);
+		border-color: var(--color-grey-47);
 		border-width: 2px;
 		border-bottom-width: 0;
 
@@ -71,7 +71,7 @@
 		translate: -50%;
 		grid-template-columns: repeat(6, auto);
         justify-content: center;
-        background-color: var(--color-grey-1);
+        background-color: var(--color-grey-47);
         border: 1px solid white;
 
 		&:popover-open {
@@ -84,7 +84,7 @@
 		height: fit-content;
 		display: flex;
 		
-        border: 1px solid var(--color-grey-1);
+        border: 1px solid var(--color-grey-47);
         border-bottom: none;
     }
 </style>

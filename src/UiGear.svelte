@@ -45,7 +45,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     <div class="gearStatsTooltipData">
         {#each relevantStatEntries as [statKey, statVal]}
         <div class="tooltipStatLine">
-            <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-11)`}>
+            <div class="tooltipStatDiff" style:color={`var(--color-${statVal < gear.slot.currentGear.stats.get(statKey)! ? "combat" : "alchemy"}-19)`}>
                 {#if gear.slot.currentGear.stats.get(statKey) != statVal}
                 <p class="diffSign">{(statVal - gear.slot.currentGear.stats.get(statKey)!) > 0 ? "+" : "−"}</p>
                 <p class="diffMagnitude">{(Math.abs(statVal - gear.slot.currentGear.stats.get(statKey)!) * (statKey.includes("oxic") || statKey.includes("rmor") ? 1 : 100)).toFixed(0)}</p>
@@ -74,16 +74,16 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
         grid-auto-rows: 100%;
         justify-content: stretch;
         justify-items: center;
-        background-color: var(--color-grey-1);
+        background-color: var(--color-grey-47);
         padding: 0;
         border: none;
         border-radius: 0;
 
         &:hover {
-            background-image: linear-gradient(to bottom, transparent, var(--color-grey-0));
+            background-image: linear-gradient(to bottom, transparent, var(--color-grey-50));
 
             .slotLabel {
-                background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-0), transparent);
+                background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-50), transparent);
             }
         }
     }
@@ -116,14 +116,14 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
 
     .gearNickname {
-        background: linear-gradient(in oklab to bottom, oklab(from var(--color-grey-2) l a b / 50%), transparent);
+        background: linear-gradient(in oklab to bottom, oklab(from var(--color-grey-42) l a b / 50%), transparent);
         font-family: var(--h-font);
         font-weight: 700;
         font-size: var(--h4-size);
     }
     
     .slotLabel {
-        background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-1), transparent);
+        background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-47), transparent);
         font-family: var(--h-font);
         font-weight: 700;
         font-size: var(--h4-size);
@@ -139,7 +139,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
 
     .gearStatsTooltipName {
-        color: var(--color-key-16);
+        color: var(--color-key-12);
         font-weight: 600;
     }
 
@@ -149,7 +149,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
 
     .tooltipStatLine {
-        color: var(--color-grey-19);
+        color: var(--color-grey-8);
         grid-column: span 5;
         display: grid;
         grid-template-columns: subgrid;
@@ -188,7 +188,7 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
     .tooltipStatUnit {
         margin-left: 0.25em;
-        color: var(--color-grey-14);
+        color: var(--color-grey-18);
     }
     .tooltipStatName {
         margin-left: 1em;

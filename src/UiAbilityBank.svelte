@@ -56,7 +56,7 @@
         display: grid;
         grid-auto-flow: row;
         grid-template-rows: auto minmax(0, 1fr);
-        background-color: var(--color-key-19);
+        background-color: var(--color-key-22);
     }
 
     .tabs {
@@ -92,26 +92,26 @@
 
     .tab {
         z-index: 0;
-        background: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-18));
+        background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
         border-width: 2px 2px 0;
-        border-color: var(--color-key-15) var(--color-key-16);
-        color: var(--color-key-3);
+        border-color: var(--color-key-16) var(--color-key-17);
+        color: var(--color-key-42);
 
         &.activeTab {
             z-index: 2;
-            background: linear-gradient(in oklab to bottom, var(--color-key-15), var(--color-key-17));
+            background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
             border-width: 2px 2px 0;
-            border-color: var(--color-key-14) var(--color-key-16);
-            color: var(--color-key-1);
+            border-color: var(--color-key-16) var(--color-key-17);
+            color: var(--color-key-50);
         }
         &:not(.activeTab) {
             padding-top: 6px;
 
             &:hover {
                 padding-top: 9px;
-                background: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-17));
+                background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
                 border-color: var(--color-key-14) var(--color-key-16);
-                color: var(--color-key-2);
+                color: var(--color-key-46);
             }
         }
     }
