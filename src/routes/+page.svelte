@@ -56,8 +56,8 @@
     }
     
     $chroma-max: 0.147;                      // [0-1] max chroma safe within all hues of chosen palette
-    $anchor-lr: calculate-lr(calc(11 / 52)); // [0-1] anchor point color's lightness (relative to white)
-    $anchor-cr: 0.52;                        // [0-1] anchor point color's max chroma at $anchor-lr (relative to $chroma-max)
+    $anchor-lr: calculate-lr(calc(12 / 52)); // [0-1] anchor point color's lightness (relative to white)
+    $anchor-cr: 0.57;                        // [0-1] anchor point color's max chroma at $anchor-lr (relative to $chroma-max)
     $chroma-b: log($anchor-cr, $anchor-lr / $lr-vertex);
     @function calculate-chroma-limit($lr) {
         $isBright: $lr-vertex > $lr;
@@ -148,12 +148,12 @@
 		text-shadow: 0 1px 3px var(--color-key-12);
 	}
 	:global(.tooltip) {
-        pointer-events: none;
+        // pointer-events: none;
         width: max-content;
-        position: absolute;
-        top: anchor(100%);
-        left: anchor(50%);
-        translate: -50%;
+        // position: absolute;
+        // top: anchor(100%);
+        // left: anchor(50%);
+        // translate: -50%;
         box-shadow: 0 2px 8px 1px var(--color-grey-4);
         color: black;
         border: 2px solid var(--color-key-48);

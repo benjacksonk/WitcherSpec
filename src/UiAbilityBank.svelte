@@ -92,16 +92,16 @@
 
     .tab {
         z-index: 0;
-        background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
+        background: linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-10));
         border-width: 2px 2px 0;
-        border-color: var(--color-key-16) var(--color-key-13);
+        border-color: var(--color-key-16) var(--color-key-14);
         color: var(--color-key-42);
 
         &.activeTab {
             z-index: 2;
-            background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-10));
+            background: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-11));
             border-width: 2px 2px 0;
-            border-color: var(--color-key-17) var(--color-key-13);
+            border-color: var(--color-key-17) var(--color-key-14);
             color: var(--color-key-50);
         }
         &:not(.activeTab) {
@@ -109,7 +109,7 @@
 
             &:hover {
                 padding-top: 9px;
-                background: linear-gradient(in oklab to bottom, var(--color-key-16), var(--color-key-10));
+                background: linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-11));
                 border-color: var(--color-key-17);
                 color: var(--color-key-46);
             }

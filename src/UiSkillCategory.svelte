@@ -79,7 +79,7 @@
         gap: 0 7px;
         color: white;
         background-color: var(--color-key-17);
-        border-top: 2px solid var(--color-key-13);
+        border-top: 2px solid var(--color-key-14);
     }
     
     .subcategoryRow,
@@ -88,10 +88,10 @@
         display: grid;
         grid-template: subgrid / subgrid;
         color: white;
-        background: var(--color-key-10);
+        background: var(--color-key-11);
         border-style: solid;
         border-width: 0 1px 1px;
-        border-color: var(--color-key-8);
+        border-color: var(--color-key-9);
         padding: 4px 0;
 
         &:before, &:after {
@@ -100,16 +100,17 @@
         }
         
         &.subcategoryRow {
-            background: linear-gradient(in oklab to bottom, var(--color-key-10) 67%);
+            background: var(--color-key-11);
             border-bottom-color: var(--color-key-14);
-            box-shadow: inset 0 -3px 1.5px oklab(from var(--color-key-8) l a b / 50%);
+            box-shadow: inset 0 -2px 2px oklab(from var(--color-key-8) l a b / 50%);
         }
         &.locked {
-            background: linear-gradient(to bottom, var(--color-key-5), var(--color-key-6) 4px);
+            background: var(--color-key-7);
             border-color: var(--color-key-4);
+            box-shadow: inset 0 2px 2px var(--color-key-6);
 
             &:has(+ .locked) {
-                border-bottom-color: var(--color-key-5);
+                border-bottom-color: var(--color-key-6);
             }
 
             .name {
@@ -158,14 +159,14 @@
         padding: 0;
 
         &:hover {
-            background: linear-gradient(in oklab to bottom, var(--color-key-14), var(--color-key-12));
-            border-color: var(--color-key-17) var(--color-key-14) var(--color-key-14);
+            background: linear-gradient(in oklab to bottom, var(--color-key-13), var(--color-key-12));
+            border-color: var(--color-key-15) var(--color-key-14) var(--color-key-14);
         }
 
         &:hover, 
         &.learned {
             color: var(--color-grey-48);
-            box-shadow: 0 1px 3px 1px var(--color-key-9);
+            box-shadow: 0 1px 2px 1px var(--color-key-9);
         }
 
         &.locked {
@@ -174,13 +175,13 @@
             &:hover {
                 color: var(--color-grey-43);
                 border-color: var(--color-key-10);
-                background-image: linear-gradient(in oklab to bottom, var(--color-key-7), var(--color-key-8));
+                background-image: linear-gradient(in oklab to bottom, var(--color-key-9), var(--color-key-10));
                 box-shadow: none;
             }
         }
 
         &.learned {
-            border-color: var(--color-key-20) var(--color-key-16) var(--color-key-15);
+            border-color: var(--color-key-20) var(--color-key-17) var(--color-key-16);
             background: linear-gradient(in oklab to right, var(--color-key-17) calc(100% * var(--skill-progress)), transparent calc(100% * var(--skill-progress))),
                         linear-gradient(in oklab to bottom, var(--color-key-15), var(--color-key-14));
 
