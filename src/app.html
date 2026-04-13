@@ -2,7 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" href="">
+		<link rel="preconnect" href="https://rsms.me/">
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
@@ -31,37 +32,35 @@
 		--h4-size: calc(1rem * exp(var(--hpower)));
 		--h5-size: 1rem;
 		--h6-size: calc(1rem * exp(var(--hpower) * -1));
-		--font: 'Comme', 'Radio Canada', sans-serif;
-		--h-font: 'Foreday Semi Sans', 'Noto Serif', 'Droid Serif', 'Open Serif', 'Roboto Slab', var(--font), serif;
-		--color-grey-mid: #777;
-		--color-grey: #a6a6a6;
+		--sans: 'Inter', 'Comme', 'Radio Canada', sans-serif;
+		--serif: 'Foreday Semi Sans', 'Noto Serif', 'Droid Serif', 'Open Serif', 'Roboto Slab', serif;
+		font-feature-settings: 'liga', 'calt', 'tnum', 'ss01', 'cv05', 'cv08';
+	}
+	@supports (font-variation-settings: normal) {
+		:root {
+			--sans: InterVariable, 'Inter', 'Comme', 'Radio Canada', sans-serif;
+		}
+	}
+	button, input, textarea {
+		font: inherit;
 	}
 
 	html {
 		font-size: 10pt;
 	}
-	
-	* {
-		font-family: var(--font);
-	}
 
 	body {
 		font-size: 1rem;
-        /* width: 100%; */
-        /* height: 100%; */
-		/* overflow: clip; */
 	}
 
-	p, span, button {
-		font-size: 1rem;
-	}
+	body, .sans { font-family: var(--sans); }
+	h1, h2, h3, h4, h5, h6, .serif { font-family: var(--serif); }
 	h1 { font-weight: 600; font-size: var(--h1-size); }
 	h2 { font-weight: 550; font-size: var(--h2-size); }
 	h3 { font-weight: 500; font-size: var(--h3-size); }
 	h4 { font-weight: 500; font-size: var(--h4-size); }
 	h5 { font-weight: 500; font-size: var(--h5-size); }
 	h6 { font-weight: 500; font-size: var(--h6-size); }
-	h1, h2, h3, h4, h5, h6 { font-family: var(--h-font); }
 
 	button {
 		--radius: calc(var(--pad) + ((1lh - var(--pad)) / 4));
@@ -86,7 +85,10 @@
 		object-fit: contain;
 		display: block;
 	}
-	p img, span img { display: inline-block; }
+	p img, 
+	span img {
+		display: inline-block;
+	}
 
 	.hidden { visibility: hidden !important; }
 	.removed { display: none !important; }

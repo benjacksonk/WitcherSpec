@@ -32,15 +32,13 @@
 	</div>
 </button>
 
-
-
 {#if relevantStatEntries.length > 0}
 <div id={tooltipId} popover="hint" 
 class="tooltip gearStatsTooltip"
 class:silver={gear.slot.name.toLowerCase().includes("silver")}
 class:steel={gear.slot.name.toLowerCase().includes("steel")}
 >
-    <h4 class="gearStatsTooltipName">{gear.name.replaceAll("_", " ")}</h4>
+    <p class="gearStatsTooltipName">{gear.name.replaceAll("_", " ")}</p>
 
     <div class="gearStatsTooltipData">
         {#each relevantStatEntries as [statKey, statVal]}
@@ -117,14 +115,14 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
 
     .gearNickname {
         background: linear-gradient(in oklab to bottom, oklab(from var(--color-grey-42) l a b / 50%), transparent);
-        font-family: var(--h-font);
+        font-family: var(--serif);
         font-weight: 700;
         font-size: var(--h4-size);
     }
     
     .slotLabel {
         background: linear-gradient(in oklab to bottom, transparent, var(--color-grey-47), transparent);
-        font-family: var(--h-font);
+        font-family: var(--serif);
         font-weight: 700;
         font-size: var(--h4-size);
     }
@@ -140,7 +138,9 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
 
     .gearStatsTooltipName {
         color: var(--color-key-12);
+        font-family: var(--serif);
         font-weight: 600;
+        font-size: var(--h4-size);
     }
 
     .gearStatsTooltipData {
@@ -149,11 +149,11 @@ class:steel={gear.slot.name.toLowerCase().includes("steel")}
     }
 
     .tooltipStatLine {
-        color: var(--color-grey-8);
+        color: var(--color-grey-5);
         grid-column: span 5;
         display: grid;
         grid-template-columns: subgrid;
-        font-weight: 500;
+        font-weight: 475;
     }
 
     .tooltipStatDiff {
